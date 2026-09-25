@@ -32,12 +32,15 @@ embed=all
   </a>
   {{END}}
 </section>
+
+<section class="__P__navy __P__foot" aria-hidden="true"></section>
 @@CSS
 .__P__head { background: #0E1C43; padding: 34px 22px 30px; text-align: center; background-image: radial-gradient(ellipse 420px 240px at 50% 0%, rgba(217,228,25,0.10), rgba(217,228,25,0) 70%); }
 #__R__ .__P__title { font-size: 30px; font-weight: 800; line-height: 1.2; letter-spacing: -0.01em; color: #FFFFFF; margin: 0 0 22px; }
 .__P__title::after { content: ""; display: block; width: 52px; height: 4px; border-radius: 4px; background: #D9E419; margin: 14px auto 0; }
 
-#__R__ .__P__list { padding: 26px 16px 40px; box-shadow: 0 40px 0 0 #F5F6F8; }
+#__R__ .__P__list { padding: 26px 16px 36px; }
+#__R__ .__P__foot { display: block; height: 14px; background: #0E1C43; box-shadow: 0 20px 0 20px #0E1C43; }
 #__R__ .__P__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; max-width: 520px; margin: 0 auto; }
 #__R__ .__P__grid li:last-child:nth-child(odd) { grid-column: 1 / -1; justify-self: center; width: calc(50% - 7px); }
 #__R__ .__P__card { position: relative; display: block; aspect-ratio: 16 / 10; border-radius: 14px; overflow: hidden; background: #FFFFFF; border: 1px solid #E4E7EE; border-bottom: 4px solid #D9E419; box-shadow: 0 10px 22px -14px rgba(14,28,67,0.45); text-decoration: none; -webkit-tap-highlight-color: transparent; transition: transform 150ms ease-out, box-shadow 150ms ease-out; }

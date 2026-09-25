@@ -102,7 +102,7 @@ A teszt egy Systeme-szerű mintaoldalon, egy `jk-` nevű asztali blokk és egy p
 
 # Forgalmazott készülékek (`/keszulekek`)
 
-**Fájl:** `dist/mobil-keszulekek.html` · előtag `jkm-kesz-` · **68,3 KB** (keret: 80 KB) · minden kép beágyazva, külső kép nincs.
+**Fájl:** `dist/mobil-keszulekek.html` · előtag `jkm-kesz-` · **68,7 KB** (keret: 80 KB) · minden kép beágyazva, külső kép nincs.
 
 ## Felépítés
 
@@ -115,7 +115,7 @@ A teszt egy Systeme-szerű mintaoldalon, egy `jk-` nevű asztali blokk és egy p
 - **Kedvező árú klímák:** teljes szélességű, kiemelt navy kártya a rács alatt, lime címke-ikonnal és nyíllal.
 - **Linkek:** relatívak (`/aux` … `/syen`, `/kedvezo`), ugyanazon a lapon nyílnak.
 - **Animáció:** csak egy finom, egyszeri beúszás. `prefers-reduced-motion` esetén nincs.
-- **Lábléc fölötti csík:** a szürke rács-szekció színe lefelé kifut, így nem marad fehér csík a lábléc fölött.
+- **Alul hullámos átmenet** a lábléc navy színébe (`#0E1C43`). A navy szín 40 px-rel lefelé kifut, így nem marad fehér csík a lábléc fölött.
 
 ## Képek: most tartalék képekkel
 
