@@ -5,19 +5,19 @@
 // tartalma), @@CSS és @@JS (oldal-specifikus kiegészítés). A __P__ helyére
 // az oldal előtagja kerül (pl. jkm-ksz-), a __G__ helyére a script-őr neve.
 //
-// Képek: {{IMG:fájl|tartalék-URL}} -> ha assets/fájl létezik, base64 data URI,
-// különben a tartalék URL (csak a Systeme.io CDN engedélyezett).
+// Képek: {{IMG:fájl|tartalék}} -> ha assets/fájl létezik, base64 data URI; különben a
+// tartalék: egy másik assets/ fájl (szintén beágyazva) vagy URL (csak a Systeme.io CDN).
 import { readFileSync, writeFileSync, readdirSync, existsSync } from 'node:fs';
 import { join, dirname, extname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const here = dirname(fileURLToPath(import.meta.url));
-const MAX_BYTES = 70 * 1024;
 const ZOHO = 'https://growthnestg.zohobookings.eu/254300000000290002';
 const CDN = 'https://d1yei2z3i6k35z.cloudfront.net/';
 const KESZULEKEK = 'https://jimmy-klima.systeme.io/keszulekek';
 const MIME = { '.webp': 'image/webp', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.png': 'image/png', '.svg': 'image/svg+xml' };
-const PREFIXES = ['jkm-ksz-', 'jkm-kt-', 'jkm-sz-', 'jkm-vsz-'];
+const PREFIXES = ['jkm-ksz-', 'jkm-kt-', 'jkm-sz-', 'jkm-vsz-', 'jkm-kesz-'];
+const MARKA_LINK = /^\/(aux|daikin|fisher|gree|midea|polar|syen|kedvezo)$/;
 
 // Ikonok: egyszer, rejtett SVG-szimbólumként kerülnek az oldalba, a gombok <use>-zal hivatkoznak rájuk.
 const SYMBOLS = {
@@ -37,6 +37,7 @@ const macros = {
   FAB_AJANLAT: `<div class="__P__fab"><a class="__P__btn __P__btn-lime" href="${ZOHO}" target="_blank" rel="noopener" data-__P__ajanlat>Ingyenes árajánlat kérése</a></div>`,
   FAB_FOGLALAS: `<div class="__P__fab"><a class="__P__btn __P__btn-lime" href="${ZOHO}" target="_blank" rel="noopener">${icon('cal')}Időpont foglalása</a></div>`,
   BTN_KESZULEKEK: `<a class="__P__btn __P__btn-dark" href="${KESZULEKEK}">Forgalmazott készülékek${icon('arrow')}</a>`,
+  ICON_ARROW: icon('arrow'),
   CHECK_IC: `<span class="__P__check-ic">${icon('check')}</span>`,
 };
 
@@ -78,7 +79,7 @@ const NAVY = '#0E1C43', WHITE = '#FFFFFF', GRAY = '#F5F6F8';
 const WAVES = ['M0,0 L400,0 L400,10 C 300,26 110,2 0,16 Z', 'M0,0 L400,0 L400,10 C 300,4 100,22 0,8 Z'];
 function sectionColor(cls) {
   if (/__P__hero-light/.test(cls)) return WHITE;
-  if (/__P__hero|__P__cta/.test(cls)) return NAVY;
+  if (/__P__hero|__P__cta|__P__navy/.test(cls)) return NAVY;
   if (/__P__sec-gray/.test(cls)) return GRAY;
   return WHITE;
 }
@@ -113,7 +114,9 @@ const fail = (msg) => { console.error('  HIBA: ' + msg); failed = true; };
 for (const file of readdirSync(join(here, 'src')).filter((f) => !f.startsWith('_') && f.endsWith('.html')).sort()) {
   const p = parts(readFileSync(join(here, 'src', file), 'utf8'));
   const cfg = Object.fromEntries(p.CONFIG.split('\n').map((l) => l.split('=').map((s) => s.trim())));
-  const html0 = addWaves(p.HTML);
+  const maxBytes = (cfg.maxkb ? Number(cfg.maxkb) : 70) * 1024;
+  // {{IF:fájl}}…{{ELSE}}…{{END}}: az első ág, ha assets/fájl létezik, különben a második.
+  const html0 = addWaves(p.HTML.replace(/\{\{IF:([\w.-]+)\}\}([\s\S]*?)\{\{ELSE\}\}([\s\S]*?)\{\{END\}\}/g, (_, f, a, b) => (existsSync(join(here, 'assets', f)) ? a : b)));
   // {{SPLIT}} sor: az oldal több, egymás után beillesztendő blokkra bomlik (-1, -2 ...).
   const chunks = html0.split(/^\s*\{\{SPLIT\}\}\s*$/m);
   const pageIds = [];
@@ -132,8 +135,12 @@ for (const file of readdirSync(join(here, 'src')).filter((f) => !f.startsWith('_
     const css = shakeCss(compactCss(`${baseCss}\n${p.CSS || ''}`), used);
     let html = `<style>${css}</style>\n<div id="__R__">\n${markup}\n</div>\n<script>\n${js}\n</script>\n`;
     html = html.replace(/\{\{IMG:([\w.-]+)\|([^}]+)\}\}/g, (_, f, fallback) => {
-      const path = join(here, 'assets', f);
-      if (!existsSync(path)) { pendingKb += EXPECTED_HERO_KB[f] || 0; return fallback; }
+      let path = join(here, 'assets', f);
+      if (!existsSync(path)) {
+        if (/^https?:/.test(fallback)) { pendingKb += EXPECTED_HERO_KB[f] || 0; return fallback; }
+        f = fallback;
+        path = join(here, 'assets', f);
+      }
       embedded.push(f);
       return `data:${MIME[extname(f)]};base64,${readFileSync(path).toString('base64')}`;
     });
@@ -142,13 +149,13 @@ for (const file of readdirSync(join(here, 'src')).filter((f) => !f.startsWith('_
 
     const bytes = Buffer.byteLength(html);
     const code = html.replace(/data:[\w/+.-]+;base64,[A-Za-z0-9+/=]+/g, '');
-    const img = embedded.length ? ', beágyazva: ' + embedded.join(', ') : pendingKb ? ', hero: CDN URL' : '';
+    const img = embedded.length ? `, beágyazva: ${embedded.length} kép` : pendingKb ? ', hero: CDN URL' : '';
     console.log(`${out}: ${(bytes / 1024).toFixed(1)} KB (kód ${(Buffer.byteLength(code) / 1024).toFixed(1)} KB)${img}`);
-    if (bytes > MAX_BYTES) fail('nagyobb, mint 70 KB');
+    if (bytes > maxBytes) fail(`nagyobb, mint ${maxBytes / 1024} KB`);
     if (pendingKb) {
       const projected = bytes / 1024 + pendingKb;
       console.log(`  beágyazott hero-képpel várhatóan ${projected.toFixed(1)} KB`);
-      if (projected > MAX_BYTES / 1024) fail('a hero beágyazása után 70 KB fölé menne');
+      if (projected > maxBytes / 1024) fail(`a hero beágyazása után ${maxBytes / 1024} KB fölé menne`);
     }
     const names = code.replace(/https?:\/\/\S+/g, '');
     if (/(?<![A-Za-z0-9_])(jk-|--jk-|data-jk-)/.test(names)) fail('desktop "jk-" név a kódban');
@@ -157,8 +164,8 @@ for (const file of readdirSync(join(here, 'src')).filter((f) => !f.startsWith('_
     if (code.includes('<!--')) fail('HTML-komment');
     if (code.includes('—')) fail('gondolatjel (—) a szövegben');
     if (/fertőtlen/i.test(code)) fail('"fertőtlenítés" szó');
-    for (const [, src] of code.matchAll(/\ssrc="([^"]+)"/g)) if (/^https?:/.test(src) && !src.startsWith(CDN)) fail(`külső kép: ${src}`);
-    for (const [, href] of code.matchAll(/\shref="([^"]+)"/g)) if (href !== ZOHO && href !== KESZULEKEK && href !== 'tel:+36203734991' && !href.startsWith(`#${rootId}-i-`)) fail(`váratlan link: ${href}`);
+    for (const [, src] of code.matchAll(/\ssrc="([^"]+)"/g)) if (/^https?:/.test(src) && (cfg.embed === 'all' || !src.startsWith(CDN))) fail(`külső kép: ${src}`);
+    for (const [, href] of code.matchAll(/\shref="([^"]+)"/g)) if (href !== ZOHO && href !== KESZULEKEK && href !== 'tel:+36203734991' && !MARKA_LINK.test(href) && !href.startsWith(`#${rootId}-i-`)) fail(`váratlan link: ${href}`);
     const ids = [...code.matchAll(/\sid="([^"]+)"/g)].map((m) => m[1]);
     pageIds.push(...ids);
     if (ids.some((id) => !id.startsWith(cfg.prefix))) fail('előtag nélküli id');

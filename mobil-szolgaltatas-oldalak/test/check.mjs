@@ -70,6 +70,7 @@ async function run(browser, { name, blocks, width, height, order, reduce = false
   await pg.route('https://d1yei2z3i6k35z.cloudfront.net/**', (r) => r.fulfill({ contentType: 'image/svg+xml', body: placeholder(r.request().url()) }));
   await ctx.route('https://growthnestg.zohobookings.eu/**', (r) => r.fulfill({ contentType: 'text/html', body: 'zoho' }));
   await pg.route('https://test.local/', (r) => r.fulfill({ contentType: 'text/html', body: page(blocks, order) }));
+  await pg.route(/^https:\/\/test\.local\/[a-z]+$/, (r) => r.fulfill({ contentType: 'text/html', body: '<title>cel</title>' }));
   await pg.goto('https://test.local/');
   await pg.waitForTimeout(500);
 
@@ -104,6 +105,7 @@ async function run(browser, { name, blocks, width, height, order, reduce = false
       animated: rv.length,
       notIn: rv.filter((e) => !/-in( |$)/.test(e.className)).map((e) => e.className.split(' ')[0]),
       desktopIn: document.querySelectorAll('#jk-steps .jk-step.jk-in').length,
+      hasFab: !!document.querySelector('[class$="-fab"], [class*="-fab "]'),
       fabAtEnd: !!document.querySelector('[class*="-fab "][class*="-show"], [class$="-show"][class*="-fab"]'),
       overflowing: all.filter((e) => {
         if (!vis(e) || e.closest('[class*="gal-vp"], [class*="-lb"]') || getComputedStyle(e).position === 'fixed') return false;
@@ -114,6 +116,22 @@ async function run(browser, { name, blocks, width, height, order, reduce = false
       smallTargets: roots.flatMap((r) => [...r.querySelectorAll('a, button')]).filter((e) => vis(e) && !/-dot/.test(e.className) && e.getBoundingClientRect().height < 44).map((e) => e.className),
     };
   });
+  // Márka-kártyák: minden relatív link koppintásra a saját oldalára visz.
+  const cardNav = [];
+  if (mobile && !reduce) {
+    const hrefs = await pg.$$eval('div[id^="jkm-"][id*="-root"] a[href^="/"]', (as) => as.map((a) => a.getAttribute('href')));
+    for (const href of hrefs) {
+      await pg.goto('https://test.local/');
+      await pg.waitForTimeout(300);
+      const a = pg.locator(`div[id^="jkm-"][id*="-root"] a[href="${href}"]`).first();
+      await a.scrollIntoViewIfNeeded();
+      await pg.waitForTimeout(700);
+      await Promise.all([pg.waitForURL(`https://test.local${href}`, { timeout: 4000 }).catch(() => {}), a.tap()]);
+      cardNav.push(`${href}:${pg.url() === `https://test.local${href}` ? 'ok' : 'HIBA ' + pg.url()}`);
+    }
+    await pg.goto('https://test.local/');
+    await pg.waitForTimeout(500);
+  }
   let popupClicked = 0, newPage = false;
   if (mobile && !reduce) {
     const ctaSel = '[id$="-root"] [class*="-btn-lime"][target="_blank"]';
@@ -125,7 +143,7 @@ async function run(browser, { name, blocks, width, height, order, reduce = false
     popupClicked = await pg.evaluate(() => window.__popupClicked || 0);
   }
   await ctx.close();
-  return { name, errors, fabStates: fabStates.filter(Boolean), popupClicked, newPage, ...m };
+  return { name, errors, fabStates: fabStates.filter(Boolean), popupClicked, newPage, cardNav, ...m };
 }
 
 const browser = await playwright.chromium.launch();
@@ -157,13 +175,15 @@ for (const r of results) {
   if (mobile && r.fabAtEnd) problems.push('lebegő gomb látszik a záró gombsornál');
   const corner = r.fabStates.filter((f) => f.right > f.w - 84 - 4);
   if (corner.length) problems.push('lebegő gomb a chat-sarokba lóg');
-  if (mobile && !r.name.includes('reduced') && !r.fabStates.length) problems.push('a lebegő gomb sosem jelent meg');
+  if (mobile && r.hasFab && !r.name.includes('reduced') && !r.fabStates.length) problems.push('a lebegő gomb sosem jelent meg');
+  const badNav = r.cardNav.filter((x) => !x.endsWith(':ok'));
+  if (badNav.length) problems.push('rossz kártya-link: ' + badNav.join(', '));
   if (mobile && !r.name.includes('reduced') && (!r.newPage || r.popupClicked)) problems.push(`CTA: új lap ${r.newPage}, popup ${r.popupClicked}`);
   if (problems.length) ok = false;
   console.log(`${problems.length ? 'HIBA' : 'OK  '} ${r.name.padEnd(36)} ${String(r.height).padStart(5)} px, csúszás ${r.scrollWidth}/${r.innerWidth}, animált ${r.animated - r.notIn.length}/${r.animated}, asztali ${r.desktopIn}/3${problems.length ? '\n     ' + problems.join('\n     ') : ''}`);
 }
 for (const [name] of Object.entries(pages)) {
   const r = results.find((x) => x.name === `${name}-390-mobile-first`);
-  console.log(`\n${name} linkjei:\n  ` + r.links.join('\n  '));
+  console.log(`\n${name} linkjei:\n  ` + r.links.join('\n  ') + (r.cardNav.length ? `\n  koppintás: ${r.cardNav.join(' ')}` : ''));
 }
 process.exit(ok ? 0 : 1);

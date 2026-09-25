@@ -1,0 +1,57 @@
+@@CONFIG
+prefix=jkm-kesz-
+guard=__jkmKeszInit
+out=mobil-keszulekek.html
+maxkb=80
+embed=all
+@@HTML
+<section class="__P__navy __P__head">
+  <h1 class="__P__title __P__rv __P__up">Forgalmazott készülékek</h1>
+  <div class="__P__btns __P__rv __P__up" style="--__P__d:100ms">
+    {{BTN_AJANLAT}}
+  </div>
+</section>
+
+<section class="__P__sec __P__sec-gray __P__list">
+  <ul class="__P__grid __P__rv __P__up">
+    <li><a class="__P__card" href="/aux"><img src="{{IMG:aux.webp|logo-aux.webp}}" alt="AUX légkondicionálók" width="360" height="225" decoding="async"></a></li>
+    <li><a class="__P__card" href="/daikin"><img src="{{IMG:daikin.webp|logo-daikin.webp}}" alt="Daikin" width="360" height="225" decoding="async"></a></li>
+    <li><a class="__P__card" href="/fisher"><img src="{{IMG:fisher.webp|logo-fisher.webp}}" alt="Fisher" width="360" height="225" decoding="async"></a></li>
+    <li><a class="__P__card" href="/gree"><img src="{{IMG:gree.webp|logo-gree.webp}}" alt="Gree légkondicionálók" width="360" height="225" decoding="async"></a></li>
+    <li><a class="__P__card" href="/midea"><img src="{{IMG:midea.webp|logo-midea.webp}}" alt="Midea" width="360" height="225" decoding="async"></a></li>
+    <li><a class="__P__card" href="/polar"><img src="{{IMG:polar.webp|logo-polar.webp}}" alt="Polar" width="360" height="225" decoding="async"></a></li>
+    <li><a class="__P__card" href="/syen"><img src="{{IMG:syen.webp|logo-syen.webp}}" alt="Syen" width="360" height="225" decoding="async"></a></li>
+  </ul>
+  {{IF:kedvezo.webp}}
+  <a class="__P__deal __P__deal-img __P__rv __P__up" href="/kedvezo"><img src="{{IMG:kedvezo.webp|logo-aux.webp}}" alt="Kedvező árú klímák" width="420" height="313" decoding="async"></a>
+  {{ELSE}}
+  <a class="__P__deal __P__rv __P__up" href="/kedvezo">
+    <span class="__P__deal-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#0E1C43" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.6 12.6L12 21.2 2.8 12 11.4 3.4H20.6v9.2z"/><circle cx="16" cy="8" r="1.5" fill="#0E1C43" stroke="none"/></svg></span>
+    <span class="__P__deal-t">Kedvező árú klímák</span>
+    <span class="__P__deal-go">{{ICON_ARROW}}</span>
+  </a>
+  {{END}}
+</section>
+@@CSS
+.__P__head { background: #0E1C43; padding: 34px 22px 30px; text-align: center; background-image: radial-gradient(ellipse 420px 240px at 50% 0%, rgba(217,228,25,0.10), rgba(217,228,25,0) 70%); }
+#__R__ .__P__title { font-size: 30px; font-weight: 800; line-height: 1.2; letter-spacing: -0.01em; color: #FFFFFF; margin: 0 0 22px; }
+.__P__title::after { content: ""; display: block; width: 52px; height: 4px; border-radius: 4px; background: #D9E419; margin: 14px auto 0; }
+
+#__R__ .__P__list { padding: 26px 16px 40px; box-shadow: 0 40px 0 0 #F5F6F8; }
+#__R__ .__P__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; max-width: 520px; margin: 0 auto; }
+#__R__ .__P__grid li:last-child:nth-child(odd) { grid-column: 1 / -1; justify-self: center; width: calc(50% - 7px); }
+#__R__ .__P__card { position: relative; display: block; aspect-ratio: 16 / 10; border-radius: 14px; overflow: hidden; background: #FFFFFF; border: 1px solid #E4E7EE; border-bottom: 4px solid #D9E419; box-shadow: 0 10px 22px -14px rgba(14,28,67,0.45); text-decoration: none; -webkit-tap-highlight-color: transparent; transition: transform 150ms ease-out, box-shadow 150ms ease-out; }
+#__R__ .__P__card:active { transform: scale(0.97); box-shadow: 0 6px 14px -10px rgba(14,28,67,0.45); }
+#__R__ .__P__card img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+#__R__ .__P__deal { display: flex; align-items: center; gap: 14px; max-width: 520px; min-height: 84px; margin: 16px auto 0; padding: 16px 16px 16px 18px; border-radius: 16px; background: linear-gradient(135deg, #0E1C43 0%, #1B2B5E 100%); border-left: 5px solid #D9E419; text-decoration: none; box-shadow: 0 14px 28px -16px rgba(14,28,67,0.7); -webkit-tap-highlight-color: transparent; transition: transform 150ms ease-out; }
+#__R__ .__P__deal:active { transform: scale(0.98); }
+.__P__deal-ic { flex: none; width: 46px; height: 46px; border-radius: 999px; background: #D9E419; display: flex; align-items: center; justify-content: center; }
+.__P__deal-ic svg { width: 24px; height: 24px; }
+#__R__ .__P__deal-t { flex: 1; font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; font-size: 18px; font-weight: 800; line-height: 1.25; color: #FFFFFF; }
+.__P__deal-go { flex: none; width: 36px; height: 36px; border-radius: 999px; border: 2px solid rgba(217,228,25,0.6); color: #D9E419; display: flex; align-items: center; justify-content: center; }
+#__R__ .__P__deal-go svg { width: 18px; height: 18px; }
+#__R__ .__P__deal-img { position: relative; display: block; padding: 0; min-height: 0; border: 1px solid #E4E7EE; border-bottom: 4px solid #D9E419; overflow: hidden; background: #FFFFFF; }
+#__R__ .__P__deal-img img { display: block; width: 100%; height: auto; }
+@media (prefers-reduced-motion: reduce) { #__R__ .__P__card, #__R__ .__P__deal { transition: none; } }
+@@JS

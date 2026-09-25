@@ -97,3 +97,43 @@ A teszt egy Systeme-szerű mintaoldalon, egy `jk-` nevű asztali blokk és egy p
 - `src/_base.css`, `src/_base.js`: közös stílus és script (`__P__` = oldal-előtag, `__R__` = blokk gyökér-ID).
 - `src/<oldal>.html`: `@@CONFIG`, `@@HTML` (a `{{SPLIT}}` sor új blokkot kezd), `@@CSS`, `@@JS`.
 - A build oldalanként kiszűri a nem használt CSS-szabályokat, az ikonokat pedig egyszer, SVG-szimbólumként teszi be.
+
+---
+
+# Forgalmazott készülékek (`/keszulekek`)
+
+**Fájl:** `dist/mobil-keszulekek.html` · előtag `jkm-kesz-` · **68,3 KB** (keret: 80 KB) · minden kép beágyazva, külső kép nincs.
+
+## Felépítés
+
+- **Fejléc (navy):** „Forgalmazott készülékek” (H1) és az „Ingyenes árajánlat kérése” gomb. A gomb a foglalási linkre mutat, új lapon. Ugyanúgy váltható popupra, mint a szolgáltatás-oldalakon (`AJANLAT_MOD`).
+- Hullámos átmenet után **kétoszlopos rács a 7 márkával**.
+  - A kép kitölti a kártyát, így a kék (AUX, Midea) és a fehér hátterű képek egységes csempeként állnak.
+  - Lime alsó szegély, árnyék, koppintáskor enyhe lenyomódás.
+  - A 7. kártya (Syen) középre kerül.
+  - A kártyák 165–180 px szélesek, bőven 44 px fölött.
+- **Kedvező árú klímák:** teljes szélességű, kiemelt navy kártya a rács alatt, lime címke-ikonnal és nyíllal.
+- **Linkek:** relatívak (`/aux` … `/syen`, `/kedvezo`), ugyanazon a lapon nyílnak.
+- **Animáció:** csak egy finom, egyszeri beúszás. `prefers-reduced-motion` esetén nincs.
+- **Lábléc fölötti csík:** a szürke rács-szekció színe lefelé kifut, így nem marad fehér csík a lábléc fölött.
+
+## Képek: most tartalék képekkel
+
+A `kepek/*.webp` kártyaképek nem voltak elérhetők a fejlesztői környezetben. Ezért most a főoldal márkaszalagjának logói állnak a helyükön: ugyanaz a 16:10 arány és megjelenés, 200 px szélesen. Ezeket David már jóváhagyta a főoldalon.
+
+A „Kedvező árú klímák” kártya addig kódból rajzolt navy kártya.
+
+**Csere az eredetiekre:** tedd az `assets/` mappába az eredeti fájlokat ezekkel a nevekkel, majd futtasd a `node build.mjs` parancsot:
+
+```
+aux.webp  daikin.webp  fisher.webp  gree.webp  midea.webp  polar.webp  syen.webp  kedvezo.webp
+```
+
+A build ekkor ezeket ágyazza be. Ha van `kedvezo.webp`, a 8. kártya a képes változatra vált (lime alsó szegéllyel).
+
+## Teszt (2026-09-25)
+
+7/7 mérés rendben (390, 360, 1280 px, mindkét DOM-sorrend, reduced-motion):
+- 0 csúszás, 0 duplikált ID, 0 konzolhiba.
+- A desktop minta változatlan.
+- Mind a 8 kártyára koppintva a teszt a megfelelő oldalra jutott (`/aux` … `/kedvezo`: ok).
