@@ -4,10 +4,10 @@ Mobile-only Raw HTML blokkok a négy szolgáltatás-oldalhoz. **Beillesztésre k
 
 | Oldal | Fájl(ok) a `dist/` mappában | Előtag | Méret most | Beágyazott hero-képpel |
 |---|---|---|---|---|
-| Klímaszerelés (`/klimaszereles`) | `mobil-klimaszereles.html` | `jkm-ksz-` | 15,8 KB | ~37 KB |
-| Klímatisztítás (`/klimatisztitas`) | `mobil-klimatisztitas.html` | `jkm-kt-` | 23,5 KB | ~58 KB |
-| Szellőztetés (`/szelloztetes`) | `mobil-szelloztetes.html` | `jkm-sz-` | 14,9 KB | ~54 KB |
-| Villanyszerelés (`/villanyszereles`) | `mobil-villanyszereles-1.html` (hero), `mobil-villanyszereles-2.html` (a többi) | `jkm-vsz-` | 7,2 + 11,2 KB | ~64 + 11 KB |
+| Klímaszerelés (`/klimaszereles`) | `mobil-klimaszereles.html` | `jkm-ksz-` | 17,8 KB | ~39 KB |
+| Klímatisztítás (`/klimatisztitas`) | `mobil-klimatisztitas.html` | `jkm-kt-` | 24,5 KB | ~59 KB |
+| Szellőztetés (`/szelloztetes`) | `mobil-szelloztetes.html` | `jkm-sz-` | 16,3 KB | ~55 KB |
+| Villanyszerelés (`/villanyszereles`) | `mobil-villanyszereles-1.html` (hero), `mobil-villanyszereles-2.html` (a többi) | `jkm-vsz-` | 7,2 + 12,5 KB | ~64 + 13 KB |
 
 A villanyszerelés két blokkra bomlik, mert az 57 KB-os hero-képpel egy blokkban 70 KB fölé menne. A két blokk sorrendben, egymás alá kerül.
 
@@ -41,7 +41,12 @@ Tipográfiai megoldások, a szöveg változtatása nélkül:
 - Az árak címkére és kiemelt összegre vannak bontva.
 - A klímatisztítás szezon-kártyáin a hónapok félkövérek.
 
-Új szöveg nem került az oldalakra. Új elemként egy **lebegő gomb** jelent meg a bal alsó sarokban, a fő gomb feliratával. Ez csak a hero után látszik, és eltűnik, amikor a záró gombsor képernyőre ér. A jobb alsó chat-sarok szabad marad (a teszt ellenőrzi).
+Új elemek:
+- **Forgalmazott készülékek** gomb a klímaszerelés oldalon, a márkák alatt (David kérése). A `https://jimmy-klima.systeme.io/keszulekek` oldalra visz, ugyanazon a lapon.
+- **Hullámos szekció-átmenetek**, mint a mobil főoldalon. A build automatikusan teszi be őket két eltérő hátterű szekció közé.
+- A záró kék gombsor színe 40 px-rel lefelé „kifut”. Így a lábléc és az utolsó kék szekció között nem látszik fehér csík, a Systeme.io alsó térköze sem.
+
+Ezen kívül egy **lebegő gomb** jelent meg a bal alsó sarokban, a fő gomb feliratával. Ez csak a hero után látszik, és eltűnik, amikor a záró gombsor képernyőre ér. A jobb alsó chat-sarok szabad marad (a teszt ellenőrzi).
 
 ## (c) Hero-képek: még nincsenek beágyazva
 

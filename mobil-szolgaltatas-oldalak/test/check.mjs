@@ -44,6 +44,7 @@ function page(blocks, order) {
   header{height:64px;background:#0E1C43;color:#fff;display:flex;align-items:center;padding:0 16px;font-weight:800}
   footer{background:#0E1C43;color:#fff;padding:40px 16px}
   .sio-row{max-width:1100px;margin:0 auto;padding:0 10px}
+  .sio-mobile{padding-bottom:8px;background:#fff}
   @media (max-width:800px){.sio-desktop{display:none}}
   @media (min-width:801px){.sio-mobile{display:none}}
   #chat{position:fixed;right:20px;bottom:20px;width:64px;height:64px;border-radius:50%;background:#2b6cf6;z-index:2147483647}
