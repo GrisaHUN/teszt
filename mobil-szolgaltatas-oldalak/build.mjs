@@ -13,7 +13,7 @@ import { fileURLToPath } from 'node:url';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const MAX_BYTES = 70 * 1024;
-const ZOHO = 'https://growthnestg.zohobookings.eu/254300000000290002/#/254300000000290002?booknow=true';
+const ZOHO = 'https://growthnestg.zohobookings.eu/254300000000290002';
 const CDN = 'https://d1yei2z3i6k35z.cloudfront.net/';
 const KESZULEKEK = 'https://jimmy-klima.systeme.io/keszulekek';
 const MIME = { '.webp': 'image/webp', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.png': 'image/png', '.svg': 'image/svg+xml' };
