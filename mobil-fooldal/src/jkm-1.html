@@ -1,0 +1,303 @@
+<style>
+  @media (max-width: 767px) { html, body { max-width: 100%; overflow-x: hidden; } }
+  #jkm-b1 { box-sizing: border-box; position: relative; width: 100vw; max-width: 100vw; margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw); overflow-x: clip; color: #33394A; font-size: 16px; line-height: 1.6; text-align: left; }
+  #jkm-b1 *, #jkm-b1 *::before, #jkm-b1 *::after { box-sizing: border-box; }
+  #jkm-b1 h1, #jkm-b1 h2, #jkm-b1 h3, #jkm-b1 p { margin: 0; padding: 0; }
+  #jkm-b1 .jkm-btn { font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; -webkit-tap-highlight-color: transparent; }
+
+  #jkm-b1.jkm-js .jkm-rv { opacity: 0; transition: opacity 550ms ease-out, transform 550ms ease-out; transition-delay: var(--jkm-d, 0ms); }
+  #jkm-b1.jkm-js .jkm-rv-up { transform: translateY(24px); }
+  #jkm-b1.jkm-js .jkm-rv-r { transform: translateX(34px); }
+  #jkm-b1.jkm-js .jkm-rv-sc { transform: scale(0.95); }
+  #jkm-b1.jkm-js .jkm-rv.jkm-in { opacity: 1; transform: none; }
+
+  #jkm-hero { position: relative; min-height: 600px; overflow: hidden; background: #0E1C43; }
+  #jkm-hero-photo { position: absolute; left: 0; top: -60px; width: 100%; height: calc(100% + 120px); object-fit: cover; object-position: center 20%; will-change: transform; }
+  .jkm-hero-scrim { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(14,28,67,0.80) 0%, rgba(14,28,67,0.55) 30%, rgba(14,28,67,0.35) 52%, rgba(14,28,67,0.65) 78%, #0E1C43 100%); }
+  .jkm-hero-content { position: relative; z-index: 2; padding: 52px 22px 48px; text-align: center; }
+  .jkm-hero-textwrap { backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); background: rgba(14,28,67,0.30); border-radius: 20px; padding: 24px 18px 22px; margin: 0 0 22px; }
+  #jkm-b1 .jkm-hero-title { font-size: 31px; font-weight: 800; color: #FFFFFF; line-height: 1.22; margin: 0 0 14px; text-shadow: 0 2px 12px rgba(0,0,0,0.35); }
+  #jkm-b1 .jkm-hero-sub { font-size: 16.5px; line-height: 1.6; color: rgba(255,255,255,0.93); max-width: 420px; margin: 0 auto; text-shadow: 0 1px 8px rgba(0,0,0,0.3); }
+  .jkm-hero-actions { max-width: 380px; margin: 0 auto; }
+  #jkm-b1 .jkm-hero-cta { display: block; width: 100%; background: #D9E419; color: #0E1C43; font-weight: 800; font-size: 16.5px; line-height: 1.3; text-align: center; text-decoration: none; padding: 17px 18px; border-radius: 12px; border: 0;
+    box-shadow: 0 8px 22px -6px rgba(0,0,0,0.5); animation: jkm-hero-pulse 2600ms ease-in-out 1600ms infinite; transition: background-color 160ms ease; }
+  #jkm-b1 .jkm-hero-cta:hover, #jkm-b1 .jkm-hero-cta:active { background: #C3CE12; color: #0E1C43; }
+  @keyframes jkm-hero-pulse {
+    0%, 100% { box-shadow: 0 8px 22px -6px rgba(0,0,0,0.5), 0 0 0 0 rgba(217,228,25,0.45); transform: scale(1); }
+    50% { box-shadow: 0 8px 22px -6px rgba(0,0,0,0.5), 0 0 0 10px rgba(217,228,25,0); transform: scale(1.02); }
+  }
+
+  .jkm-curve { display: block; line-height: 0; font-size: 0; margin-top: -1px; }
+  .jkm-curve svg { display: block; width: 100%; height: 26px; }
+
+  #jkm-services { background: #F5F6F8; padding: 42px 0 40px; }
+  #jkm-b1 .jkm-sec-title { font-size: 25px; font-weight: 800; color: #0E1C43; text-align: center; line-height: 1.25; margin: 0 22px 24px; }
+  #jkm-services-vp { overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding: 6px 0 10px; }
+  #jkm-services-vp::-webkit-scrollbar { display: none; }
+  #jkm-services-track { display: flex; gap: 14px; padding: 0 22px; width: max-content; }
+  .jkm-svc { flex: none; width: calc(100vw * 0.78); max-width: 340px; scroll-snap-align: center; scroll-snap-stop: always; background: #FFFFFF; border-radius: 16px; padding: 26px 22px 24px; box-shadow: 0 10px 28px -14px rgba(14,28,67,0.24); border-bottom: 4px solid #D9E419; }
+  .jkm-icon { position: relative; width: 52px; height: 52px; border-radius: 999px; background: #0E1C43; display: flex; align-items: center; justify-content: center; margin: 0 0 16px; transition: transform 150ms ease-out; }
+  .jkm-icon svg { width: 26px; height: 26px; }
+  .jkm-icon.jkm-press { transform: scale(0.92); }
+  .jkm-ring { position: absolute; inset: 0; border-radius: 999px; border: 2px solid #D9E419; opacity: 0; pointer-events: none; }
+  .jkm-ring.jkm-go { animation: jkm-ring-pulse 480ms ease-out; }
+  @keyframes jkm-ring-pulse { 0% { opacity: 0.75; transform: scale(1); } 100% { opacity: 0; transform: scale(1.7); } }
+  #jkm-b1 .jkm-svc-title { font-size: 19px; font-weight: 800; color: #0E1C43; line-height: 1.3; margin: 0 0 8px; }
+  #jkm-b1 .jkm-svc-text { font-size: 15.5px; line-height: 1.6; color: #4B5568; }
+  .jkm-dots { display: flex; justify-content: center; flex-wrap: wrap; gap: 4px; margin-top: 14px; padding: 0 16px; }
+  #jkm-b1 .jkm-dot { width: 22px; height: 22px; border: 0; padding: 0; margin: 0; background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; -webkit-tap-highlight-color: transparent; }
+  #jkm-b1 .jkm-dot::before { content: ""; width: 7px; height: 7px; border-radius: 999px; background: rgba(14,28,67,0.25); transition: background 200ms ease, transform 200ms ease; }
+  #jkm-b1 .jkm-dot.jkm-on::before { background: #0E1C43; transform: scale(1.35); box-shadow: 0 0 0 2px #D9E419; }
+
+  #jkm-refs { background: #FFFFFF; padding: 44px 0 40px; }
+  #jkm-refs-vp { overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding: 6px 0 12px; }
+  #jkm-refs-vp::-webkit-scrollbar { display: none; }
+  #jkm-refs-track { display: flex; gap: 12px; padding: 0 9vw; width: max-content; }
+  .jkm-ref { flex: none; width: 82vw; max-width: 420px; aspect-ratio: var(--jkm-ref-ratio, 4 / 3); border-radius: 16px; overflow: hidden; background: #F5F6F8; box-shadow: 0 10px 30px -12px rgba(14,28,67,0.4); scroll-snap-align: center; scroll-snap-stop: always;
+    transform: scale(0.94); transition: transform 320ms cubic-bezier(0.16, 1, 0.3, 1); }
+  .jkm-ref.jkm-center { transform: scale(1); }
+  .jkm-ref img { display: block; width: 100%; height: 100%; object-fit: contain; cursor: zoom-in; }
+
+  #jkm-lb { position: fixed; inset: 0; z-index: 2147482000; background: rgba(14,28,67,0.94); display: none; align-items: center; justify-content: center; padding: 16px; }
+  #jkm-lb.jkm-open { display: flex; }
+  #jkm-lb img { max-width: 100%; max-height: 82vh; object-fit: contain; border-radius: 8px; box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
+  #jkm-lb button { position: absolute; width: 44px; height: 44px; border-radius: 999px; background: rgba(255,255,255,0.16); border: 0; color: #FFFFFF; font-size: 22px; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 0; }
+  #jkm-lb .jkm-lb-close { top: 16px; right: 16px; }
+  #jkm-lb .jkm-lb-prev { left: 10px; top: 50%; margin-top: -22px; }
+  #jkm-lb .jkm-lb-next { right: 10px; top: 50%; margin-top: -22px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    #jkm-b1.jkm-js .jkm-rv { opacity: 1; transform: none; transition: none; }
+    #jkm-b1 .jkm-hero-cta { animation: none; }
+    #jkm-hero-photo { top: 0; height: 100%; transform: none !important; }
+    .jkm-ref { transition: none; }
+    .jkm-ring { display: none; }
+  }
+</style>
+<div id="jkm-b1">
+  <section id="jkm-hero">
+    <img id="jkm-hero-photo" src="{{hero.webp}}" alt="Jimmy Klíma -- beszerelt klíma beltéri egység" fetchpriority="high">
+    <div class="jkm-hero-scrim"></div>
+    <div class="jkm-hero-content">
+      <div class="jkm-hero-textwrap">
+        <h1 class="jkm-hero-title jkm-rv jkm-rv-up">Profi klímaszerelés Szegeden</h1>
+        <p class="jkm-hero-sub jkm-rv jkm-rv-up" style="--jkm-d:100ms">Klímaszerelés, klímatisztítás, hővisszanyerős szellőztetés és villanyszerelés Szegeden és 30 km-es környékén. Ingyenes helyszíni felméréssel, fix árajánlattal.</p>
+      </div>
+      <div class="jkm-hero-actions jkm-rv jkm-rv-up" style="--jkm-d:200ms">
+        <a class="jkm-btn jkm-hero-cta" href="https://growthnestg.zohobookings.eu/254300000000290002/#/254300000000290002?booknow=true" target="_blank" rel="noopener">Ingyenes árajánlat kérése</a>
+      </div>
+    </div>
+  </section>
+  <div class="jkm-curve" style="background:#F5F6F8" aria-hidden="true"><svg viewBox="0 0 400 26" preserveAspectRatio="none"><path d="M0,0 L400,0 L400,10 C 300,26 110,2 0,16 Z" fill="#0E1C43"/></svg></div>
+
+  <section id="jkm-services">
+    <h2 class="jkm-sec-title jkm-rv jkm-rv-up">Szolgáltatásaink</h2>
+    <div id="jkm-services-vp">
+      <div id="jkm-services-track">
+        <div class="jkm-svc jkm-rv jkm-rv-r">
+          <div class="jkm-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#D9E419" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M7 10h4M7 14h2"/></svg></div>
+          <h3 class="jkm-svc-title">Klímaszerelés</h3>
+          <p class="jkm-svc-text">Megbízható készülékek szakszerű telepítése otthonába teljes körű lebonyolítással, számlával és garanciával.</p>
+        </div>
+        <div class="jkm-svc jkm-rv jkm-rv-r" style="--jkm-d:90ms">
+          <div class="jkm-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#D9E419" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c3 4 6 7 6 11a6 6 0 0 1-12 0c0-4 3-7 6-11z"/><path d="M9.5 14.5a2.5 2.5 0 0 0 2.5 2.5"/></svg></div>
+          <h3 class="jkm-svc-title">Klímatisztítás</h3>
+          <p class="jkm-svc-text">Speciális vegyszeres gépi klímamosás szennyezettségtől függően, teljes szétszedéssel és fertőtlenítéssel.</p>
+        </div>
+        <div class="jkm-svc jkm-rv jkm-rv-r" style="--jkm-d:180ms">
+          <div class="jkm-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#D9E419" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9h11a3 3 0 1 0-3-3"/><path d="M3 15h15a3 3 0 1 1-3 3"/><path d="M3 12h7"/></svg></div>
+          <h3 class="jkm-svc-title">Hővisszanyerős szellőztetés</h3>
+          <p class="jkm-svc-text">Hővisszanyerős szellőztető rendszerek pontos tervezése és precíz kivitelezése A-Z-ig.</p>
+        </div>
+        <div class="jkm-svc jkm-rv jkm-rv-r" style="--jkm-d:270ms">
+          <div class="jkm-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#D9E419" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M13 3 4 14h6l-1 7 9-11h-6l1-7z"/></svg></div>
+          <h3 class="jkm-svc-title">Villanyszerelés</h3>
+          <p class="jkm-svc-text">Otthona komplett villanyszerelési munkálatait rendkívüli figyelemmel és hozzáértéssel végezzük el.</p>
+        </div>
+      </div>
+    </div>
+    <div class="jkm-dots" id="jkm-services-dots"></div>
+  </section>
+
+  <section id="jkm-refs">
+    <div id="jkm-refs-wrap" class="jkm-rv jkm-rv-up">
+      <div id="jkm-refs-vp">
+        <div id="jkm-refs-track">
+          <div class="jkm-ref"><img src="https://d1yei2z3i6k35z.cloudfront.net/19002789/6ab2ea7b1333a1.24918670_20260705_163402.jpg" alt="Jimmy Klíma referencia" decoding="async"></div>
+          <div class="jkm-ref"><img src="https://d1yei2z3i6k35z.cloudfront.net/19002789/6ab2ea7f2c2744.15213399_20260605_090856.jpg" alt="Jimmy Klíma referencia" decoding="async"></div>
+          <div class="jkm-ref"><img src="https://d1yei2z3i6k35z.cloudfront.net/19002789/6ab2ea82a8bbf7.65251433_20260703_163242.jpg" alt="Jimmy Klíma referencia" decoding="async"></div>
+          <div class="jkm-ref"><img src="https://d1yei2z3i6k35z.cloudfront.net/19002789/6ab2ea86b34680.04630094_20260801_163042.jpg" alt="Jimmy Klíma referencia" decoding="async"></div>
+          <div class="jkm-ref"><img src="https://d1yei2z3i6k35z.cloudfront.net/19002789/6ab2ea8aa8c7b2.48418748_20260812_170002.jpg" alt="Jimmy Klíma referencia" decoding="async"></div>
+          <div class="jkm-ref"><img src="https://d1yei2z3i6k35z.cloudfront.net/19002789/6ab2ea8f31f529.33799786_20260812_170039.jpg" alt="Jimmy Klíma referencia" decoding="async"></div>
+          <div class="jkm-ref"><img src="https://d1yei2z3i6k35z.cloudfront.net/19002789/6ab2ea92114f73.70971524_FB_IMG_1754053438813.jpg" alt="Jimmy Klíma referencia" decoding="async"></div>
+          <div class="jkm-ref"><img src="https://d1yei2z3i6k35z.cloudfront.net/19002789/6ab2ea94d8f837.68203941_FB_IMG_1790092953803.jpg" alt="Jimmy Klíma referencia" decoding="async"></div>
+          <div class="jkm-ref"><img src="https://d1yei2z3i6k35z.cloudfront.net/19002789/6ab2ea99183d44.71500953_FB_IMG_1790092957102.jpg" alt="Jimmy Klíma referencia" decoding="async"></div>
+          <div class="jkm-ref"><img src="https://d1yei2z3i6k35z.cloudfront.net/19002789/6ab2ea9c918728.52597628_FB_IMG_1790092972064.jpg" alt="Jimmy Klíma referencia" decoding="async"></div>
+          <div class="jkm-ref"><img src="https://d1yei2z3i6k35z.cloudfront.net/19002789/6ab2eadcddb628.26371470_FB_IMG_1790093001104.jpg" alt="Jimmy Klíma referencia" decoding="async"></div>
+          <div class="jkm-ref"><img src="https://d1yei2z3i6k35z.cloudfront.net/19002789/6ab2eae4256315.94683235_FB_IMG_1790093020950.jpg" alt="Jimmy Klíma referencia" decoding="async"></div>
+          <div class="jkm-ref"><img src="https://d1yei2z3i6k35z.cloudfront.net/19002789/6ab2eddc52c5e0.75724716_FB_IMG_1790092961333.jpg" alt="Jimmy Klíma referencia" decoding="async"></div>
+        </div>
+      </div>
+      <div class="jkm-dots" id="jkm-refs-dots"></div>
+    </div>
+  </section>
+
+  <div id="jkm-lb" role="dialog" aria-modal="true" aria-label="Referencia kép nagyítva">
+    <button type="button" class="jkm-lb-close" aria-label="Bezárás">&#10005;</button>
+    <button type="button" class="jkm-lb-prev" aria-label="Előző kép">&#8249;</button>
+    <button type="button" class="jkm-lb-next" aria-label="Következő kép">&#8250;</button>
+    <img id="jkm-lb-img" alt="Jimmy Klíma referencia, nagyított">
+  </div>
+</div>
+<script>
+(function () {
+  if (window.__jkmB1) return;
+  window.__jkmB1 = true;
+  var root = document.getElementById('jkm-b1');
+  if (!root) return;
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  root.classList.add('jkm-js');
+
+  var rv = root.querySelectorAll('.jkm-rv');
+  var svcVp = document.getElementById('jkm-services-vp');
+  if (reduce || !('IntersectionObserver' in window)) {
+    rv.forEach(function (el) { el.classList.add('jkm-in'); });
+  } else {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        if (e.target === svcVp) root.querySelectorAll('.jkm-svc').forEach(function (el) { el.classList.add('jkm-in'); });
+        else e.target.classList.add('jkm-in');
+        io.unobserve(e.target);
+      });
+    }, { threshold: 0.15 });
+    rv.forEach(function (el) { if (!el.classList.contains('jkm-svc')) io.observe(el); });
+    if (svcVp) io.observe(svcVp);
+  }
+
+  var hero = document.getElementById('jkm-hero');
+  var photo = document.getElementById('jkm-hero-photo');
+  if (!reduce && hero && photo) {
+    var ticking = false;
+    var drift = function () {
+      ticking = false;
+      var r = hero.getBoundingClientRect();
+      if (!r.height || r.bottom < 0) return;
+      var vh = window.innerHeight || document.documentElement.clientHeight;
+      var p = Math.max(0, Math.min(1, -r.top / vh));
+      photo.style.transform = 'translateY(' + (p * 90) + 'px) scale(1.06)';
+    };
+    window.addEventListener('scroll', function () {
+      if (!ticking) { ticking = true; requestAnimationFrame(drift); }
+    }, { passive: true });
+    drift();
+  }
+
+  function carousel(vp, items, dotsWrap, label, onChange) {
+    if (!vp || !items.length || !dotsWrap) return;
+    var dots = items.map(function (item, i) {
+      var d = document.createElement('button');
+      d.type = 'button';
+      d.className = 'jkm-dot' + (i === 0 ? ' jkm-on' : '');
+      d.setAttribute('aria-label', label + ' ' + (i + 1));
+      d.addEventListener('click', function () {
+        vp.scrollTo({ left: item.offsetLeft - (vp.clientWidth - item.offsetWidth) / 2, behavior: reduce ? 'auto' : 'smooth' });
+      });
+      dotsWrap.appendChild(d);
+      return d;
+    });
+    var timer = null;
+    var update = function () {
+      var c = vp.getBoundingClientRect();
+      var mid = c.left + c.width / 2, best = 0, bestD = Infinity;
+      items.forEach(function (el, i) {
+        var r = el.getBoundingClientRect();
+        var d = Math.abs(r.left + r.width / 2 - mid);
+        if (d < bestD) { bestD = d; best = i; }
+      });
+      dots.forEach(function (d, i) { d.classList.toggle('jkm-on', i === best); });
+      if (onChange) onChange(best);
+    };
+    vp.addEventListener('scroll', function () {
+      if (timer) clearTimeout(timer);
+      timer = setTimeout(update, 50);
+    }, { passive: true });
+    update();
+  }
+
+  carousel(document.getElementById('jkm-services-vp'),
+    Array.prototype.slice.call(root.querySelectorAll('.jkm-svc')),
+    document.getElementById('jkm-services-dots'), 'Szolgáltatás');
+
+  var refs = Array.prototype.slice.call(root.querySelectorAll('.jkm-ref'));
+  carousel(document.getElementById('jkm-refs-vp'), refs, document.getElementById('jkm-refs-dots'), 'Kép', function (idx) {
+    refs.forEach(function (el, i) { el.classList.toggle('jkm-center', i === idx); });
+  });
+
+  if (!reduce) {
+    root.querySelectorAll('.jkm-icon').forEach(function (icon) {
+      var ring = document.createElement('span');
+      ring.className = 'jkm-ring';
+      icon.appendChild(ring);
+      icon.addEventListener('touchstart', function () {
+        icon.classList.add('jkm-press');
+        ring.classList.remove('jkm-go');
+        void ring.offsetWidth;
+        ring.classList.add('jkm-go');
+      }, { passive: true });
+      icon.addEventListener('touchend', function () {
+        setTimeout(function () { icon.classList.remove('jkm-press'); }, 150);
+      }, { passive: true });
+    });
+  }
+
+  var lb = document.getElementById('jkm-lb');
+  var lbImg = document.getElementById('jkm-lb-img');
+  var track = document.getElementById('jkm-refs-track');
+  if (track && refs.length) {
+    var best = 0;
+    var consider = function (img) {
+      if (img.naturalWidth && img.naturalHeight && img.naturalWidth * img.naturalHeight > best) {
+        best = img.naturalWidth * img.naturalHeight;
+        track.style.setProperty('--jkm-ref-ratio', img.naturalWidth + ' / ' + img.naturalHeight);
+      }
+    };
+    refs.forEach(function (el) {
+      var img = el.querySelector('img');
+      if (img.complete) consider(img);
+      else img.addEventListener('load', function () { consider(img); }, { once: true });
+    });
+  }
+
+  if (lb && lbImg) {
+    document.body.appendChild(lb);
+    var srcs = refs.map(function (el) { return el.querySelector('img').getAttribute('src'); });
+    var cur = 0;
+    var openAt = function (i) {
+      cur = (i + srcs.length) % srcs.length;
+      lbImg.src = srcs[cur];
+      lb.classList.add('jkm-open');
+    };
+    var close = function () { lb.classList.remove('jkm-open'); lbImg.removeAttribute('src'); };
+    refs.forEach(function (el, i) { el.addEventListener('click', function () { openAt(i); }); });
+    lb.querySelector('.jkm-lb-close').addEventListener('click', close);
+    lb.querySelector('.jkm-lb-prev').addEventListener('click', function (e) { e.stopPropagation(); openAt(cur - 1); });
+    lb.querySelector('.jkm-lb-next').addEventListener('click', function (e) { e.stopPropagation(); openAt(cur + 1); });
+    lb.addEventListener('click', function (e) { if (e.target === lb) close(); });
+    document.addEventListener('keydown', function (e) {
+      if (!lb.classList.contains('jkm-open')) return;
+      if (e.key === 'Escape') close();
+      else if (e.key === 'ArrowLeft') openAt(cur - 1);
+      else if (e.key === 'ArrowRight') openAt(cur + 1);
+    });
+    var sx = null;
+    lb.addEventListener('touchstart', function (e) { sx = e.touches[0].clientX; }, { passive: true });
+    lb.addEventListener('touchend', function (e) {
+      if (sx === null) return;
+      var dx = e.changedTouches[0].clientX - sx;
+      sx = null;
+      if (Math.abs(dx) > 50) openAt(cur + (dx < 0 ? 1 : -1));
+    }, { passive: true });
+  }
+})();
+</script>

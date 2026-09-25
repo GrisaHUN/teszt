@@ -1,0 +1,330 @@
+<style>
+  @media (max-width: 767px) { html, body { max-width: 100%; overflow-x: hidden; } }
+  #jkm-b2 { box-sizing: border-box; position: relative; width: 100vw; max-width: 100vw; margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw); overflow-x: clip; color: #33394A; font-size: 16px; line-height: 1.6; text-align: left; }
+  #jkm-b2 *, #jkm-b2 *::before, #jkm-b2 *::after { box-sizing: border-box; }
+  #jkm-b2 h2, #jkm-b2 h3, #jkm-b2 p, #jkm-b2 ul { margin: 0; padding: 0; }
+  #jkm-b2 .jkm-btn { font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; -webkit-tap-highlight-color: transparent; }
+
+  #jkm-b2.jkm-js .jkm-rv { opacity: 0; transition: opacity 550ms ease-out, transform 550ms ease-out; transition-delay: var(--jkm-d, 0ms); }
+  #jkm-b2.jkm-js .jkm-rv-up { transform: translateY(24px); }
+  #jkm-b2.jkm-js .jkm-rv-l { transform: translateX(-32px); }
+  #jkm-b2.jkm-js .jkm-rv-r { transform: translateX(32px); }
+  #jkm-b2.jkm-js .jkm-rv-sc { transform: scale(0.94); }
+  #jkm-b2.jkm-js .jkm-rv.jkm-in { opacity: 1; transform: none; }
+
+  #jkm-b2 .jkm-sec-title { font-size: 25px; font-weight: 800; color: #0E1C43; text-align: center; line-height: 1.25; margin: 0 0 8px; }
+  .jkm-curve { display: block; line-height: 0; font-size: 0; margin-top: -1px; }
+  .jkm-curve svg { display: block; width: 100%; height: 26px; }
+
+  #jkm-miert { background: #FFFFFF; padding: 44px 22px 12px; }
+  .jkm-miert-inner { max-width: 480px; margin: 0 auto; }
+  #jkm-b2 .jkm-miert-sub { font-size: 15.5px; color: #64708B; text-align: center; margin: 0 0 28px; }
+  .jkm-miert-list { display: flex; flex-direction: column; gap: 18px; }
+  .jkm-miert-item { position: relative; overflow: hidden; background: #F5F6F8; border-radius: 16px; padding: 30px 20px 22px; text-align: center; }
+  .jkm-badge { position: relative; width: 54px; height: 54px; border-radius: 999px; background: #0E1C43; display: flex; align-items: center; justify-content: center; margin: 0 auto 14px; transition: transform 150ms ease-out; }
+  .jkm-badge svg { width: 26px; height: 26px; }
+  .jkm-badge.jkm-press { transform: scale(0.92); }
+  .jkm-ring { position: absolute; inset: 0; border-radius: 999px; border: 2px solid #D9E419; opacity: 0; pointer-events: none; }
+  .jkm-ring.jkm-go { animation: jkm-ring-pulse 480ms ease-out; }
+  @keyframes jkm-ring-pulse { 0% { opacity: 0.75; transform: scale(1); } 100% { opacity: 0; transform: scale(1.7); } }
+  #jkm-b2 .jkm-miert-text { font-size: 16px; line-height: 1.58; color: #33394A; }
+  .jkm-wave { position: absolute; top: 0; left: -40%; width: 40%; height: 100%; pointer-events: none; opacity: 0;
+    background: linear-gradient(90deg, rgba(217,228,25,0) 0%, rgba(217,228,25,0.24) 50%, rgba(217,228,25,0) 100%); }
+  .jkm-wave.jkm-go { animation: jkm-wave-sweep 650ms ease-out; }
+  @keyframes jkm-wave-sweep { 0% { transform: translateX(0); opacity: 1; } 100% { transform: translateX(350%); opacity: 0; } }
+
+  .jkm-cta { background: #FFFFFF; padding: 28px 22px 32px; text-align: center; }
+  #jkm-b2 .jkm-cta-btn { display: block; width: 100%; max-width: 380px; margin: 0 auto; background: #D9E419; color: #0E1C43; font-weight: 800; font-size: 16px; line-height: 1.3; text-align: center; text-decoration: none; padding: 16px 18px; border-radius: 12px; border: 0;
+    box-shadow: 0 10px 24px -12px rgba(14,28,67,0.45); transition: transform 160ms ease, background-color 160ms ease; }
+  #jkm-b2 .jkm-cta-btn:hover { background: #C3CE12; color: #0E1C43; }
+  #jkm-b2 .jkm-cta-btn:active { background: #C3CE12; transform: scale(0.97); }
+
+  #jkm-rolunk { background: #0E1C43; padding: 44px 24px 40px; text-align: center; }
+  .jkm-rolunk-inner { max-width: 480px; margin: 0 auto; }
+  #jkm-b2 .jkm-rolunk-title { font-size: 25px; font-weight: 800; color: #FFFFFF; margin: 0 0 18px; }
+  #jkm-b2 .jkm-rolunk-text { font-size: 16.5px; line-height: 1.62; color: rgba(255,255,255,0.86); margin: 0 0 22px; }
+  #jkm-b2 .jkm-rolunk-motto { font-size: 17px; font-style: italic; font-weight: 700; color: #D9E419; }
+  .jkm-rolunk-rule { width: 56px; height: 3px; border-radius: 3px; background: #D9E419; margin: 0 auto 18px; }
+
+  #jkm-steps { padding: 48px 16px 60px; text-align: center; background-color: #0E1C43;
+    background-image: radial-gradient(ellipse 520px 420px at 50% 38%, rgba(255,255,255,0.07), rgba(255,255,255,0) 70%), linear-gradient(180deg, #0E1C43 0%, #122050 30%, #0E1C43 65%, #091530 100%), url("{{steps-pattern.svg}}");
+    background-repeat: no-repeat, no-repeat, repeat; background-size: 100% 100%, 100% 100%, 220px 220px; }
+  #jkm-b2 .jkm-steps-title { font-size: 25px; font-weight: 800; color: #FFFFFF; line-height: 1.28; margin: 0 0 14px; }
+  #jkm-b2 .jkm-steps-sub { font-size: 16px; line-height: 1.6; color: rgba(255,255,255,0.92); max-width: 420px; margin: 0 auto 52px; }
+  .jkm-steps-list { display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 360px; margin: 0 auto; }
+  .jkm-step { position: relative; width: 100%; background: #FFFFFF; border-radius: 14px; padding: 44px 20px 24px; text-align: center; border-bottom: 4px solid #D9E419; box-shadow: 0 16px 34px -18px rgba(0,0,0,0.6); }
+  .jkm-step-badge { position: absolute; top: -28px; left: 50%; margin-left: -28px; width: 56px; height: 56px; border-radius: 999px; background: #FFFFFF; box-shadow: 0 8px 20px -8px rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; }
+  .jkm-step-badge svg { width: 26px; height: 26px; }
+  .jkm-step-num { display: flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 999px; background: #E7E9F1; font-size: 17px; font-weight: 800; color: #64708B; margin: 0 auto 10px; }
+  #jkm-b2 .jkm-step-title { font-size: 19px; font-weight: 800; color: #0E1C43; line-height: 1.3; margin: 0 0 8px; }
+  #jkm-b2 .jkm-step-text { font-size: 15.5px; line-height: 1.6; color: #4B5568; }
+  .jkm-conn { display: block; width: 20px; height: 64px; margin: 0 auto; flex: none; overflow: visible; }
+  .jkm-conn-line { fill: none; stroke: #D9E419; stroke-opacity: 0.9; stroke-width: 3; stroke-linecap: round; }
+  .jkm-conn-dot { fill: #D9E419; }
+  #jkm-b2.jkm-js .jkm-conn-line { stroke-dasharray: 60; stroke-dashoffset: 60; transition: stroke-dashoffset 550ms cubic-bezier(0.16, 1, 0.3, 1); }
+  #jkm-b2.jkm-js .jkm-conn-dot { transform-box: fill-box; transform-origin: center; transform: scale(0); transition: transform 240ms ease-out; }
+  #jkm-b2.jkm-js .jkm-conn-dot.jkm-end { transition-delay: 460ms; }
+  #jkm-b2.jkm-js .jkm-conn.jkm-in .jkm-conn-line { stroke-dashoffset: 0; }
+  #jkm-b2.jkm-js .jkm-conn.jkm-in .jkm-conn-dot { transform: scale(1); }
+
+  #jkm-testi { background: #F5F6F8; padding: 40px 0 44px; }
+  #jkm-b2 .jkm-testi-title { margin: 0 22px 22px; }
+  #jkm-testi-vp { overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding: 6px 0 14px; }
+  #jkm-testi-vp::-webkit-scrollbar { display: none; }
+  #jkm-testi-track { display: flex; align-items: stretch; gap: 14px; padding: 0 5vw; width: max-content; }
+  .jkm-testi-item { flex: none; width: 88vw; max-width: 400px; display: flex; flex-direction: column; background: #FFFFFF; border-radius: 16px; padding: 22px 20px 20px; box-shadow: 0 10px 30px -14px rgba(14,28,67,0.2); scroll-snap-align: center; scroll-snap-stop: always; }
+  .jkm-testi-quote { color: #D9E419; font-size: 40px; font-weight: 800; line-height: 1; height: 26px; margin: 0 0 10px; font-family: Georgia, 'Times New Roman', serif; }
+  #jkm-b2 .jkm-testi-text { color: #111318; font-size: 16px; line-height: 1.65; margin: 0 0 18px; flex: 1 0 auto; }
+  .jkm-testi-name { color: #0E1C43; font-weight: 700; font-size: 15px; padding-top: 14px; border-top: 1px solid #E4E7EE; }
+  .jkm-dots { display: flex; justify-content: center; gap: 4px; margin-top: 10px; }
+  #jkm-b2 .jkm-dot { width: 22px; height: 22px; border: 0; padding: 0; margin: 0; background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; -webkit-tap-highlight-color: transparent; }
+  #jkm-b2 .jkm-dot::before { content: ""; width: 7px; height: 7px; border-radius: 999px; background: rgba(14,28,67,0.25); transition: background 200ms ease, transform 200ms ease; }
+  #jkm-b2 .jkm-dot.jkm-on::before { background: #0E1C43; transform: scale(1.35); box-shadow: 0 0 0 2px #D9E419; }
+
+  #jkm-futes { background: #FFFFFF; padding: 44px 22px 4px; }
+  .jkm-futes-inner { max-width: 480px; margin: 0 auto; }
+  #jkm-b2 .jkm-futes-title { margin: 0 0 18px; }
+  .jkm-futes-photo { display: block; width: 100%; height: auto; border-radius: 16px; margin: 0 0 20px; box-shadow: 0 14px 30px -16px rgba(14,28,67,0.35); background: #F5F6F8; }
+  #jkm-b2 .jkm-futes-text { font-size: 16px; line-height: 1.62; color: #33394A; margin: 0 0 20px; }
+  #jkm-b2 .jkm-futes-text strong { color: #0E1C43; }
+  #jkm-b2 .jkm-futes-list { list-style: none; display: flex; flex-direction: column; gap: 10px; margin: 0 0 22px; }
+  #jkm-b2 .jkm-futes-list li { display: flex; align-items: flex-start; gap: 10px; font-size: 15.5px; line-height: 1.5; color: #33394A; margin: 0; padding: 0; }
+  #jkm-b2 .jkm-futes-list li::before { content: none; }
+  .jkm-check { flex: none; width: 20px; height: 20px; border-radius: 999px; background: #D9E419; display: flex; align-items: center; justify-content: center; margin-top: 1px; }
+  .jkm-check svg { width: 12px; height: 12px; }
+  .jkm-tarifa { background: #0E1C43; border-radius: 16px; padding: 22px 20px; text-align: center; }
+  #jkm-b2 .jkm-tarifa-title { font-size: 17px; font-weight: 800; color: #FFFFFF; margin: 0 0 8px; }
+  #jkm-b2 .jkm-tarifa-text { font-size: 14.5px; line-height: 1.55; color: rgba(255,255,255,0.84); }
+
+  @media (prefers-reduced-motion: reduce) {
+    #jkm-b2.jkm-js .jkm-rv { opacity: 1; transform: none; transition: none; }
+    #jkm-b2.jkm-js .jkm-conn-line { stroke-dashoffset: 0; transition: none; }
+    #jkm-b2.jkm-js .jkm-conn-dot { transform: none; transition: none; }
+    .jkm-wave, .jkm-ring { display: none; }
+  }
+</style>
+<div id="jkm-b2">
+  <section id="jkm-miert">
+    <div class="jkm-miert-inner">
+      <h2 class="jkm-sec-title jkm-rv jkm-rv-up">Miért minket válasszon?</h2>
+      <p class="jkm-miert-sub jkm-rv jkm-rv-up" style="--jkm-d:80ms">Amikor minket hív, pontosan tudja, mire számíthat.</p>
+      <div class="jkm-miert-list">
+        <div class="jkm-miert-item jkm-rv jkm-rv-l">
+          <div class="jkm-badge"><svg viewBox="0 0 24 24" fill="none" stroke="#D9E419" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg></div>
+          <p class="jkm-miert-text">+2 év garancia a telepítésre, +6 hónap a tisztított és karbantartott készülékekre.</p>
+        </div>
+        <div class="jkm-miert-item jkm-rv jkm-rv-r">
+          <div class="jkm-badge"><svg viewBox="0 0 24 24" fill="none" stroke="#D9E419" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="8" width="14" height="9" rx="1.5"/><path d="M16 11h3l3 3v3h-6"/><circle cx="7" cy="19" r="1.6"/><circle cx="18" cy="19" r="1.6"/></svg></div>
+          <p class="jkm-miert-text">Ingyenes helyszíni felmérés, majd 24 órán belül fix, részletes árajánlat.</p>
+        </div>
+        <div class="jkm-miert-item jkm-rv jkm-rv-l">
+          <div class="jkm-badge"><svg viewBox="0 0 24 24" fill="none" stroke="#D9E419" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.6 12.6L12 21.2 2.8 12 11.4 3.4H20.6v9.2z"/><circle cx="16" cy="8" r="1.4" fill="#D9E419" stroke="none"/></svg></div>
+          <p class="jkm-miert-text">A felmérés után adott ár végleges. Nincs utólagos meglepetés a számlán.</p>
+        </div>
+        <div class="jkm-miert-item jkm-rv jkm-rv-r">
+          <div class="jkm-badge"><svg viewBox="0 0 24 24" fill="none" stroke="#D9E419" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8.5" cy="8" r="3"/><circle cx="16" cy="9" r="2.4"/><path d="M2.5 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M14.8 14.2c2.6.4 4.7 2.6 4.7 5.8"/></svg></div>
+          <p class="jkm-miert-text">Minden esetben az Ön igényeit helyezzük előtérbe. Rugalmasak vagyunk, nálunk minden megbeszélhető.</p>
+        </div>
+        <div class="jkm-miert-item jkm-rv jkm-rv-l">
+          <div class="jkm-badge"><svg viewBox="0 0 24 24" fill="none" stroke="#D9E419" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.3" fill="#D9E419" stroke="none"/></svg></div>
+          <p class="jkm-miert-text">Az Ön kérését, elképzelését minden esetben megvalósítjuk.</p>
+        </div>
+        <div class="jkm-miert-item jkm-rv jkm-rv-r">
+          <div class="jkm-badge"><svg viewBox="0 0 24 24" fill="none" stroke="#D9E419" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+          <p class="jkm-miert-text">A munkaterületet mindig úgy adjuk vissza, ahogy kaptuk &ndash; szakszerűen és tisztán dolgozunk.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="jkm-cta">
+    <a class="jkm-btn jkm-cta-btn jkm-rv jkm-rv-sc" href="https://growthnestg.zohobookings.eu/254300000000290002/#/254300000000290002?booknow=true" target="_blank" rel="noopener">Ingyenes árajánlat kérése</a>
+  </div>
+  <div class="jkm-curve" style="background:#0E1C43" aria-hidden="true"><svg viewBox="0 0 400 26" preserveAspectRatio="none"><path d="M0,0 L400,0 L400,10 C 300,4 100,22 0,8 Z" fill="#FFFFFF"/></svg></div>
+
+  <section id="jkm-rolunk">
+    <div class="jkm-rolunk-inner">
+      <h2 class="jkm-rolunk-title jkm-rv jkm-rv-sc">Rólunk</h2>
+      <div class="jkm-rolunk-rule jkm-rv jkm-rv-sc" style="--jkm-d:80ms"></div>
+      <p class="jkm-rolunk-text jkm-rv jkm-rv-up" style="--jkm-d:150ms">2019 óta szerelünk és tisztítunk klímaberendezéseket Szeged és 30 kilométeres körzetében, kedvező árakon. 2023-ban villanyszereléssel is bővítettük a kínálatunkat. Minden munkánál ugyanazzal a szemlélettel dolgozunk: pontosan és alaposan, úgy, ahogy a saját otthonunkban is elvárnánk.</p>
+      <p class="jkm-rolunk-motto jkm-rv jkm-rv-up" style="--jkm-d:280ms">&bdquo;Csináld úgy, mintha magadnak csinálnád!&rdquo;</p>
+    </div>
+  </section>
+
+  <section id="jkm-steps">
+    <h2 class="jkm-steps-title jkm-rv jkm-rv-up">Klíma vásárlás menete &ndash; 4 egyszerű lépésben</h2>
+    <p class="jkm-steps-sub jkm-rv jkm-rv-up" style="--jkm-d:100ms">Mindent úgy alakítottunk ki, hogy a klímavásárlás és karbantartás Önnek gyors, egyszerű és stresszmentes legyen. Ránk hosszú távon is számíthat.</p>
+    <div class="jkm-steps-list">
+      <div class="jkm-step jkm-rv jkm-rv-up">
+        <div class="jkm-step-badge"><svg viewBox="0 0 24 24" fill="none" stroke="#0E1C43" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></div>
+        <div class="jkm-step-num">1.</div>
+        <h3 class="jkm-step-title">Ingyenes ajánlatkérés</h3>
+        <p class="jkm-step-text">Kérjen személyre szabott ajánlatot pár kattintással, és segítünk megtalálni az Önnek tökéletes készüléket.</p>
+      </div>
+      <svg class="jkm-conn" viewBox="0 0 20 64" aria-hidden="true"><path class="jkm-conn-line" d="M10,6 L10,58"/><circle class="jkm-conn-dot" cx="10" cy="6" r="4"/><circle class="jkm-conn-dot jkm-end" cx="10" cy="58" r="4"/></svg>
+      <div class="jkm-step jkm-rv jkm-rv-up">
+        <div class="jkm-step-badge"><svg viewBox="0 0 24 24" fill="none" stroke="#0E1C43" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><circle cx="8" cy="15" r="1.4" fill="#0E1C43" stroke="none"/></svg></div>
+        <div class="jkm-step-num">2.</div>
+        <h3 class="jkm-step-title">Időpont-egyeztetés</h3>
+        <p class="jkm-step-text">Rugalmasan egyeztetjük a kiválasztott klíma beszerelésének időpontját, igazodva az Ön időbeosztásához.</p>
+      </div>
+      <svg class="jkm-conn" viewBox="0 0 20 64" aria-hidden="true"><path class="jkm-conn-line" d="M10,6 L10,58"/><circle class="jkm-conn-dot" cx="10" cy="6" r="4"/><circle class="jkm-conn-dot jkm-end" cx="10" cy="58" r="4"/></svg>
+      <div class="jkm-step jkm-rv jkm-rv-up">
+        <div class="jkm-step-badge"><svg viewBox="0 0 24 24" fill="none" stroke="#0E1C43" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2-2 2.5-2.5z"/></svg></div>
+        <div class="jkm-step-num">3.</div>
+        <h3 class="jkm-step-title">Klíma beszerelés</h3>
+        <p class="jkm-step-text">Szakembereink gyorsan és precízen felszerelik a kiválasztott klímát, hogy minél előbb élvezhesse otthona komfortját.</p>
+      </div>
+      <svg class="jkm-conn" viewBox="0 0 20 64" aria-hidden="true"><path class="jkm-conn-line" d="M10,6 L10,58"/><circle class="jkm-conn-dot" cx="10" cy="6" r="4"/><circle class="jkm-conn-dot jkm-end" cx="10" cy="58" r="4"/></svg>
+      <div class="jkm-step jkm-rv jkm-rv-up">
+        <div class="jkm-step-badge"><svg viewBox="0 0 24 24" fill="none" stroke="#0E1C43" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13a8 8 0 0 1 16 0"/><path d="M4 13v4a2 2 0 0 0 2 2h1v-6H5a1 1 0 0 0-1 1z"/><path d="M20 13v4a2 2 0 0 1-2 2h-1v-6h1a1 1 0 0 1 2 1z"/><path d="M14 19a2 2 0 0 1-4 0"/></svg></div>
+        <div class="jkm-step-num">4.</div>
+        <h3 class="jkm-step-title">Szervíz és támogatás</h3>
+        <p class="jkm-step-text">A telepítés után is Ön mellett állunk: évente karbantartjuk a készüléket, és segítünk bármilyen kérdés vagy probléma esetén.</p>
+      </div>
+    </div>
+  </section>
+  <div class="jkm-curve" style="background:#F5F6F8" aria-hidden="true"><svg viewBox="0 0 400 26" preserveAspectRatio="none"><path d="M0,0 L400,0 L400,10 C 300,26 110,2 0,16 Z" fill="#091530"/></svg></div>
+
+  <section id="jkm-testi">
+    <h2 class="jkm-sec-title jkm-testi-title jkm-rv jkm-rv-up">Rólunk írták</h2>
+    <div class="jkm-rv jkm-rv-r" style="--jkm-d:100ms">
+      <div id="jkm-testi-vp">
+        <div id="jkm-testi-track">
+          <div class="jkm-testi-item">
+            <div class="jkm-testi-quote" aria-hidden="true">&#8221;&#8221;</div>
+            <p class="jkm-testi-text">Nagyon profi, pontosan jött, és kiváló munkát végzett. Magam is műszaki ember vagyok, messziről megérzem a középszerűséget, vagy a kóklerséget. Öröm volt nézni, ahogy dolgozott, mindenkinek ajánlom!</p>
+            <div class="jkm-testi-name">K. Kálmán</div>
+          </div>
+          <div class="jkm-testi-item">
+            <div class="jkm-testi-quote" aria-hidden="true">&#8221;&#8221;</div>
+            <p class="jkm-testi-text">Pontos érkezés, precíz munkavégzés, minden rendben volt. Csak ajánlani tudom!</p>
+            <div class="jkm-testi-name">M. Dóra</div>
+          </div>
+          <div class="jkm-testi-item">
+            <div class="jkm-testi-quote" aria-hidden="true">&#8221;&#8221;</div>
+            <p class="jkm-testi-text">Szakszerű és precíz munkát végeztek. Örülök, hogy őket választottam.</p>
+            <div class="jkm-testi-name">D. Bálint</div>
+          </div>
+          <div class="jkm-testi-item">
+            <div class="jkm-testi-quote" aria-hidden="true">&#8221;&#8221;</div>
+            <p class="jkm-testi-text">Nagyon alapos és szakszerű munkát végzett. Ajánlom a Jimmy klímát mindenkinek.</p>
+            <div class="jkm-testi-name">V. Mihály</div>
+          </div>
+        </div>
+      </div>
+      <div class="jkm-dots" id="jkm-testi-dots"></div>
+    </div>
+  </section>
+
+  <section id="jkm-futes">
+    <div class="jkm-futes-inner">
+      <h2 class="jkm-sec-title jkm-futes-title jkm-rv jkm-rv-up">Fűtés klímával &ndash; megéri?</h2>
+      <img class="jkm-futes-photo jkm-rv jkm-rv-sc" src="https://d1yei2z3i6k35z.cloudfront.net/19002789/6ab2f2260189f1.00259298_Gemini_Generated_Image_x2xr81x2xr81x2xr.jpeg" alt="Fűtés klímával" decoding="async">
+      <p class="jkm-futes-text jkm-rv jkm-rv-up">A klímás fűtés ideális választás azoknak, akik gyorsan és költséghatékonyan szeretnék korszerűsíteni otthonuk fűtését. Különösen megéri azoknak, akik túllépik a kedvezményes gázkeretet, hiszen ilyenkor a klímás fűtés akár <strong>háromszor-négyszer olcsóbb lehet a piaci áras gázfűtéshez képest</strong>.</p>
+      <ul class="jkm-futes-list">
+        <li class="jkm-rv jkm-rv-l"><span class="jkm-check"><svg viewBox="0 0 24 24" fill="none" stroke="#0E1C43" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>Energiatakarékos hőszivattyús működés</li>
+        <li class="jkm-rv jkm-rv-l"><span class="jkm-check"><svg viewBox="0 0 24 24" fill="none" stroke="#0E1C43" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>100 000 Ft+ megtakarítható havonta</li>
+        <li class="jkm-rv jkm-rv-l"><span class="jkm-check"><svg viewBox="0 0 24 24" fill="none" stroke="#0E1C43" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>Nincs gázterv, engedélyeztetés</li>
+        <li class="jkm-rv jkm-rv-l"><span class="jkm-check"><svg viewBox="0 0 24 24" fill="none" stroke="#0E1C43" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>Nincs kémény bélelés, drága felújítás</li>
+        <li class="jkm-rv jkm-rv-l"><span class="jkm-check"><svg viewBox="0 0 24 24" fill="none" stroke="#0E1C43" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>Költséghatékony beszerelés 1 nap alatt</li>
+        <li class="jkm-rv jkm-rv-l"><span class="jkm-check"><svg viewBox="0 0 24 24" fill="none" stroke="#0E1C43" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>&ndash;25 °C-ig megbízható működés télen</li>
+        <li class="jkm-rv jkm-rv-l"><span class="jkm-check"><svg viewBox="0 0 24 24" fill="none" stroke="#0E1C43" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>Gyors fűtésrásegítés ősszel és tavasszal</li>
+        <li class="jkm-rv jkm-rv-l"><span class="jkm-check"><svg viewBox="0 0 24 24" fill="none" stroke="#0E1C43" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>Kellemes hűvös a nyári kánikulában</li>
+        <li class="jkm-rv jkm-rv-l"><span class="jkm-check"><svg viewBox="0 0 24 24" fill="none" stroke="#0E1C43" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>Okostelefonos távoli Wifi vezérlés</li>
+      </ul>
+      <div class="jkm-tarifa jkm-rv jkm-rv-up">
+        <div class="jkm-tarifa-title">H tarifa &ndash; klímás fűtésre</div>
+        <p class="jkm-tarifa-text">A korszerű klímás fűtés hőszivattyú technológia, ezért az áram szolgáltatóknál igényelhető hozzá kedvezményes árú H tarifa (~23 Ft/kWh).</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="jkm-cta">
+    <a class="jkm-btn jkm-cta-btn jkm-rv jkm-rv-sc" href="https://growthnestg.zohobookings.eu/254300000000290002/#/254300000000290002?booknow=true" target="_blank" rel="noopener">Ingyenes árajánlat kérése</a>
+  </div>
+</div>
+<script>
+(function () {
+  if (window.__jkmB2) return;
+  window.__jkmB2 = true;
+  var root = document.getElementById('jkm-b2');
+  if (!root) return;
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  root.classList.add('jkm-js');
+
+  var list = root.querySelectorAll('.jkm-futes-list li');
+  list.forEach(function (el, i) { el.style.setProperty('--jkm-d', (i * 60) + 'ms'); });
+
+  var rv = root.querySelectorAll('.jkm-rv, .jkm-conn');
+  if (reduce || !('IntersectionObserver' in window)) {
+    rv.forEach(function (el) { el.classList.add('jkm-in'); });
+  } else {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('jkm-in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
+    rv.forEach(function (el) { io.observe(el); });
+  }
+
+  var vp = document.getElementById('jkm-testi-vp');
+  var dotsWrap = document.getElementById('jkm-testi-dots');
+  var items = Array.prototype.slice.call(root.querySelectorAll('.jkm-testi-item'));
+  if (vp && dotsWrap && items.length) {
+    var dots = items.map(function (item, i) {
+      var d = document.createElement('button');
+      d.type = 'button';
+      d.className = 'jkm-dot' + (i === 0 ? ' jkm-on' : '');
+      d.setAttribute('aria-label', 'Vélemény ' + (i + 1));
+      d.addEventListener('click', function () {
+        vp.scrollTo({ left: item.offsetLeft - (vp.clientWidth - item.offsetWidth) / 2, behavior: reduce ? 'auto' : 'smooth' });
+      });
+      dotsWrap.appendChild(d);
+      return d;
+    });
+    var timer = null;
+    var update = function () {
+      var c = vp.getBoundingClientRect();
+      var mid = c.left + c.width / 2, best = 0, bestD = Infinity;
+      items.forEach(function (el, i) {
+        var r = el.getBoundingClientRect();
+        var d = Math.abs(r.left + r.width / 2 - mid);
+        if (d < bestD) { bestD = d; best = i; }
+      });
+      dots.forEach(function (d, i) { d.classList.toggle('jkm-on', i === best); });
+    };
+    vp.addEventListener('scroll', function () {
+      if (timer) clearTimeout(timer);
+      timer = setTimeout(update, 50);
+    }, { passive: true });
+  }
+
+  if (!reduce) {
+    root.querySelectorAll('.jkm-miert-item').forEach(function (item) {
+      var wave = document.createElement('span');
+      wave.className = 'jkm-wave';
+      item.appendChild(wave);
+      item.addEventListener('touchstart', function () {
+        wave.classList.remove('jkm-go');
+        void wave.offsetWidth;
+        wave.classList.add('jkm-go');
+      }, { passive: true });
+      var badge = item.querySelector('.jkm-badge');
+      if (!badge) return;
+      var ring = document.createElement('span');
+      ring.className = 'jkm-ring';
+      badge.appendChild(ring);
+      badge.addEventListener('touchstart', function () {
+        badge.classList.add('jkm-press');
+        ring.classList.remove('jkm-go');
+        void ring.offsetWidth;
+        ring.classList.add('jkm-go');
+      }, { passive: true });
+      badge.addEventListener('touchend', function () {
+        setTimeout(function () { badge.classList.remove('jkm-press'); }, 150);
+      }, { passive: true });
+    });
+  }
+})();
+</script>
