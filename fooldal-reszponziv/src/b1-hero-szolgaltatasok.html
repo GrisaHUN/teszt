@@ -31,28 +31,28 @@ modules=carousel,parallax
   <div class="jkh-car jkh-svc-car jkh-group">
     <ul class="jkh-scroller jkh-svc-list" tabindex="0" aria-label="Szolgáltatásaink">
       <li class="jkh-slide">
-        <a class="jkh-svc jkh-rv jkh-right" href="/klimaszereles">
+        <a class="jkh-svc jkh-hover-host jkh-rv jkh-right" href="/klimaszereles">
           <span class="jkh-badge"><svg viewBox="0 0 24 24" fill="none" stroke="#D9E419" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M7 10h4M7 14h2"/></svg></span>
           <h3 class="jkh-svc-title">Klímaszerelés</h3>
           <p class="jkh-svc-text">Megbízható készülékek szakszerű telepítése otthonába teljes körű lebonyolítással, számlával és garanciával.</p>
         </a>
       </li>
       <li class="jkh-slide">
-        <a class="jkh-svc jkh-rv jkh-right" href="/klimatisztitas" style="--jkh-d:90ms">
+        <a class="jkh-svc jkh-hover-host jkh-rv jkh-right" href="/klimatisztitas" style="--jkh-d:90ms">
           <span class="jkh-badge"><svg viewBox="0 0 24 24" fill="none" stroke="#D9E419" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3c3 4 6 7 6 11a6 6 0 0 1-12 0c0-4 3-7 6-11z"/><path d="M9.5 14.5a2.5 2.5 0 0 0 2.5 2.5"/></svg></span>
           <h3 class="jkh-svc-title">Klímatisztítás</h3>
           <p class="jkh-svc-text">Speciális vegyszeres gépi klímamosás szennyezettségtől függően, teljes szétszedéssel és fertőtlenítéssel.</p>
         </a>
       </li>
       <li class="jkh-slide">
-        <a class="jkh-svc jkh-rv jkh-right" href="/szelloztetes" style="--jkh-d:180ms">
+        <a class="jkh-svc jkh-hover-host jkh-rv jkh-right" href="/szelloztetes" style="--jkh-d:180ms">
           <span class="jkh-badge"><svg viewBox="0 0 24 24" fill="none" stroke="#D9E419" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 9h11a3 3 0 1 0-3-3"/><path d="M3 15h15a3 3 0 1 1-3 3"/><path d="M3 12h7"/></svg></span>
           <h3 class="jkh-svc-title">Hővisszanyerős szellőztetés</h3>
           <p class="jkh-svc-text">Hővisszanyerős szellőztető rendszerek pontos tervezése és precíz kivitelezése A-Z-ig.</p>
         </a>
       </li>
       <li class="jkh-slide">
-        <a class="jkh-svc jkh-rv jkh-right" href="/villanyszereles" style="--jkh-d:270ms">
+        <a class="jkh-svc jkh-hover-host jkh-rv jkh-right" href="/villanyszereles" style="--jkh-d:270ms">
           <span class="jkh-badge"><svg viewBox="0 0 24 24" fill="none" stroke="#D9E419" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M13 3 4 14h6l-1 7 9-11h-6l1-7z"/></svg></span>
           <h3 class="jkh-svc-title">Villanyszerelés</h3>
           <p class="jkh-svc-text">Otthona komplett villanyszerelési munkálatait rendkívüli figyelemmel és hozzáértéssel végezzük el.</p>
@@ -98,9 +98,10 @@ modules=carousel,parallax
 #__R__ .jkh-svc-sec { background: #F5F6F8; --jkh-next: #0E1C43; }
 #__R__ .jkh-svc-list { display: flex; gap: 14px; padding: 6px 22px 12px; scroll-padding: 0 22px; }
 #__R__ .jkh-svc-list > .jkh-slide { flex: none; width: clamp(260px, 78vw, 340px); display: flex; scroll-snap-align: center; scroll-snap-stop: always; }
-#__R__ .jkh-svc { flex: 1; display: flex; flex-direction: column; background: #FFFFFF; border-radius: 16px; padding: clamp(24px, 18px + 1vw, 36px) clamp(20px, 16px + 1vw, 32px); box-shadow: 0 10px 28px -14px rgba(14,28,67,0.24); border-bottom: 4px solid #D9E419; color: inherit; text-decoration: none; -webkit-tap-highlight-color: transparent; transition: transform 200ms ease-out, box-shadow 200ms ease-out; }
+#__R__ .jkh-svc { flex: 1; display: flex; flex-direction: column; background: #FFFFFF; border-radius: 16px; padding: clamp(30px, 22px + 1.2vw, 44px) clamp(20px, 16px + 1vw, 32px); box-shadow: 0 10px 28px -14px rgba(14,28,67,0.24); border-bottom: 4px solid #D9E419; color: inherit; text-decoration: none; -webkit-tap-highlight-color: transparent; transition: transform 200ms ease-out, box-shadow 200ms ease-out; }
 #__R__ .jkh-svc:active { background: #EEF0F5; }
-#__R__ .jkh-svc .jkh-badge { margin: 0 0 16px; }
+#__R__ .jkh-svc .jkh-badge { margin: 4px 0 22px; }
+#__R__ .jkh-svc .jkh-badge.jkh-zoom { transform: scale(1.2); }
 #__R__ .jkh-svc-title { font-size: var(--jkh-fs-h3); font-weight: 800; color: #0E1C43; line-height: 1.3; margin: 0 0 8px; }
 #__R__ .jkh-svc-text { font-size: calc(var(--jkh-fs-body) * 0.96); line-height: 1.6; color: #4B5568; }
 @media (min-width: 640px) {

@@ -205,7 +205,8 @@ for (const w of WIDTHS) {
     window.__jkhRingLog = [];
     document.querySelectorAll('.jkh-svc .jkh-badge')[0].querySelectorAll('.jkh-ring').forEach((r, i) => r.addEventListener('animationstart', () => window.__jkhRingLog.push(i)));
   });
-  await pg.mouse.move(bb.x + bb.width / 2, bb.y + bb.height / 2);
+  const card = await pg.locator('.jkh-svc').first().boundingBox();
+  await pg.mouse.move(card.x + card.width - 12, card.y + card.height - 14);
   const frames = [[60, '1-gyuru-indul-az-elrol'], [200, '2-zoom-csucs'], [330, '3-gyuru-kifele'], [520, '4-gyuru-halvanyul'], [900, '5-vege']];
   let t = 0;
   const ringStates = [];
@@ -216,13 +217,13 @@ for (const w of WIDTHS) {
   }
   const early = ringStates[0];
   const scaleEarly = early.tf === 'none' ? 1 : Number(early.tf.match(/matrix\(([^,]+)/)[1]);
-  ok('ikon: egérre nagyít (1,15x)', /matrix\(1\.1[2-8]/.test(ringStates[1].zoom), ringStates[1].zoom);
+  ok('ikon: a kártya bármely pontjára vitt egérre nagyít (1,2x)', /matrix\(1\.(1[5-9]|2)/.test(ringStates[1].zoom), ringStates[1].zoom);
   ok('ikon: a gyűrű a keret széléről indul (kezdeti méret ~1,0x, üres, inset:0)', scaleEarly < 1.2 && await pg.evaluate(() => { const r = document.querySelector('.jkh-svc .jkh-badge .jkh-ring'); const s = getComputedStyle(r); return s.top === '0px' && s.left === '0px' && s.backgroundColor === 'rgba(0, 0, 0, 0)' && parseFloat(s.borderTopWidth) > 0; }), `kezdeti skála ${scaleEarly.toFixed(2)}`);
   const logMouse = await pg.evaluate(() => window.__jkhRingLog.length);
-  await pg.mouse.move(bb.x + bb.width / 2 + 3, bb.y + bb.height / 2 + 3);
+  await pg.mouse.move(bb.x + bb.width / 2, bb.y + bb.height / 2, { steps: 6 });
   await pg.waitForTimeout(700);
   const logStill = await pg.evaluate(() => window.__jkhRingLog.length);
-  ok('ikon: egy belépésre egyszer fut (mozgatásra nem ismétlődik)', logMouse === 2 && logStill === 2, `${logMouse}, ${logStill}`);
+  ok('ikon: egy belépésre egyszer fut (a kártyán belül az ikonra mozdulva sem ismétlődik)', logMouse === 2 && logStill === 2, `${logMouse}, ${logStill}`);
   await pg.mouse.move(5, 5);
   await pg.waitForTimeout(400);
   const back = await pg.evaluate(() => getComputedStyle(document.querySelector('.jkh-svc .jkh-badge')).transform);

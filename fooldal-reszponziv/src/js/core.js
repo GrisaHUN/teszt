@@ -50,12 +50,14 @@
         rings.forEach(function (r) { r.classList.remove('jkh-go'); void r.offsetWidth; r.classList.add('jkh-go'); });
       };
       var touchT = null;
-      b.addEventListener('pointerenter', function (e) {
+      // Ha a jelvény egy .jkh-hover-host kártyában ül, a kártya bármely pontja indítja.
+      var host = b.closest('.jkh-hover-host') || b;
+      host.addEventListener('pointerenter', function (e) {
         if (e.pointerType !== 'mouse') return;
         b.classList.add('jkh-zoom');
         wave();
       });
-      b.addEventListener('pointerleave', function (e) {
+      host.addEventListener('pointerleave', function (e) {
         if (e.pointerType === 'mouse') b.classList.remove('jkh-zoom');
       });
       b.addEventListener('touchstart', function () {

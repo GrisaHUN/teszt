@@ -26,6 +26,12 @@ A chat-gomb blokkja külön marad, ahhoz nem kell nyúlni. A jobb alsó sarok sz
 - Minden szekcióváltás **hullámos**, a mobil főoldal két hullámformájával felváltva. Hullám vezet a heróból a szürke szolgáltatásokba, a láblécbe is (navy `#0E1C43`), a fűtés szekcióból pedig a készülékek-fotóba.
 - **Hézagtöltés:** a Systeme.io minden Raw HTML elem köré 5–10 px sor-margót tesz, a tároló háttere `#F2F2F3`. Ebből jött a lábléc fölötti vékony csík. Minden blokk megméri a rést a következő blokkig vagy a láblécig, és a saját záró színével tölti ki. Az első blokk ugyanígy tölti ki a fejléc alatti rést navy színnel. A tesztoldalon, a törlés előtti oldal valódi Systeme-szerkezetében, sehol nem maradt csík.
 
+## Ikon-animáció
+
+- **Szolgáltatás-kártyák (David kérése, 2026-09-26):** a kártya bármely pontjára vitt egér elindítja a jelvény animációját. A jelvény 1,2×-re nő, és a keretéről kifelé fut a lime gyűrű. A kártyán belül az ikonra mozdulva nem indul újra, kilépéskor visszaáll. A jelvény körül több a hely, hogy a nagyítás ne érjen a címhez.
+- **Miért minket, lépések:** az animáció az ikonra vitt egérre indul (1,15×).
+- **Érintés:** mindenhol az ikon érintésére fut, egyszer.
+
 ## Linkek
 
 - **3× „Ingyenes árajánlat kérése”** (hero, 2 CTA-sáv): `https://growthnestg.zohobookings.eu/254300000000290002/#/254300000000290002?booknow=true`, új lapon, `rel="noopener"`. A prompt szerint.
@@ -100,7 +106,7 @@ Az ikon-animáció képkockái a `test/out/ikon-kepkockak.png` fájlban vannak (
 | 9 | Tablet rendezett | nem | **Megfelelt**: 2 oszlopos kártyák és lépések, galéria és vélemények 2-esével. |
 | 10 | 1920/2560: nincs megnyúlt fotó | nem | **Megfelelt**: tartalom 1120 px, a sáv 1920 px-nél megáll, `object-fit: cover`. |
 | 11 | Hero parallax és pulzálás | nem | **Megfelelt**: a mobil kód, a hero magasságával arányosítva. |
-| 12 | Ikon: egér-zoom egyszer, hullám a keret széléről | igen | **Megfelelt**: 1,15×, két üres gyűrű `inset: 0`-ról, egyszer fut. Képkockák mellékelve. |
+| 12 | Ikon: egér-zoom egyszer, hullám a keret széléről | igen | **Megfelelt**: 1,15× (a szolgáltatás-kártyákon 1,2×), két üres gyűrű `inset: 0`-ról, egyszer fut. Képkockák mellékelve. |
 | 13 | Érintésre ugyanaz, nem kétszer | nem | **Megfelelt**: teszt szerint 2 gyűrű-animáció érintésenként (1 futás). |
 | 14 | Körhinták (pötty, nyíl, húzás, billentyű) | nem | **Megfelelt**: mind tesztelve. |
 | 15 | Lightbox (nyit, zár, Esc, háttér, fókusz) | nem | **Megfelelt**: fókusz a bezárásra, majd vissza a képre. |
