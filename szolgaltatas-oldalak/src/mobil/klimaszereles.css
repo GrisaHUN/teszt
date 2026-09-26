@@ -1,0 +1,32 @@
+#__R__ .__P__callout { display: flex; gap: 14px; align-items: flex-start; margin-top: 22px; padding: 18px 18px 18px 16px; border-left: 4px solid #D9E419; }
+#__R__ .__P__callout .__P__badge { --__P__icon: 40px; }
+
+#__R__ .__P__steps { position: relative; margin: 6px 0 0; }
+#__R__ .__P__step { position: relative; display: flex; gap: 14px; align-items: flex-start; padding: 0 0 16px; }
+#__R__ .__P__step:last-child { padding-bottom: 0; }
+#__R__ .__P__step:not(:last-child)::before { content: ""; position: absolute; left: 19px; top: 40px; bottom: 0; width: 2px; background: #D9E419; transform-origin: top; }
+#__R__.__P__js .__P__step:not(:last-child)::before { transform: scaleY(0); transition: transform 600ms ease-out 350ms; }
+#__R__.__P__js .__P__step.__P__in:not(:last-child)::before { transform: scaleY(1); }
+#__R__ .__P__step-num { position: relative; z-index: 1; flex: none; width: 40px; height: 40px; border-radius: 999px; background: #0E1C43; color: #D9E419; font-size: 17px; font-weight: 800; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 0 5px #F5F6F8; }
+#__R__ .__P__step-card { flex: 1; min-width: 0; border-radius: 14px; padding: 14px 16px; }
+#__R__ .__P__step-text { font-size: var(--__P__fs-body); line-height: 1.6; color: #33394A; }
+#__R__ .__P__free { display: inline-block; margin-top: 12px; padding: 7px 12px; border-radius: 999px; background: #D9E419; color: #0E1C43; font-weight: 800; font-size: 14px; line-height: 1.3; }
+
+#__R__ .__P__price { position: relative; overflow: hidden; margin: 26px 0 0; background: #0E1C43; border-radius: 20px; padding: 26px 22px; text-align: center; box-shadow: 0 18px 38px -22px rgba(14,28,67,0.8); }
+#__R__ .__P__price::before { content: ""; position: absolute; right: -40px; top: -40px; width: 140px; height: 140px; border-radius: 999px; border: 14px solid rgba(217,228,25,0.16); }
+#__R__ .__P__price-label { position: relative; font-size: 15.5px; font-weight: 600; color: rgba(255,255,255,0.85); margin: 0 0 6px; }
+#__R__ .__P__price-value { position: relative; font-size: 30px; font-weight: 800; line-height: 1.2; color: #D9E419; }
+#__R__ .__P__brands { margin: 26px 0 18px; padding: 16px 18px; border-left: 4px solid #D9E419; background: #F5F6F8; border-radius: 0 12px 12px 0; }
+#__R__ .__P__related { margin-top: 18px; text-align: center; font-size: 15.5px; color: #4B5568; }
+#__R__ .__P__related .__P__link { display: inline-block; padding: 10px 2px; }
+
+#__R__ .__P__faq-list { display: flex; flex-direction: column; gap: 14px; }
+#__R__ .__P__qa { padding: 20px 18px; }
+#__R__ .__P__qa-head { display: flex; gap: 12px; align-items: flex-start; margin: 0 0 10px; }
+#__R__ .__P__qa-ic { --__P__icon: 32px; font-size: 17px; font-weight: 800; line-height: 1; }
+#__R__ .__P__qa-q { font-size: 17px; font-weight: 800; line-height: 1.4; color: #0E1C43; padding-top: 3px; }
+#__R__ .__P__qa-a { font-size: var(--__P__fs-body); line-height: 1.65; color: #4B5568; }
+
+@media (prefers-reduced-motion: reduce) {
+  #__R__.__P__js .__P__step:not(:last-child)::before { transform: none; transition: none; }
+}
