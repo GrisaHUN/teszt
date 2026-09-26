@@ -105,14 +105,14 @@ Minden oldalon:
   - az ár-sor `Ár: Br.: 14 999 Ft`, jelölés nélkül.
 - **Minden más szöveg is úgy marad, ahogy most a blokkokban van.**
 
-## Imre adatára váró elemek (nincsenek beépítve)
+## Véglegesen kihagyva (David döntése, 2026-09-26)
 
-Ezekhez új tény kell, ezért a jóváhagyás önmagában nem elég:
+Ezek nem kerülnek az oldalakra, a blokkok így véglegesek:
 
 - **Klímaszerelés:**
-  - a „Mit tartalmaz, mitől függ az ár” táblázat (Don 3.3). Helye: az ár-rész, a „A helyszíni felmérés célja…” bekezdés alatt;
-  - a GYIK-kérdések: „Mennyibe kerül” („24 órán belül”, „fix”), „Mit tartalmaz”, „Mely településeken dolgoznak?”.
-- **Klímatisztítás:** a „Mennyibe kerül?” kérdés: mire vonatkozik a 14 999 Ft.
+  - a „Mit tartalmaz, mitől függ az ár” táblázat;
+  - a „Mennyibe kerül”, a „Mit tartalmaz” és a „Mely településeken dolgoznak?” GYIK-kérdés.
+- **Klímatisztítás:** hogy mire vonatkozik a 14 999 Ft, nem írjuk ki, és a „Mennyibe kerül?” kérdés sem kerül be.
 - **Villanyszerelés:** a „Mely településeken dolgoznak?” kérdés.
 
 ## Nyitott kérdések
@@ -176,7 +176,7 @@ Ezekhez új tény kell, ezért a jóváhagyás önmagában nem elég:
 | 15 | `prefers-reduced-motion` | megfelelt | Minden azonnal látszik, nincs gyűrű és filmszalag. |
 | 16 | Egy H1, helyes hierarchia, alt, width, height | megfelelt | H1 → H2 → H3 (GYIK); 13 egyedi, leíró referencia-alt. |
 | 17 | Lazy loading működik, és nem rontja az animációkat | megfelelt | A hero eager, `fetchpriority="high"`; a galéria lazy; a felfedés nem függ képtől. |
-| 18 | GYIK: csak kitehető sorok, látható | megfelelt | A prompt 7. pontjának sorai, mindig nyitva; az Imre adatára váró sorok fent felsorolva. |
+| 18 | GYIK: csak kitehető sorok, látható | megfelelt | A prompt 7. pontjának sorai, mindig nyitva; a véglegesen kihagyott sorok fent felsorolva. |
 | 19 | JSON-LD egyszer, szögletes mezők nélkül | megfelelt | Service, BreadcrumbList, FAQPage egy `@graph`-ban, a blokk végén; a FAQPage szó szerint egyezik a látható GYIK-kal. |
 | 20 | Lighthouse: LCP 2,5 s alatt, CLS 0,1 alatt, SEO és akadálymentesség jó, 70 KB alatt | részben | Desktopon minden cél teljesül; mobilon a CLS 0 és a SEO 100, de az LCP 3,2-3,3 s a Systeme-keret miatt. A blokkok 38-61 KB-osak. |
 
