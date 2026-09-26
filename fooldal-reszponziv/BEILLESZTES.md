@@ -8,7 +8,7 @@ A fejléc után, fentről lefelé, négy Raw HTML elem:
 
 | # | Fájl | Tartalom | Méret |
 |---|---|---|---|
-| 1 | `fooldal-1-hero-szolgaltatasok-cta.html` | Hero, Szolgáltatásaink, CTA-sáv | 58,5 KB |
+| 1 | `fooldal-1-hero-szolgaltatasok-cta.html` | Hero, Szolgáltatásaink, CTA-sáv | 22,4 KB |
 | 2 | `fooldal-2-miert-galeria-rolunk.html` | Miért minket válasszon?, referencia-galéria (nagyítással), Rólunk | 33,9 KB |
 | 3 | `fooldal-3-lepesek-velemenyek-futes-keszulekek.html` | Klíma vásárlás menete, Ügyfeleink mondták, CTA-sáv, Fűtés klímával, Forgalmazott készülékek sáv | 37,4 KB |
 | 4 | `fooldal-4-markak.html` | Márka-futószalag (7 logó, beágyazva), hullám a láblécbe | 67,9 KB |
@@ -66,7 +66,7 @@ Az aláhúzás kék (navy `#0E1C43`), egérre világoskék (`#1E6FD9`). A navy h
 | Hova | Forrás |
 |---|---|
 | Hero, desktop | `profi-klimaszereles-szegeden-hero.jpg` (CDN, `fetchpriority="high"`) |
-| Hero, telefon (`<picture>`, ≤800 px) | **`JKH_HERO_MOBIL_URL` üres**, ezért most base64 (27 KB). Ha megvan a CDN-cím, `build.mjs`-ben add meg, és futtasd a buildet: a blokk 37 KB-tal kisebb lesz. |
+| Hero, telefon (`<picture>`, ≤800 px) | CDN: `6ab70fbcafebb2.61270426_profi-klimaszereles-szegeden-hero-mobil.webp` (`JKH_HERO_MOBIL_URL`). A hero címe, szövege és gombja animáció nélkül, azonnal látszik (gyorsabb LCP mobilon). |
 | Fűtés | `futes-klimaval-csalad-otthon.jpeg` (CDN, eredeti) |
 | Készülékek sáv | `…-hatter-bal.webp` + `…-hatter-jobb.webp`, 8 px átfedéssel, maszkolt varrattal, 1920 px-nél megáll. **Mobilon nem jelenik meg és nem is töltődik le**: ott a mobil főoldal fehér, cím + gomb változata van. |
 | Galéria | a 13 régi CDN-link, a mobil blokk leíró alt szövegeivel |
