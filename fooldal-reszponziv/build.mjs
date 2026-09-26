@@ -16,7 +16,7 @@ const CDN = 'https://d1yei2z3i6k35z.cloudfront.net/19002789/';
 const JKH_HERO_DESKTOP_URL = CDN + '6ab70e3f922b67.12682778_profi-klimaszereles-szegeden-hero.jpg';
 // A mobil (álló) hero végleges CDN-címe még nincs meg. Amíg üres, a kép
 // base64-ként kerül a blokkba (assets/hero-mobil-allo.webp, 27 KB).
-const JKH_HERO_MOBIL_URL = CDN + '6ab70fbcafebb2.61270426_profi-klimaszereles-szegeden-hero-mobil.webp';
+const JKH_HERO_MOBIL_URL = CDN + '6ab79f5c280aa4.91411184_profi-klimaszereles-szegeden-hero-mobil-allo.webp';
 const JKH_FUTES_URL = CDN + '6ab70e37e78260.28840404_futes-klimaval-csalad-otthon.jpeg';
 const JKH_KESZ_BAL_URL = CDN + '6ab71575da1d26.72504795_forgalmazott-keszulekek-hatter-bal.webp';
 const JKH_KESZ_JOBB_URL = CDN + '6ab71572d1f637.82507672_forgalmazott-keszulekek-hatter-jobb.webp';

@@ -41,7 +41,7 @@ export async function preparePage(ctx, html) {
   await ctx.route('**/*', (r) => {
     const u = r.request().url();
     if (u === 'https://jimmy-klima.systeme.io/') return r.fulfill({ contentType: 'text/html; charset=utf-8', body: html });
-    if (u.endsWith('_profi-klimaszereles-szegeden-hero-mobil.webp')) {
+    if (/_profi-klimaszereles-szegeden-hero-mobil(-allo)?\.webp$/.test(u)) {
       log.requests.push(u);
       return r.fulfill({ contentType: 'image/webp', body: readFileSync(join(here, '..', 'assets', 'hero-mobil-allo.webp')) });
     }

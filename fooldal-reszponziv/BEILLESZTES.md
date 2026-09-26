@@ -66,7 +66,7 @@ Az aláhúzás kék (navy `#0E1C43`), egérre világoskék (`#1E6FD9`). A navy h
 | Hova | Forrás |
 |---|---|
 | Hero, desktop | `profi-klimaszereles-szegeden-hero.jpg` (CDN, `fetchpriority="high"`) |
-| Hero, telefon (`<picture>`, ≤800 px) | CDN: `6ab70fbcafebb2.61270426_profi-klimaszereles-szegeden-hero-mobil.webp` (`JKH_HERO_MOBIL_URL`). A hero címe, szövege és gombja animáció nélkül, azonnal látszik (gyorsabb LCP mobilon). |
+| Hero, telefon (`<picture>`, ≤800 px) | CDN: `6ab79f5c280aa4.91411184_profi-klimaszereles-szegeden-hero-mobil-allo.webp` (álló, külön mobil hero) (`JKH_HERO_MOBIL_URL`). A hero címe, szövege és gombja animáció nélkül, azonnal látszik (gyorsabb LCP mobilon). |
 | Fűtés | `futes-klimaval-csalad-otthon.jpeg` (CDN, eredeti) |
 | Készülékek sáv | `…-hatter-bal.webp` + `…-hatter-jobb.webp`, 8 px átfedéssel, maszkolt varrattal, 1920 px-nél megáll. **Mobilon nem jelenik meg és nem is töltődik le**: ott a mobil főoldal fehér, cím + gomb változata van. |
 | Galéria | a 13 régi CDN-link, a mobil blokk leíró alt szövegeivel |
