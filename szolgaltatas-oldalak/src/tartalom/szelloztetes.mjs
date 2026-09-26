@@ -1,5 +1,5 @@
 // Hővisszanyerős szellőztetés oldal szövege. Forrás: az utolsó élő állapot (anyagok/szoveg/szelloztetes.txt).
-// JÓVÁHAGYÁSRA VÁR (Matt): a „85-90%” hatásfok és az „1,5-2 millió forint” becslés; addig hűen az élő szöveg.
+// A „85-90%” hatásfok és az „1,5-2 millió forint” becslés jóváhagyva (David, 2026-09-26), az élő szöveg szerint.
 // A GYIK Don 3.2 táblázatának kitehető soraiból; a meglévő ingatlanos kérdés az élő oldal szövegével (egyszer).
 export default {
   slug: 'szelloztetes',

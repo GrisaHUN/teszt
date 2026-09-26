@@ -97,20 +97,23 @@ Minden oldalon:
   - a „Kapcsolódó oldal:” link-sorok;
   - a márkanevek linkjei.
 
-## Jóváhagyásra váró elemek
+## Jóváhagyott, változatlan elemek (David, 2026-09-26: „Mehet úgy, ahogyan eredetileg volt.”)
+
+- **Szellőztetés:** a „85-90%” hatásfok és az „1,5-2 millió forint” becslés jóváhagyva, az élő szöveg szerint marad.
+- **Klímatisztítás:**
+  - a „Milyen gyakran” GYIK-válasz az eredeti formában marad, NNGYK-mondat nélkül;
+  - az ár-sor `Ár: Br.: 14 999 Ft`, jelölés nélkül.
+- **Minden más szöveg is úgy marad, ahogy most a blokkokban van.**
+
+## Imre adatára váró elemek (nincsenek beépítve)
+
+Ezekhez új tény kell, ezért a jóváhagyás önmagában nem elég:
 
 - **Klímaszerelés:**
-  - A „Mit tartalmaz, mitől függ az ár” táblázat (Don 3.3) Imre válaszára vár. Helye: az ár-rész, a „A helyszíni felmérés célja…” bekezdés alatt.
-  - Kihagyott GYIK-sorok: „Mennyibe kerül” („24 órán belül”, „fix”: Imre és Matt), „Mit tartalmaz” (Imre), „Települések” (Imre).
-  - Az ár-sor végleges szövege: Imre és Matt.
-- **Klímatisztítás:**
-  - A „Milyen gyakran” válaszból **kimaradt az NNGYK-mondat**, mert a „fertőtlenítés” szó szerepel benne. Matt döntésére vár.
-  - Kihagyott GYIK-sor: „Mennyibe kerül?”, mert nem tudjuk, mire vonatkozik a 14 999 Ft (Imre).
-  - Az ár-sor mellett ezért nincs „/ készülék” jelölés.
-- **Szellőztetés:**
-  - Hűen az élő szöveg, de **nem jóváhagyott (Matt): a „85-90%” hatásfok és az „1,5-2 millió forint” becslés**.
-  - A GYIK „Mennyibe kerül?” válasza összeg nélküli, Don szerint.
-- **Villanyszerelés:** kihagyott GYIK-sor: „Mely településeken dolgoznak?” (Imre).
+  - a „Mit tartalmaz, mitől függ az ár” táblázat (Don 3.3). Helye: az ár-rész, a „A helyszíni felmérés célja…” bekezdés alatt;
+  - a GYIK-kérdések: „Mennyibe kerül” („24 órán belül”, „fix”), „Mit tartalmaz”, „Mely településeken dolgoznak?”.
+- **Klímatisztítás:** a „Mennyibe kerül?” kérdés: mire vonatkozik a 14 999 Ft.
+- **Villanyszerelés:** a „Mely településeken dolgoznak?” kérdés.
 
 ## Nyitott kérdések
 
@@ -173,7 +176,7 @@ Minden oldalon:
 | 15 | `prefers-reduced-motion` | megfelelt | Minden azonnal látszik, nincs gyűrű és filmszalag. |
 | 16 | Egy H1, helyes hierarchia, alt, width, height | megfelelt | H1 → H2 → H3 (GYIK); 13 egyedi, leíró referencia-alt. |
 | 17 | Lazy loading működik, és nem rontja az animációkat | megfelelt | A hero eager, `fetchpriority="high"`; a galéria lazy; a felfedés nem függ képtől. |
-| 18 | GYIK: csak kitehető sorok, látható | megfelelt | A prompt 7. pontjának sorai, mindig nyitva; a kihagyott sorok fent felsorolva. |
+| 18 | GYIK: csak kitehető sorok, látható | megfelelt | A prompt 7. pontjának sorai, mindig nyitva; az Imre adatára váró sorok fent felsorolva. |
 | 19 | JSON-LD egyszer, szögletes mezők nélkül | megfelelt | Service, BreadcrumbList, FAQPage egy `@graph`-ban, a blokk végén; a FAQPage szó szerint egyezik a látható GYIK-kal. |
 | 20 | Lighthouse: LCP 2,5 s alatt, CLS 0,1 alatt, SEO és akadálymentesség jó, 70 KB alatt | részben | Desktopon minden cél teljesül; mobilon a CLS 0 és a SEO 100, de az LCP 3,2-3,3 s a Systeme-keret miatt. A blokkok 38-61 KB-osak. |
 
