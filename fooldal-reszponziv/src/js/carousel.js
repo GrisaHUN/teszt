@@ -1,6 +1,6 @@
   // Körhinta: görgethető sáv scroll-snappel; mobilon pöttyök, desktopon nyilak,
   // egérrel húzható, billentyűzettel (nyilak) léptethető.
-  var carousel = function (car, label, onCenter) {
+  var carousel = function (car, label, onCenter, loopN) {
     var vp = car.querySelector('.jkh-scroller');
     var items = vp ? Array.prototype.slice.call(vp.querySelectorAll('.jkh-slide')) : [];
     if (!vp || !items.length) return;
@@ -20,7 +20,7 @@
     };
     var dots = [];
     if (dotsWrap) {
-      dots = items.map(function (it, i) {
+      dots = items.slice(0, loopN || items.length).map(function (it, i) {
         var d = document.createElement('button');
         d.type = 'button';
         d.className = 'jkh-dot';
@@ -38,7 +38,8 @@
         if (d < bestD) { bestD = d; best = i; }
       });
       current = best;
-      dots.forEach(function (d, i) { d.classList.toggle('jkh-on', i === best); d.setAttribute('aria-current', i === best ? 'true' : 'false'); });
+      var di = loopN ? best % loopN : best;
+      dots.forEach(function (d, i) { d.classList.toggle('jkh-on', i === di); d.setAttribute('aria-current', i === di ? 'true' : 'false'); });
       var max = vp.scrollWidth - vp.clientWidth;
       if (prev) prev.disabled = vp.scrollLeft <= 2;
       if (next) next.disabled = vp.scrollLeft >= max - 2;

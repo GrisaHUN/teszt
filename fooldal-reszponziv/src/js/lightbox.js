@@ -2,7 +2,7 @@
   // háttérre kattintással; lapozás nyilakkal és húzással; a fókusz visszaáll.
   var lb = root.querySelector('.jkh-lb');
   var lbImg = lb && lb.querySelector('.jkh-lb-img');
-  var shots = Array.prototype.slice.call(root.querySelectorAll('.jkh-ref'));
+  var shots = Array.prototype.slice.call(root.querySelectorAll('.jkh-ref')).filter(function (el) { return !el.closest('.jkh-clone'); });
   if (lb && lbImg && shots.length) {
     var cur = 0, lastFocus = null;
     var btns = Array.prototype.slice.call(lb.querySelectorAll('button'));
@@ -24,7 +24,13 @@
       lbImg.removeAttribute('src');
       if (lastFocus && lastFocus.focus) lastFocus.focus();
     };
-    shots.forEach(function (el, i) { el.addEventListener('click', function () { openAt(i); }); });
+    // Delegált kattintás: a filmszalag másolatai (jkh-clone) az eredeti képet nyitják.
+    root.addEventListener('click', function (e) {
+      var ref = e.target.closest && e.target.closest('.jkh-ref');
+      if (!ref || !root.contains(ref)) return;
+      var li = ref.closest('[data-jkh-i]');
+      openAt(li ? Number(li.getAttribute('data-jkh-i')) : shots.indexOf(ref));
+    });
     lb.querySelector('.jkh-lb-close').addEventListener('click', close);
     lb.querySelector('.jkh-lb-prev').addEventListener('click', function (e) { e.stopPropagation(); openAt(cur - 1); });
     lb.querySelector('.jkh-lb-next').addEventListener('click', function (e) { e.stopPropagation(); openAt(cur + 1); });

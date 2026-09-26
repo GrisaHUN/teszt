@@ -8,10 +8,10 @@ A fejléc után, fentről lefelé, négy Raw HTML elem:
 
 | # | Fájl | Tartalom | Méret |
 |---|---|---|---|
-| 1 | `fooldal-1-hero-szolgaltatasok-cta.html` | Hero, Szolgáltatásaink, CTA-sáv | 57,9 KB |
-| 2 | `fooldal-2-miert-galeria-rolunk.html` | Miért minket válasszon?, referencia-galéria (nagyítással), Rólunk | 29,4 KB |
-| 3 | `fooldal-3-lepesek-velemenyek-futes-keszulekek.html` | Klíma vásárlás menete, Ügyfeleink mondták, CTA-sáv, Fűtés klímával, Forgalmazott készülékek sáv | 34,5 KB |
-| 4 | `fooldal-4-markak.html` | Márka-futószalag (7 logó, beágyazva), hullám a láblécbe | 67,5 KB |
+| 1 | `fooldal-1-hero-szolgaltatasok-cta.html` | Hero, Szolgáltatásaink, CTA-sáv | 58,5 KB |
+| 2 | `fooldal-2-miert-galeria-rolunk.html` | Miért minket válasszon?, referencia-galéria (nagyítással), Rólunk | 33,9 KB |
+| 3 | `fooldal-3-lepesek-velemenyek-futes-keszulekek.html` | Klíma vásárlás menete, Ügyfeleink mondták, CTA-sáv, Fűtés klímával, Forgalmazott készülékek sáv | 37,4 KB |
+| 4 | `fooldal-4-markak.html` | Márka-futószalag (7 logó, beágyazva), hullám a láblécbe | 67,9 KB |
 
 A chat-gomb blokkja külön marad, ahhoz nem kell nyúlni. A jobb alsó sarok szabad.
 
@@ -29,7 +29,27 @@ A chat-gomb blokkja külön marad, ahhoz nem kell nyúlni. A jobb alsó sarok sz
 ## Ikon-animáció
 
 - **Szolgáltatás-kártyák (David kérése, 2026-09-26):** a kártya bármely pontjára vitt egér elindítja a jelvény animációját. A jelvény 1,2×-re nő, és a keretéről kifelé fut a lime gyűrű. A kártyán belül az ikonra mozdulva nem indul újra, kilépéskor visszaáll. A jelvény körül több a hely, hogy a nagyítás ne érjen a címhez.
-- **Miért minket, lépések:** az animáció az ikonra vitt egérre indul (1,15×).
+- **Miért minket (2026-09-26):** a kártya bármely pontja indítja (1,2×). A kártyák kaptak még:
+  - lime alsó szegélyt;
+  - lime fényfoltot a jobb felső sarokban, ami egérre kinő;
+  - egérre felül végigfutó lime csíkot;
+  - lime udvart a jelvény körül;
+  - emelkedést egérre.
+- **Lépések:** az animáció az ikonra vitt egérre indul (1,15×).
+
+## Filmszalag (2026-09-26)
+
+A referencia-galéria és az „Ügyfeleink mondták” alapból lassan, folyamatosan gördül, végtelenítve: a diák másolatai a végén, a képernyőolvasó elől elrejtve.
+- **Megállás:** ha az egér a sávra kerül, érintésre, billentyűzet-fókuszra és lapozáskor (nyíl, pötty).
+- **Folytatás:** magától indul újra, ha az egér elmegy (mobilon az érintés után 3,5 s-mal).
+- **Sebesség:** galéria kb. 5,2 s, vélemények kb. 6,5 s képenként/kártyánként.
+- **Csak ha látszik:** a mozgás csak akkor fut, amikor a sáv a képernyőn van.
+- **Mozgáscsökkentés:** `prefers-reduced-motion` esetén nincs mozgás.
+- **Nagyítás:** a másolatra kattintva is az eredeti kép nyílik meg.
+
+## Szöveges linkek
+
+Az aláhúzás kék (navy `#0E1C43`), egérre világoskék (`#1E6FD9`). A navy hátterű részeken (a lépések bevezetője, mobilon a Rólunk) lime maradt, mert ott a kék nem látszana.
 - **Érintés:** mindenhol az ikon érintésére fut, egyszer.
 
 ## Linkek
@@ -77,7 +97,7 @@ Szó szerint a forrásból. Ahol a desktop és a mobil forrás eltért, a mobil 
 
 A teszt a törlés előtti főoldal valódi fejlécével és láblécével, a Systeme.io saját szekció-szerkezetében, helyi képmásolatokkal futott.
 - `node build.mjs`: méret, előtag, komment, JSON-LD, linkek, képattribútumok, egy H1, duplikált ID.
-- `node test/check.mjs`: **86/86 rendben**. 14 szélesség (320–2560 px): nincs csúszás, nincs duplikált ID, nincs konzolhiba, minden felfedés lefut, nincs 250 px-nél keskenyebb kártya. Ezen felül: linkek és kattintások, körhinták, lightbox, futószalag, parallax, pulzálás, ikon-animáció, érintés, reduced-motion, lazy loading, nyers HTML.
+- `node test/check.mjs`: **89/89 rendben**. 14 szélesség (320–2560 px): nincs csúszás, nincs duplikált ID, nincs konzolhiba, minden felfedés lefut, nincs 250 px-nél keskenyebb kártya. Ezen felül: linkek és kattintások, körhinták, lightbox, futószalag, parallax, pulzálás, ikon-animáció, érintés, reduced-motion, lazy loading, nyers HTML.
 - **Lighthouse:**
 
 | Mérés | Teljesítmény | Akadálymentesség | SEO | LCP | CLS |

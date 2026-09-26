@@ -103,6 +103,23 @@ for (const w of WIDTHS) {
   const car = '.jkh-gal-car';
   await pg.locator(car).scrollIntoViewIfNeeded();
   await pg.waitForTimeout(900);
+  await pg.mouse.move(5, 5);
+  const f0 = await pg.evaluate((c) => document.querySelector(c + ' .jkh-scroller').scrollLeft, car);
+  await pg.waitForTimeout(1500);
+  const f1 = await pg.evaluate((c) => document.querySelector(c + ' .jkh-scroller').scrollLeft, car);
+  const gb = await pg.locator(car).boundingBox();
+  await pg.mouse.move(gb.x + gb.width / 2, gb.y + gb.height / 2);
+  await pg.waitForTimeout(300);
+  const f2 = await pg.evaluate((c) => document.querySelector(c + ' .jkh-scroller').scrollLeft, car);
+  await pg.waitForTimeout(1200);
+  const f3 = await pg.evaluate((c) => document.querySelector(c + ' .jkh-scroller').scrollLeft, car);
+  const speed = (f1 - f0) / 1.5;
+  await pg.mouse.move(5, 5);
+  await pg.waitForTimeout(1500);
+  const f4 = await pg.evaluate((c) => document.querySelector(c + ' .jkh-scroller').scrollLeft, car);
+  ok('galéria: filmszalag magától gördül (lassan), egérre megáll, utána folytatja', speed > 20 && speed < 150 && Math.abs(f3 - f2) < 2 && f4 > f3, `${speed.toFixed(0)} px/s, megállva: ${f2}->${f3}, folytatás: ${f4}`);
+  await pg.mouse.move(gb.x + gb.width / 2, gb.y + gb.height / 2);
+  await pg.waitForTimeout(700);
   const sl = () => pg.evaluate((c) => document.querySelector(c + ' .jkh-scroller').scrollLeft, car);
   const a = await sl();
   await pg.click(`${car} .jkh-next`);
@@ -126,6 +143,19 @@ for (const w of WIDTHS) {
   const tv = '.jkh-testi-car';
   await pg.locator(tv).scrollIntoViewIfNeeded();
   await pg.waitForTimeout(900);
+  {
+    const slv = () => pg.evaluate((c2) => document.querySelector(c2 + ' .jkh-scroller').scrollLeft, tv);
+    await pg.mouse.move(5, 5);
+    const g0 = await slv(); await pg.waitForTimeout(1500); const g1 = await slv();
+    const tb = await pg.locator(tv).boundingBox();
+    await pg.mouse.move(tb.x + tb.width / 2, tb.y + tb.height / 2);
+    await pg.waitForTimeout(300);
+    const g2 = await slv(); await pg.waitForTimeout(1200); const g3 = await slv();
+    await pg.mouse.move(5, 5); await pg.waitForTimeout(1500); const g4 = await slv();
+    ok('vélemények: filmszalag magától gördül, egérre megáll, utána folytatja', g1 > g0 && Math.abs(g3 - g2) < 2 && g4 > g3, `${g0}->${g1}, megállva ${g2}->${g3}, folytatás ${g4}`);
+    await pg.mouse.move(tb.x + tb.width / 2, tb.y + tb.height / 2);
+    await pg.waitForTimeout(700);
+  }
   const e0 = await pg.evaluate((c2) => document.querySelector(c2 + ' .jkh-scroller').scrollLeft, tv);
   await pg.click(`${tv} .jkh-next`);
   await pg.waitForTimeout(700);
@@ -138,7 +168,7 @@ for (const w of WIDTHS) {
     await m.pg.locator(sel).scrollIntoViewIfNeeded();
     await m.pg.waitForTimeout(700);
     const n = await m.pg.evaluate((s) => document.querySelectorAll(s + ' .jkh-dot').length, sel);
-    await m.pg.locator(`${sel} .jkh-dot`).nth(2).click();
+    await m.pg.locator(`${sel} .jkh-dot`).nth(2).click({ force: true });
     await m.pg.waitForTimeout(900);
     const st = await m.pg.evaluate((s) => ({ on: [...document.querySelectorAll(s + ' .jkh-dot')].findIndex((d) => d.classList.contains('jkh-on')), sl: document.querySelector(s + ' .jkh-scroller').scrollLeft }), sel);
     ok(`mobil ${name}: pöttyök (${n}) lapoznak`, n > 2 && st.on === 2 && st.sl > 0, JSON.stringify(st));
@@ -152,7 +182,7 @@ for (const w of WIDTHS) {
   await pg.locator('.jkh-gal-car').scrollIntoViewIfNeeded();
   await pg.waitForTimeout(900);
   const first = pg.locator('.jkh-ref').first();
-  await first.click();
+  await first.click({ force: true });
   await pg.waitForTimeout(300);
   let st = await pg.evaluate(() => ({ open: document.querySelector('.jkh-lb').classList.contains('jkh-open'), focus: document.activeElement.className, src: document.querySelector('.jkh-lb-img').getAttribute('src') }));
   ok('nagyítás nyílik, fókusz a bezárás gombon', st.open && /jkh-lb-close/.test(st.focus) && !!st.src, JSON.stringify(st));
@@ -165,7 +195,7 @@ for (const w of WIDTHS) {
   await pg.waitForTimeout(200);
   st = await pg.evaluate(() => ({ open: document.querySelector('.jkh-lb').classList.contains('jkh-open'), focus: document.activeElement.className }));
   ok('Esc bezár, fókusz visszaáll a képre', !st.open && /jkh-ref/.test(st.focus), JSON.stringify(st));
-  await first.click();
+  await first.click({ force: true });
   await pg.waitForTimeout(200);
   await pg.mouse.click(8, 450);
   await pg.waitForTimeout(200);
@@ -246,6 +276,22 @@ for (const w of WIDTHS) {
   const touchLog = await m.pg.evaluate(() => window.__jkhRingLog.length);
   ok('érintés: zoom + gyűrű egyszer (nem kétszer)', touchLog === 2 && /matrix\(1\.1/.test(zoomTouch), `${touchLog} animáció, ${zoomTouch}`);
   await m.ctx.close();
+}
+
+// 6b. Miért minket: a kártya bármely pontja indítja az ikon-animációt, a kártya megemelkedik
+{
+  const { ctx, pg } = await open(1440);
+  const item = pg.locator('.jkh-why-item').nth(1);
+  await item.scrollIntoViewIfNeeded();
+  await pg.waitForTimeout(1600);
+  await pg.mouse.move(5, 5);
+  const ib = await item.boundingBox();
+  await pg.mouse.move(ib.x + ib.width - 12, ib.y + ib.height - 12);
+  await pg.waitForTimeout(350);
+  const st = await pg.evaluate(() => { const it = document.querySelectorAll('.jkh-why-item')[1]; return { badge: getComputedStyle(it.querySelector('.jkh-badge')).transform, card: getComputedStyle(it).transform, go: it.querySelectorAll('.jkh-ring.jkh-go').length }; });
+  ok('Miért minket: kártyára vitt egér nagyítja az ikont, gyűrű indul, a kártya emelkedik', /matrix\(1\.(1[5-9]|2)/.test(st.badge) && st.go === 2 && /matrix\(1, 0, 0, 1, 0, -/.test(st.card), JSON.stringify(st));
+  await pg.screenshot({ path: join(out, 'miert-hover.png'), clip: { x: ib.x - 30, y: ib.y - 30, width: ib.width * 3 + 100, height: ib.height + 60 } });
+  await ctx.close();
 }
 
 // 7. prefers-reduced-motion

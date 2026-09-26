@@ -12,6 +12,7 @@
   var rv = Array.prototype.slice.call(root.querySelectorAll('.jkh-rv'));
   var show = function (el) {
     el.classList.add('jkh-in');
+    setTimeout(function () { el.classList.add('jkh-done'); }, 1200);
     if (el.classList.contains('jkh-group')) el.querySelectorAll('.jkh-rv').forEach(function (c) { c.classList.add('jkh-in'); });
   };
   var groups = Array.prototype.slice.call(root.querySelectorAll('.jkh-group'));

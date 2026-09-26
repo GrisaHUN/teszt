@@ -2,34 +2,34 @@
 root=jkh-b2
 guard=__jkhB2
 out=fooldal-2-miert-galeria-rolunk.html
-modules=carousel,lightbox
+modules=carousel,lightbox,film
 @@HTML
 <section class="jkh-sec jkh-why" aria-labelledby="jkh-why-h">
   <div class="jkh-wrap">
     <h2 id="jkh-why-h" class="jkh-h2 jkh-why-h2 jkh-rv jkh-up">Miért minket válasszon?</h2>
     <p class="jkh-why-sub jkh-rv jkh-up" style="--jkh-d:80ms">Amikor minket hív, pontosan tudja, mire számíthat.</p>
     <ul class="jkh-why-list">
-      <li class="jkh-why-item jkh-rv jkh-left">
+      <li class="jkh-why-item jkh-hover-host jkh-rv jkh-left">
         <span class="jkh-badge"><svg viewBox="0 0 24 24" fill="none" stroke="#D9E419" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg></span>
         <p class="jkh-why-text">+2 év garancia a telepítésre, +6 hónap a tisztított és karbantartott készülékekre.</p>
       </li>
-      <li class="jkh-why-item jkh-rv jkh-right" style="--jkh-d:60ms">
+      <li class="jkh-why-item jkh-hover-host jkh-rv jkh-right" style="--jkh-d:60ms">
         <span class="jkh-badge"><svg viewBox="0 0 24 24" fill="none" stroke="#D9E419" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="2" y="8" width="14" height="9" rx="1.5"/><path d="M16 11h3l3 3v3h-6"/><circle cx="7" cy="19" r="1.6"/><circle cx="18" cy="19" r="1.6"/></svg></span>
         <p class="jkh-why-text">Ingyenes helyszíni felmérés, majd 24 órán belül fix, részletes árajánlat.</p>
       </li>
-      <li class="jkh-why-item jkh-rv jkh-left" style="--jkh-d:120ms">
+      <li class="jkh-why-item jkh-hover-host jkh-rv jkh-left" style="--jkh-d:120ms">
         <span class="jkh-badge"><svg viewBox="0 0 24 24" fill="none" stroke="#D9E419" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20.6 12.6L12 21.2 2.8 12 11.4 3.4H20.6v9.2z"/><circle cx="16" cy="8" r="1.4" fill="#D9E419" stroke="none"/></svg></span>
         <p class="jkh-why-text">A felmérés után adott ár végleges. Nincs utólagos meglepetés a számlán.</p>
       </li>
-      <li class="jkh-why-item jkh-rv jkh-right">
+      <li class="jkh-why-item jkh-hover-host jkh-rv jkh-right">
         <span class="jkh-badge"><svg viewBox="0 0 24 24" fill="none" stroke="#D9E419" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="8.5" cy="8" r="3"/><circle cx="16" cy="9" r="2.4"/><path d="M2.5 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M14.8 14.2c2.6.4 4.7 2.6 4.7 5.8"/></svg></span>
         <p class="jkh-why-text">Minden esetben az Ön igényeit helyezzük előtérbe. Rugalmasak vagyunk, nálunk minden megbeszélhető.</p>
       </li>
-      <li class="jkh-why-item jkh-rv jkh-left" style="--jkh-d:60ms">
+      <li class="jkh-why-item jkh-hover-host jkh-rv jkh-left" style="--jkh-d:60ms">
         <span class="jkh-badge"><svg viewBox="0 0 24 24" fill="none" stroke="#D9E419" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.3" fill="#D9E419" stroke="none"/></svg></span>
         <p class="jkh-why-text">Az Ön kérését, elképzelését minden esetben megvalósítjuk.</p>
       </li>
-      <li class="jkh-why-item jkh-rv jkh-right" style="--jkh-d:120ms">
+      <li class="jkh-why-item jkh-hover-host jkh-rv jkh-right" style="--jkh-d:120ms">
         <span class="jkh-badge"><svg viewBox="0 0 24 24" fill="none" stroke="#D9E419" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6L9 17l-5-5"/></svg></span>
         <p class="jkh-why-text">A munkaterületet mindig úgy adjuk vissza, ahogy kaptuk &ndash; szakszerűen és tisztán dolgozunk.</p>
       </li>
@@ -88,8 +88,16 @@ modules=carousel,lightbox
 #__R__ .jkh-why-h2 { margin-bottom: 10px; }
 #__R__ .jkh-why-sub { font-size: calc(var(--jkh-fs-body) * 0.98); font-weight: 600; color: #64708B; text-align: center; margin: 0 0 clamp(26px, 16px + 2vw, 56px); }
 #__R__ .jkh-why-list { display: grid; grid-template-columns: 1fr; gap: 18px; max-width: 480px; margin: 0 auto; }
-#__R__ .jkh-why-item { display: flex; flex-direction: column; align-items: center; text-align: center; background: #F5F6F8; border-radius: 16px; padding: clamp(28px, 22px + 1vw, 40px) clamp(18px, 14px + 1vw, 32px) clamp(22px, 18px + 1vw, 34px); }
-#__R__ .jkh-why-item .jkh-badge { margin: 0 0 14px; }
+#__R__ .jkh-why-item { position: relative; overflow: hidden; display: flex; flex-direction: column; align-items: center; text-align: center; background: #F5F6F8; border-radius: 18px; border-bottom: 4px solid #D9E419; padding: clamp(32px, 24px + 1.2vw, 46px) clamp(18px, 14px + 1vw, 32px) clamp(24px, 18px + 1vw, 36px); box-shadow: 0 10px 26px -18px rgba(14,28,67,0.35); }
+#__R__ .jkh-why-item::before { content: ""; position: absolute; top: -56px; right: -56px; width: 150px; height: 150px; border-radius: 50%; background: radial-gradient(circle, rgba(217,228,25,0.42) 0%, rgba(217,228,25,0) 68%); pointer-events: none; transition: transform 450ms ease-out; }
+#__R__ .jkh-why-item::after { content: ""; position: absolute; left: 0; top: 0; width: 100%; height: 3px; background: linear-gradient(90deg, #D9E419, rgba(217,228,25,0)); transform: scaleX(0); transform-origin: left; transition: transform 450ms ease-out; pointer-events: none; }
+#__R__ .jkh-why-item:hover::before { transform: scale(1.45); }
+#__R__ .jkh-why-item:hover::after { transform: scaleX(1); }
+#__R__ .jkh-why-item .jkh-badge { margin: 4px 0 20px; box-shadow: 0 0 0 7px rgba(217,228,25,0.22), 0 10px 22px -10px rgba(14,28,67,0.6); }
+#__R__ .jkh-why-item .jkh-badge.jkh-zoom { transform: scale(1.2); }
+#__R__ .jkh-why-item .jkh-why-text { position: relative; }
+#__R__ .jkh-slide.jkh-clone .jkh-ref { cursor: zoom-in; }
+#__R__ .jkh-auto .jkh-ref { transform: none; }
 #__R__ .jkh-why-text { font-size: var(--jkh-fs-body); line-height: 1.58; color: #33394A; }
 @media (min-width: 640px) {
   #__R__ .jkh-why-list { grid-template-columns: repeat(2, 1fr); gap: var(--jkh-gap); max-width: none; }
@@ -121,6 +129,8 @@ modules=carousel,lightbox
 #__R__ .jkh-about-inner { max-width: 900px; }
 #__R__ .jkh-about-h2 { color: #FFFFFF; }
 #__R__ .jkh-about-h2::after { content: ""; display: block; width: 56px; height: 3px; border-radius: 3px; background: #D9E419; margin: 16px auto 0; }
+#__R__ .jkh-about .jkh-link { text-decoration-color: #D9E419; }
+#__R__ .jkh-about .jkh-link:hover { color: #FFFFFF; text-decoration-color: #FFFFFF; }
 #__R__ .jkh-about-text { font-size: clamp(16.5px, 15.6px + 0.25vw, 20px); line-height: 1.65; color: rgba(255,255,255,0.88); margin: 0 0 clamp(22px, 16px + 1.4vw, 44px); }
 #__R__ .jkh-motto { margin: 0 auto; max-width: 720px; padding: 18px 20px; border-radius: 16px; background: rgba(255,255,255,0.06); border: 1px solid rgba(217,228,25,0.35); }
 #__R__ .jkh-motto-label { font-size: 15px; font-weight: 800; color: rgba(255,255,255,0.75); margin: 0 0 6px; }
@@ -130,10 +140,13 @@ modules=carousel,lightbox
   #__R__ { --jkh-fill-bottom: #0E1C43; }
   #__R__ .jkh-why { background: #F0F4A3; --jkh-next: #F5F6F8; }
   #__R__ .jkh-why-item { background: #FFFFFF; box-shadow: 0 14px 34px -22px rgba(14,28,67,0.45); }
+  #__R__ .jkh-why-item:hover { box-shadow: 0 26px 44px -24px rgba(14,28,67,0.55); }
   #__R__ .jkh-about { background: #F5F6F8; }
   #__R__ .jkh-about-h2 { color: #0E1C43; }
   #__R__ .jkh-about-h2::after { content: none; }
   #__R__ .jkh-about-text { color: #4B5568; }
+  #__R__ .jkh-about .jkh-link { text-decoration-color: #0E1C43; }
+  #__R__ .jkh-about .jkh-link:hover { color: #0E1C43; text-decoration-color: #1E6FD9; }
   #__R__ .jkh-motto { background: #FFFFFF; border: 0; border-left: 5px solid #D9E419; box-shadow: 0 16px 36px -22px rgba(14,28,67,0.45); padding: clamp(18px, 14px + 1vw, 30px) clamp(24px, 18px + 1.4vw, 44px); }
   #__R__ .jkh-motto-label { color: #0E1C43; font-size: 16px; }
   #__R__ .jkh-motto-quote p { color: #0E1C43; }
@@ -148,9 +161,11 @@ modules=carousel,lightbox
 #__R__ .jkh-lb-close { top: 16px; right: 16px; }
 #__R__ .jkh-lb-prev { left: 12px; top: 50%; margin-top: -24px; }
 #__R__ .jkh-lb-next { right: 12px; top: 50%; margin-top: -24px; }
-@media (prefers-reduced-motion: reduce) { #__R__ .jkh-ref { transition: none; } }
+@media (prefers-reduced-motion: reduce) { #__R__ .jkh-ref, #__R__ .jkh-why-item::before, #__R__ .jkh-why-item::after { transition: none; } }
 @@JS
-  var slides = Array.prototype.slice.call(root.querySelectorAll('.jkh-gal-track > .jkh-slide'));
-  root.querySelectorAll('.jkh-gal-car').forEach(function (c) {
-    carousel(c, 'Fotó', function (i) { slides.forEach(function (s, j) { s.classList.toggle('jkh-center', i === j); }); });
-  });
+  var gal = root.querySelector('.jkh-gal-car');
+  if (gal) {
+    var gp = filmPrep(gal);
+    carousel(gal, 'Fotó', function (i) { gp.slides.forEach(function (s, j) { s.classList.toggle('jkh-center', i === j); }); }, gp.n);
+    film(gal, gp, 5200);
+  }

@@ -23,8 +23,8 @@
 #__R__ .jkh-wrap { width: min(1120px, calc(100% - 32px)); margin: 0 auto; }
 #__R__ .jkh-sec { position: relative; padding: var(--jkh-pad) 0 calc(var(--jkh-pad) + var(--jkh-wave-h)); }
 #__R__ .jkh-h2 { font-size: var(--jkh-fs-h2); font-weight: 800; line-height: 1.18; letter-spacing: -0.01em; color: #0E1C43; text-align: center; margin: 0 0 clamp(22px, 12px + 1.6vw, 48px); }
-#__R__ .jkh-link { color: inherit; text-decoration: underline; text-decoration-color: rgba(217,228,25,0.95); text-decoration-thickness: 2px; text-underline-offset: 3px; transition: text-decoration-color 150ms ease-out; }
-#__R__ .jkh-link:hover { text-decoration-color: currentColor; }
+#__R__ .jkh-link { color: inherit; text-decoration: underline; text-decoration-color: #0E1C43; text-decoration-thickness: 2px; text-underline-offset: 4px; text-decoration-skip-ink: none; transition: text-decoration-color 150ms ease-out, color 150ms ease-out; }
+#__R__ .jkh-link:hover { color: #0E1C43; text-decoration-color: #1E6FD9; }
 #__R__ a:focus-visible, #__R__ button:focus-visible, #__R__ [tabindex]:focus-visible { outline: 3px solid #D9E419; outline-offset: 3px; box-shadow: 0 0 0 6px rgba(14,28,67,0.6); }
 
 #__R__ .jkh-wave { position: absolute; left: 0; bottom: -1px; z-index: 2; display: block; width: 100%; height: var(--jkh-wave-h); pointer-events: none; fill: var(--jkh-next, #FFFFFF); }
@@ -36,6 +36,10 @@
 #__R__.jkh-js .jkh-right { transform: translateX(30px); }
 #__R__.jkh-js .jkh-zoomin { transform: scale(0.95); }
 #__R__.jkh-js .jkh-rv.jkh-in { opacity: 1; transform: none; }
+#__R__.jkh-js .jkh-rv.jkh-done { transition: opacity 200ms ease-out, transform 220ms ease-out, box-shadow 220ms ease-out; transition-delay: 0ms; }
+@media (min-width: 801px) {
+  #__R__ .jkh-hover-host:hover, #__R__.jkh-js .jkh-rv.jkh-hover-host.jkh-done:hover { transform: translateY(-4px); }
+}
 
 #__R__ .jkh-btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; width: 100%; max-width: 380px; min-height: 54px; padding: 15px 22px; border: 0; border-radius: 12px; background: #D9E419; color: #0E1C43; font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; font-size: clamp(16px, 15.2px + 0.22vw, 20px); font-weight: 800; line-height: 1.2; text-align: center; text-decoration: none; cursor: pointer; box-shadow: 0 10px 24px -10px rgba(0,0,0,0.5); -webkit-tap-highlight-color: transparent; transition: background-color 160ms ease-out, transform 160ms ease-out, box-shadow 160ms ease-out; }
 #__R__ .jkh-btn:hover { background: #C3CE12; color: #0E1C43; }
@@ -57,6 +61,7 @@
 #__R__ .jkh-scroller { overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; overscroll-behavior-x: contain; }
 #__R__ .jkh-scroller::-webkit-scrollbar { display: none; }
 #__R__ .jkh-scroller.jkh-drag { scroll-snap-type: none; cursor: grabbing; user-select: none; }
+#__R__ .jkh-scroller.jkh-auto { scroll-snap-type: none; }
 #__R__ .jkh-scroller.jkh-drag * { pointer-events: none; }
 #__R__ .jkh-dots { display: flex; justify-content: center; flex-wrap: wrap; gap: 2px; margin-top: 12px; }
 #__R__ .jkh-dot { width: 24px; height: 24px; padding: 0; margin: 0; border: 0; background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; -webkit-tap-highlight-color: transparent; }
