@@ -12,7 +12,7 @@ mkdirSync(out, { recursive: true });
 const page = process.argv[2] || 'klimaszereles';
 const c = (await import(`../src/tartalom/${page}.mjs`)).default;
 const PX = { klimaszereles: 'ksz', klimatisztitas: 'kt', szelloztetes: 'sz', villanyszereles: 'vsz' }[page];
-const D = `jk-${PX}-`, M = `jkm-${PX}-`;
+const D = `jks-${PX}-`, M = D;
 const DESKTOP_W = [801, 820, 1024, 1280, 1366, 1440, 1920, 2560];
 const MOBIL_W = [320, 360, 390, 430, 768, 800];
 const browser = await playwright.chromium.launch();
@@ -23,7 +23,7 @@ const url = `${SITE}/${page}`;
 async function open(width, opts = {}) {
   const mob = width <= 800;
   const ctx = await browser.newContext({ viewport: { width, height: mob ? 844 : 900 }, deviceScaleFactor: 1, isMobile: mob, hasTouch: mob, reducedMotion: opts.reduce ? 'reduce' : 'no-preference' });
-  const log = await preparePage(ctx, testPage(page, { order: opts.order || 'dm' }), page);
+  const log = await preparePage(ctx, testPage(page), page);
   const pg = await ctx.newPage();
   const errors = [];
   pg.on('pageerror', (e) => errors.push(e.message));
@@ -39,10 +39,9 @@ async function scrollThrough(pg, step = 450) {
 }
 
 // 1. Szélességek (mindkét elhelyezési sorrendben): csúszás, id, hiba, eszköz-váltás, felfedés, H1, oszlopszélesség, képernyőkép
-for (const order of ['dm', 'md']) {
+{ const order = 'dm';
   for (const w of [...MOBIL_W, ...DESKTOP_W]) {
-    if (order === 'md' && ![360, 390, 800, 801, 1440].includes(w)) continue;
-    const { ctx, pg, errors } = await open(w, { order });
+    const { ctx, pg, errors } = await open(w);
     await scrollThrough(pg, w <= 800 ? 400 : 600);
     const m = await pg.evaluate(({ D, M }) => {
       const vis = (e) => { if (!e) return false; const s = getComputedStyle(e); return s.display !== 'none' && s.visibility !== 'hidden' && e.getClientRects().length > 0 && e.getBoundingClientRect().height > 0; };
@@ -66,7 +65,7 @@ for (const order of ['dm', 'md']) {
     const tagw = `${w}px${order === 'md' ? ' (mobil blokk elöl)' : ''}`;
     ok(`${tagw}: nincs vízszintes csúszás`, m.sw <= m.iw, `${m.sw}/${m.iw}`);
     ok(`${tagw}: nincs duplikált id, konzolhiba`, !m.dup.length && !errors.length, (m.dup.join(',') + ' ' + errors.join(' | ')).trim());
-    ok(`${tagw}: csak a ${w <= 800 ? 'mobil' : 'desktop'} blokk látszik, egy H1`, (w <= 800 ? m.mVis && !m.dVis : m.dVis && !m.mVis) && m.h1s === 1, JSON.stringify({ d: m.dVis, m: m.mVis, h1: m.h1s }));
+    ok(`${tagw}: a blokk látszik, egy H1`, m.dVis && m.h1s === 1, JSON.stringify({ d: m.dVis, h1: m.h1s }));
     ok(`${tagw}: felfedés kész (${m.rv} elem, nincs fagyás)`, m.notIn === 0, `nem jelent meg: ${m.notIn}`);
     if (w > 800) {
       ok(`${tagw}: nincs 260 px alatti oszlop`, m.narrow >= 260, `${m.narrow.toFixed(0)} px`);
@@ -80,24 +79,6 @@ for (const order of ['dm', 'md']) {
     }
     await ctx.close();
   }
-}
-
-// 2. A két blokk tartalma azonos (a látható szövegegységek halmaza)
-{
-  const units = async (w, pre) => {
-    const { ctx, pg } = await open(w);
-    const u = await pg.evaluate((pre) => {
-      const r = document.getElementById(pre + 'root');
-      const set = new Set();
-      r.querySelectorAll('h1, h2, h3, p, a').forEach((e) => { const t = e.textContent.replace(/\s+/g, ' ').trim(); if (t && t !== '?') set.add(t); });
-      return [...set].sort();
-    }, pre);
-    await ctx.close();
-    return u;
-  };
-  const du = await units(1440, D), mu = await units(390, M);
-  const onlyD = du.filter((x) => !mu.includes(x)), onlyM = mu.filter((x) => !du.includes(x));
-  ok(`a két blokk szövege azonos (${du.length} egység)`, !onlyD.length && !onlyM.length, JSON.stringify({ onlyD, onlyM }));
 }
 
 // 3. Linkek, gombok, kattintások
@@ -235,8 +216,8 @@ for (const w of [1440, 390]) {
   const mReq = m.log.requests.map((u) => u.split('/').pop());
   await m.ctx.close();
   const mob = c.hero.mobil.file, desk = c.hero.desktop.file;
-  ok('desktopon csak a desktop hero töltődik (a mobil blokk képe nem)', dReq.some((u) => u.endsWith(desk)) && !dReq.some((u) => u.endsWith(mob)), dReq.join(', '));
-  ok('mobilon csak a mobil hero töltődik (a desktop blokk képe nem)', mReq.some((u) => u.endsWith(mob)) && !mReq.some((u) => u.endsWith(desk)), mReq.join(', '));
+  ok('desktopon csak a desktop hero töltődik (a mobil kép nem)', dReq.some((u) => u.endsWith(desk)) && !dReq.some((u) => u.endsWith(mob)), dReq.join(', '));
+  ok('mobilon csak a mobil hero töltődik (a desktop kép nem)', mReq.some((u) => u.endsWith(mob)) && !mReq.some((u) => u.endsWith(desk)), mReq.join(', '));
 }
 
 // 8. Hézag: a blokk a fejléchez és a lábléchez illeszkedik (nincs idegen színű csík)
@@ -257,9 +238,9 @@ for (const w of [1440, 390]) {
 
 // 9. Nyers HTML (JS nélkül) és JSON-LD
 {
-  const dRaw = readFileSync(join(OUT, `desktop-${page}.html`), 'utf8');
-  const mRaw = readFileSync(join(OUT, `mobil-${page}.html`), 'utf8');
-  for (const [name, raw] of [['desktop', dRaw], ['mobil', mRaw]]) {
+  const mRaw = readFileSync(join(OUT, `${page}.html`), 'utf8');
+  const dRaw = '';
+  for (const [name, raw] of [['blokk', mRaw]]) {
     const text = raw.replace(/<script[\s\S]*?<\/script>/g, '').replace(/<style[\s\S]*?<\/style>/g, '');
     const must = ['<h1', c.hero.h1, c.lepesekCim, c.gyikCim, ...c.gyik.map((f) => f.q), c.intro[0].slice(0, 60), 'href="/keszulekek"'];
     const miss = must.filter((s) => !text.includes(s));
@@ -276,7 +257,7 @@ for (const w of [1440, 390]) {
   const vis = await pg.evaluate((M) => [...document.getElementById(M + 'root').querySelectorAll(`.${M}qa`)].map((e) => ({ q: e.querySelector('h3').textContent.trim(), a: e.querySelector('p').textContent.trim() })), M);
   await ctx.close();
   const sameVisible = faq && vis.length === faq.mainEntity.length && vis.every((v, i) => v.q === faq.mainEntity[i].name && v.a === faq.mainEntity[i].acceptedAnswer.text);
-  ok('JSON-LD: egyszer, csak a mobil blokkban, érvényes, Service + BreadcrumbList + FAQPage', ld.length === 1 && dld.length === 0 && !!j && ['Service', 'BreadcrumbList', 'FAQPage'].every((t) => j['@graph'].some((x) => x['@type'] === t)));
+  ok('JSON-LD: egyszer, érvényes, Service + BreadcrumbList + FAQPage', ld.length === 1 && dld.length === 0 && !!j && ['Service', 'BreadcrumbList', 'FAQPage'].every((t) => j['@graph'].some((x) => x['@type'] === t)));
   ok('JSON-LD: a FAQPage szó szerint egyezik a látható GYIK-kal', !!same && !!sameVisible, JSON.stringify(vis.slice(0, 1)));
 }
 

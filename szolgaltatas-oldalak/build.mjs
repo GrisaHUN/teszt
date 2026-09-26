@@ -1,13 +1,13 @@
-// Szolgáltatás-oldalak: oldalanként egy DESKTOP (801 px-tól) és egy MOBIL (800 px-ig)
-// Raw HTML blokk a Systeme.io-ba. Futtatás: node build.mjs [oldal ...]
+// Szolgáltatás-oldalak: oldalanként EGY reszponzív Raw HTML blokk a Systeme.io-ba
+// (mobilon és desktopon is ugyanaz a kód, 800/801 px-es töréspont). Futtatás: node build.mjs [oldal ...]
 //
 // Források:
-//   src/tartalom/<oldal>.mjs   az oldal szövege (a két blokk közös, egyetlen forrása)
-//   src/<eszköz>/<oldal>.mjs   az eszköz elrendezése (sablon-függvény: (tartalom, segéd) => HTML)
-//   src/<eszköz>/<oldal>.css   az oldal saját stílusa (nem kötelező)
-//   src/<eszköz>/_base.css     az eszköz közös stílusa, src/_kozos.css mindkettőé
+//   src/tartalom/<oldal>.mjs   az oldal szövege
+//   src/oldalak/<oldal>.mjs    az oldal elrendezése (sablon-függvény: (tartalom, segéd) => HTML)
+//   src/oldalak/<oldal>.css    az oldal saját stílusa (nem kötelező)
+//   src/_kozos.css, src/oldal.css   közös stílus (mobil-first, desktop 801 px-től)
 //   src/core.js                közös script (felfedés, ikon-animáció, hézagtöltés, lebegő gomb)
-// Helyőrzők: __R__ gyökér-id, __P__ előtag (jk-ksz- / jkm-ksz-), __G__ script-őr.
+// Helyőrzők: __R__ gyökér-id, __P__ előtag (pl. jks-ksz-), __G__ script-őr.
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
@@ -24,10 +24,8 @@ const TEL_TXT = '+36 20 373 4991';
 const CDN = 'https://d1yei2z3i6k35z.cloudfront.net/';
 const KEPEK = JSON.parse(readFileSync(join(here, 'src', 'kepek-urlek.json'), 'utf8'));
 const PAGES = process.argv.slice(2).length ? process.argv.slice(2) : ['klimaszereles'];
-const DEVICES = {
-  desktop: { pre: (p) => `jk-${p}-`, guard: (p) => `__jk${p[0].toUpperCase()}${p.slice(1)}Init`, other: 'jkm-' },
-  mobil: { pre: (p) => `jkm-${p}-`, guard: (p) => `__jkm${p[0].toUpperCase()}${p.slice(1)}Init`, other: 'jk-' },
-};
+const pre = (p) => `jks-${p}-`;
+const guard = (p) => `__jks${p[0].toUpperCase()}${p.slice(1)}Init`;
 const ALLOWED_LINK = /^(\/|\/(klimaszereles|klimatisztitas|szelloztetes|villanyszereles|keszulekek|aux|daikin|fisher|gree|midea|polar|syen|kedvezo))$/;
 
 // Ikonok (24x24, vonalas). A jelvényben a szín a CSS-ből jön (currentColor).
@@ -46,7 +44,6 @@ const ICONS = {
 };
 const icon = (n) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">${ICONS[n]}</svg>`;
 
-const PIXEL = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
 const WAVES = ['M0,60 L0,26 C 380,64 1000,-6 1440,34 L1440,60 Z', 'M0,60 L0,36 C 300,2 1100,62 1440,20 L1440,60 Z'];
 
 function helpers() {
@@ -62,9 +59,8 @@ function helpers() {
     keszulekek: (label) => `<a class="__P__btn __P__btn-dark __P__host" href="${KESZULEKEK}">${label}<span class="__P__badge __P__badge-sm __P__badge-lime">${icon('nyil')}</span></a>`,
     ar: (s) => { const i = s.indexOf(': '); return { label: s.slice(0, i + 1), value: nb(s.slice(i + 2)) }; },
     img: (file) => { if (!KEPEK[file]) throw new Error('nincs végleges URL: ' + file); return KEPEK[file]; },
-    // Hero-kép: eager + fetchpriority, de a másik eszközön (ahol a blokk rejtett) egy üres
-    // 1x1 képpont töltődik helyette, így a rejtett blokk fotója sosem töltődik le.
-    hero: (im, alt, hideMedia) => { if (!KEPEK[im.file]) throw new Error('nincs végleges URL: ' + im.file); return `<picture><source media="${hideMedia}" srcset="${PIXEL}"><img src="${KEPEK[im.file]}" alt="${alt}" width="${im.w}" height="${im.h}" loading="eager" fetchpriority="high"></picture>`; },
+    // Hero-kép: mobilon (800 px-ig) a kis WebP, desktopon az eredeti JPEG; mindig csak az egyik töltődik.
+    hero: (d, m, alt) => { for (const f of [d.file, m.file]) if (!KEPEK[f]) throw new Error('nincs végleges URL: ' + f); return `<picture><source media="(max-width: 800px)" srcset="${KEPEK[m.file]}" width="${m.w}" height="${m.h}"><img src="${KEPEK[d.file]}" alt="${alt}" width="${d.w}" height="${d.h}" loading="eager" fetchpriority="high"></picture>`; },
     wave: (next) => `<svg class="__P__wave" style="--__P__next:${next}" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="${WAVES[waveN++ % 2]}"/></svg>`,
     link: (t, href) => `<a class="__P__link" href="${href}">${t}</a>`,
   };
@@ -120,79 +116,68 @@ mkdirSync(OUT, { recursive: true });
 
 for (const page of PAGES) {
   const c = (await import(pathToFileURL(join(here, 'src', 'tartalom', `${page}.mjs`)))).default;
-  const allIds = [];
-  const texts = {};
-  for (const [dev, d] of Object.entries(DEVICES)) {
-    const pre = d.pre(c.prefix);
-    const rootId = `${pre}root`;
-    const tpl = (await import(pathToFileURL(join(here, 'src', dev, `${page}.mjs`)))).default;
-    const h = helpers();
-    let markup = tpl(c, h).split('\n').map((l) => l.trim()).filter(Boolean).join('\n');
-    const css = compactCss(`${read('_kozos.css')}\n${read(dev, '_base.css')}\n${read(dev, `${page}.css`)}`);
-    const js = compactJs(read('core.js').replace('/*@PAGE_JS*/', read(dev, `${page}.js`)));
-    let html = `<style>${css}</style>\n<div id="__R__" data-__P__foglalas="${FOGLALAS}">\n${markup}\n</div>\n<script>\n${js}\n</script>\n`;
-    if (dev === 'mobil') html += jsonLd(c, h) + '\n';
-    html = html.replaceAll('__R__', rootId).replaceAll('__P__', pre).replaceAll('__G__', d.guard(c.prefix)).replaceAll('{{KESZULEKEK}}', KESZULEKEK);
-    const out = `${dev}-${page}.html`;
-    writeFileSync(join(OUT, out), html);
+  const P = pre(c.prefix);
+  const rootId = `${P}root`;
+  const tpl = (await import(pathToFileURL(join(here, 'src', 'oldalak', `${page}.mjs`)))).default;
+  const h = helpers();
+  const markup = tpl(c, h).split('\n').map((l) => l.trim()).filter(Boolean).join('\n');
+  const css = compactCss(`${read('_kozos.css')}\n${read('oldal.css')}\n${read('oldalak', `${page}.css`)}`);
+  const js = compactJs(read('core.js').replace('/*@PAGE_JS*/', read('oldalak', `${page}.js`)));
+  let html = `<style>${css}</style>\n<div id="__R__" data-__P__foglalas="${FOGLALAS}">\n${markup}\n</div>\n<script>\n${js}\n</script>\n${jsonLd(c, h)}\n`;
+  html = html.replaceAll('__R__', rootId).replaceAll('__P__', P).replaceAll('__G__', guard(c.prefix)).replaceAll('{{KESZULEKEK}}', KESZULEKEK);
+  const out = `${page}.html`;
+  writeFileSync(join(OUT, out), html);
 
-    // Ellenőrzések
-    const bytes = Buffer.byteLength(html);
-    console.log(`${out}: ${(bytes / 1024).toFixed(1)} KB`);
-    const tag = (m) => fail(`${out}: ${m}`);
-    if (bytes > 70 * 1024) tag('70 KB fölött');
-    const code = html.replace(/<script type="application\/ld\+json">[\s\S]*?<\/script>/, '');
-    const names = code.replace(/https?:\/\/\S+?(?=["'\s)])/g, '');
-    if (new RegExp(`(?<![A-Za-z0-9_])${d.other}`).test(names)) tag(`a másik eszköz előtagja (${d.other}) a kódban`);
-    if (/__P__|__G__|__R__|\{\{[A-Z]|undefined/.test(html)) tag('kitöltetlen helyőrző');
-    if (html.includes('<!--')) tag('HTML-komment');
-    if (html.includes('—')) tag('gondolatjel (—)');
-    if (/fertőtlen/i.test(html)) tag('"fertőtlenítés" szó');
-    if (/\[[^\]]*\]\(/.test(html)) tag('feldolgozatlan link-jelölés');
-    const ld = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g) || [];
-    if (dev === 'mobil') {
-      if (ld.length !== 1) tag('a mobil blokkban pontosan egy JSON-LD kell');
-      else { try { const j = JSON.parse(ld[0].replace(/^<script[^>]*>|<\/script>$/g, '')); if (/\[[A-ZÁÉÍÓÖŐÚÜŰ ]+/.test(JSON.stringify(j))) tag('szögletes mező a JSON-LD-ben'); if (/"@id"|"url"|priceRange|offers|aggregateRating|founder|foundingDate|identifier/.test(JSON.stringify(j))) tag('tiltott JSON-LD mező'); } catch (e) { tag('érvénytelen JSON-LD: ' + e.message); } }
-    } else if (ld.length) tag('a desktop blokkban nem lehet JSON-LD');
-    // globális CSS: minden szelektor a gyökérre vagy az előtagos osztályra szűkül
-    const style = html.match(/<style>([\s\S]*?)<\/style>/)[1];
-    for (const m of style.matchAll(/(?:^|[{}])([^{}@]+)\{/g)) {
-      const sels = m[1].split(',').map((s) => s.trim());
-      for (const s of sels) {
-        if (/^(from|to|\d+%)$/.test(s)) continue;
-        if (dev === 'mobil' && (s === 'html' || s === 'body')) continue;
-        if (!s.startsWith(`#${rootId}`) && !s.startsWith(`.${pre}`)) tag(`globális szelektor: ${s}`);
-      }
+  // Ellenőrzések
+  const bytes = Buffer.byteLength(html);
+  console.log(`${out}: ${(bytes / 1024).toFixed(1)} KB`);
+  const tag = (m) => fail(`${out}: ${m}`);
+  if (bytes > 70 * 1024) tag('70 KB fölött');
+  const code = html.replace(/<script type="application\/ld\+json">[\s\S]*?<\/script>/, '');
+  const names = code.replace(/https?:\/\/\S+?(?=["'\s)])/g, '');
+  if (/(?<![A-Za-z0-9_])(jk|jkm|jkh)-/.test(names)) tag('más blokk előtagja (jk-, jkm-, jkh-) a kódban');
+  if (/__P__|__G__|__R__|\{\{[A-Z]|undefined/.test(html)) tag('kitöltetlen helyőrző');
+  if (html.includes('<!--')) tag('HTML-komment');
+  if (html.includes('—')) tag('gondolatjel (—)');
+  if (/fertőtlen/i.test(html)) tag('"fertőtlenítés" szó');
+  if (/\[[^\]]*\]\(/.test(html)) tag('feldolgozatlan link-jelölés');
+  const ld = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g) || [];
+  if (ld.length !== 1) tag('pontosan egy JSON-LD kell');
+  else { try { const j = JSON.stringify(JSON.parse(ld[0].replace(/^<script[^>]*>|<\/script>$/g, ''))); if (/\[[A-ZÁÉÍÓÖŐÚÜŰ ]+/.test(j)) tag('szögletes mező a JSON-LD-ben'); if (/"@id"|"url"|priceRange|offers|aggregateRating|founder|foundingDate|identifier/.test(j)) tag('tiltott JSON-LD mező'); } catch (e) { tag('érvénytelen JSON-LD: ' + e.message); } }
+  // globális CSS: minden szelektor a gyökérre vagy az előtagos osztályra szűkül (kivétel: a mobil html/body szabály)
+  const style = html.match(/<style>([\s\S]*?)<\/style>/)[1];
+  for (const m of style.matchAll(/(?:^|[{}])([^{}@]+)\{/g)) {
+    for (const s of m[1].split(',').map((x) => x.trim())) {
+      if (/^(from|to|\d+%)$/.test(s) || s === 'html' || s === 'body') continue;
+      if (!s.startsWith(`#${rootId}`) && !s.startsWith(`.${P}`)) tag(`globális szelektor: ${s}`);
     }
-    if (dev === 'mobil' && /(^|[},])\s*(html|body)\s*[,{]/.test(style) && !style.includes('@media (max-width:800px){html,body{max-width:100%;overflow-x:hidden}}')) tag('a html/body szabály csak a megengedett mobil kivétel lehet');
-    for (const k of style.matchAll(/@keyframes\s+([\w-]+)/g)) if (!k[1].startsWith(pre)) tag(`előtag nélküli @keyframes: ${k[1]}`);
-    for (const v of style.matchAll(/(--[\w-]+)\s*:/g)) if (!v[1].startsWith(`--${pre}`)) tag(`előtag nélküli CSS-változó: ${v[1]}`);
-    const classes = [...code.matchAll(/\sclass="([^"]+)"/g)].flatMap((m) => m[1].split(/\s+/));
-    const badCls = [...new Set(classes.filter((x) => !x.startsWith(pre)))];
-    if (badCls.length) tag('előtag nélküli osztály: ' + badCls.join(', '));
-    for (const a of code.matchAll(/\sdata-([\w-]+)/g)) if (!a[1].startsWith(pre)) tag(`előtag nélküli data-attribútum: ${a[1]}`);
-    const ids = [...code.matchAll(/\sid="([^"]+)"/g)].map((m) => m[1]);
-    if (ids.some((id) => !id.startsWith(pre))) tag('előtag nélküli id');
-    allIds.push(...ids);
-    if ((code.match(/<h1[\s>]/g) || []).length !== 1) tag('nem pontosan egy <h1>');
-    if (/<main[\s>]/.test(code)) tag('<main> elem');
-    for (const [, href] of code.matchAll(/\shref="([^"]+)"/g)) {
-      if (href === FOGLALAS || href === TEL || href === KESZULEKEK || ALLOWED_LINK.test(href)) continue;
-      tag(`váratlan link: ${href}`);
-    }
-    for (const a of code.matchAll(/<a\s[^>]*href="https:[^"]*"[^>]*>/g)) if (!/target="_blank"/.test(a[0]) || !/rel="noopener"/.test(a[0])) tag('külső link target/rel nélkül');
-    for (const im of code.matchAll(/<img\s[^>]*>/g)) {
-      const t = im[0];
-      const src = (t.match(/\ssrc="([^"]+)"/) || [])[1] || '';
-      if (!/\salt="[^"]+"/.test(t) || !/\swidth="\d+"/.test(t) || !/\sheight="\d+"/.test(t)) tag(`kép alt/width/height nélkül: ${src}`);
-      if (!src.startsWith(CDN)) tag(`nem a végleges CDN-kép: ${src}`);
-      const hero = /fetchpriority="high"/.test(t);
-      if (hero ? !/loading="eager"/.test(t) : !(/loading="lazy"/.test(t) && /decoding="async"/.test(t))) tag(`lazy/eager beállítás: ${src}`);
-    }
-    texts[dev] = code.replace(/<script[\s\S]*?<\/script>/g, '').replace(/<style[\s\S]*?<\/style>/g, '').replace(/<[^>]+>/g, ' ').replace(/&nbsp;|\u00a0/g, ' ').replace(/\s+/g, ' ').trim();
   }
-  const dup = allIds.filter((id, i) => allIds.indexOf(id) !== i);
-  if (dup.length) fail(`${page}: duplikált id a két blokkban: ${dup.join(', ')}`);
-  writeFileSync(join(here, 'test', `.szoveg-${page}.json`), JSON.stringify(texts, null, 1));
+  if (/(^|[{},])\s*(html|body)\s*[,{]/.test(style) && !style.includes('@media (max-width:800px){html,body{max-width:100%;overflow-x:hidden}}')) tag('a html/body szabály csak a megengedett mobil kivétel lehet');
+  for (const k of style.matchAll(/@keyframes\s+([\w-]+)/g)) if (!k[1].startsWith(P)) tag(`előtag nélküli @keyframes: ${k[1]}`);
+  for (const v of style.matchAll(/(--[\w-]+)\s*:/g)) if (!v[1].startsWith(`--${P}`)) tag(`előtag nélküli CSS-változó: ${v[1]}`);
+  const classes = [...code.matchAll(/\sclass="([^"]+)"/g)].flatMap((m) => m[1].split(/\s+/));
+  const badCls = [...new Set(classes.filter((x) => !x.startsWith(P)))];
+  if (badCls.length) tag('előtag nélküli osztály: ' + badCls.join(', '));
+  for (const a of code.matchAll(/\sdata-([\w-]+)/g)) if (!a[1].startsWith(P)) tag(`előtag nélküli data-attribútum: ${a[1]}`);
+  const ids = [...code.matchAll(/\sid="([^"]+)"/g)].map((m) => m[1]);
+  if (ids.some((id) => !id.startsWith(P))) tag('előtag nélküli id');
+  const dup = ids.filter((id, i) => ids.indexOf(id) !== i);
+  if (dup.length) tag(`duplikált id: ${dup.join(', ')}`);
+  if ((code.match(/<h1[\s>]/g) || []).length !== 1) tag('nem pontosan egy <h1>');
+  if (/<main[\s>]/.test(code)) tag('<main> elem');
+  for (const [, href] of code.matchAll(/\shref="([^"]+)"/g)) {
+    if (href === FOGLALAS || href === TEL || href === KESZULEKEK || ALLOWED_LINK.test(href)) continue;
+    tag(`váratlan link: ${href}`);
+  }
+  for (const a of code.matchAll(/<a\s[^>]*href="https:[^"]*"[^>]*>/g)) if (!/target="_blank"/.test(a[0]) || !/rel="noopener"/.test(a[0])) tag('külső link target/rel nélkül');
+  for (const [, src] of code.matchAll(/\ssrcset="([^"]+)"/g)) if (!src.startsWith(CDN)) tag(`nem a végleges CDN-kép: ${src}`);
+  for (const im of code.matchAll(/<img\s[^>]*>/g)) {
+    const t = im[0];
+    const src = (t.match(/\ssrc="([^"]+)"/) || [])[1] || '';
+    if (!/\salt="[^"]+"/.test(t) || !/\swidth="\d+"/.test(t) || !/\sheight="\d+"/.test(t)) tag(`kép alt/width/height nélkül: ${src}`);
+    if (!src.startsWith(CDN)) tag(`nem a végleges CDN-kép: ${src}`);
+    const hero = /fetchpriority="high"/.test(t);
+    if (hero ? !/loading="eager"/.test(t) : !(/loading="lazy"/.test(t) && /decoding="async"/.test(t))) tag(`lazy/eager beállítás: ${src}`);
+  }
 }
 process.exit(failed ? 1 : 0);
