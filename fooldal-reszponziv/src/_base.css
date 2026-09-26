@@ -30,10 +30,10 @@
 #__R__ .jkh-wave { position: absolute; left: 0; bottom: -1px; z-index: 2; display: block; width: 100%; height: var(--jkh-wave-h); pointer-events: none; fill: var(--jkh-next, #FFFFFF); }
 #__R__ .jkh-wave-top { top: -1px; bottom: auto; fill: var(--jkh-prev, #FFFFFF); }
 
-#__R__.jkh-js .jkh-rv { opacity: 0; transition: opacity 550ms ease-out, transform 550ms ease-out; transition-delay: var(--jkh-d, 0ms); }
-#__R__.jkh-js .jkh-up { transform: translateY(24px); }
-#__R__.jkh-js .jkh-left { transform: translateX(-30px); }
-#__R__.jkh-js .jkh-right { transform: translateX(30px); }
+#__R__.jkh-js .jkh-rv { opacity: 0; transition: opacity 450ms ease-out, transform 450ms ease-out; transition-delay: var(--jkh-d, 0ms); }
+#__R__.jkh-js .jkh-up { transform: translateY(18px); }
+#__R__.jkh-js .jkh-left { transform: translateX(-24px); }
+#__R__.jkh-js .jkh-right { transform: translateX(24px); }
 #__R__.jkh-js .jkh-zoomin { transform: scale(0.95); }
 #__R__.jkh-js .jkh-rv.jkh-in { opacity: 1; transform: none; }
 #__R__.jkh-js .jkh-rv.jkh-done { transition: opacity 200ms ease-out, transform 220ms ease-out, box-shadow 220ms ease-out; transition-delay: 0ms; }
@@ -63,7 +63,7 @@
 #__R__ .jkh-scroller.jkh-drag { scroll-snap-type: none; cursor: grabbing; user-select: none; }
 #__R__ .jkh-scroller.jkh-auto { scroll-snap-type: none; }
 #__R__ .jkh-scroller.jkh-drag * { pointer-events: none; }
-#__R__ .jkh-dots { display: flex; justify-content: center; flex-wrap: wrap; gap: 2px; margin-top: 12px; }
+#__R__ .jkh-dots { display: flex; justify-content: center; flex-wrap: wrap; gap: 2px; margin-top: 12px; min-height: 24px; }
 #__R__ .jkh-dot { width: 24px; height: 24px; padding: 0; margin: 0; border: 0; background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; -webkit-tap-highlight-color: transparent; }
 #__R__ .jkh-dot::before { content: ""; width: 7px; height: 7px; border-radius: 999px; background: rgba(14,28,67,0.25); transition: transform 200ms ease, background 200ms ease; }
 #__R__ .jkh-dot.jkh-on::before { background: #0E1C43; transform: scale(1.35); box-shadow: 0 0 0 2px #D9E419; }

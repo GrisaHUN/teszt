@@ -24,7 +24,7 @@
       entries.forEach(function (e) {
         if (e.isIntersecting) { show(e.target); io.unobserve(e.target); }
       });
-    }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+    }, { threshold: 0, rootMargin: '0px 0px 5% 0px' });
     rv.forEach(function (el) { if (!el.closest('.jkh-group') || el.classList.contains('jkh-group')) io.observe(el); });
     groups.forEach(function (el) { if (!el.classList.contains('jkh-rv')) io.observe(el); });
     // Biztonsági háló: ami a betöltéskor már a látótérben van, az ne várjon.
