@@ -23,7 +23,7 @@ Beillesztés a Systeme.io szerkesztőben:
 ### Egy helyen cserélhető elemek
 
 - **Foglalási link:** a kész fájlban a gyökér-elem `data-jk-ksz-foglalas` (mobilon `data-jkm-ksz-foglalas`) attribútuma. Ha ezt átírod, a script minden gombot erre állít át. A gombok `href`-je is ez a link: ez a JavaScript nélküli tartalék.
-  - Jelenlegi érték: `https://growthnestg.zohobookings.eu/254300000000290002/#/254300000000290002?booknow=true`.
+  - Jelenlegi érték (a rövid link, David döntése): `https://growthnestg.zohobookings.eu/254300000000290002`.
   - Nincs popup: minden „Ingyenes árajánlat kérése” gomb új lapon nyitja a foglalást.
 - **Ár-sor:** a forrásban az `AR_SOR` változó (`src/tartalom/klimaszereles.mjs`). Jelenlegi szövege: `Klímaszerelés/telepítés ára: Br.: 99 999 Ft`.
 - **A „Forgalmazott készülékek” cél-URL-je:** `KESZULEKEK` a `build.mjs`-ben, jelenleg `/keszulekek`.
@@ -67,7 +67,7 @@ Beillesztés a Systeme.io szerkesztőben:
 
 ## Nyitott kérdések
 
-- **Foglalási link:** a prompt a `…?booknow=true` változatot írja. Korábban a szolgáltatás-oldalakra a rövid `https://growthnestg.zohobookings.eu/254300000000290002` linket kérted. Most a prompté van beépítve; ha a rövid kell, egy helyen átírom.
+- **Foglalási link:** eldőlt, a rövid link van beépítve (David döntése).
 - **JSON-LD:**
   - Nincs benne `@id` és `url` (a végleges domain még nincs eldöntve).
   - A BreadcrumbList relatív URL-eket használ (`/` és `/klimaszereles`), ahogy a prompt kéri. A domain eldöntése után érdemes abszolútra cserélni, és átfuttatni a Rich Results Testen.

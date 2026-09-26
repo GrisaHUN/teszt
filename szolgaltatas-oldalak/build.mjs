@@ -17,7 +17,7 @@ const OUT = join(here, 'kimenet', 'aloldalak');
 
 // Egy helyen cserélhető célok. A foglalási link a kész blokkban is egy helyen, a gyökér
 // data-<előtag>foglalas attribútumában van; a gombok href-je ugyanez (JS nélküli tartalék).
-export const FOGLALAS = 'https://growthnestg.zohobookings.eu/254300000000290002/#/254300000000290002?booknow=true';
+export const FOGLALAS = 'https://growthnestg.zohobookings.eu/254300000000290002';
 export const KESZULEKEK = '/keszulekek';
 const TEL = 'tel:+36203734991';
 const TEL_TXT = '+36 20 373 4991';
