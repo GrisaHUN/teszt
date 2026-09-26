@@ -1,0 +1,53 @@
+@@CONFIG
+root=jkh-b4
+guard=__jkhB4
+out=fooldal-4-markak.html
+modules=
+@@HTML
+<section class="jkh-brands-sec" aria-label="Forgalmazott márkák">
+  <div class="jkh-brands jkh-rv jkh-up">
+    <ul class="jkh-brands-track">
+      <li class="jkh-brand"><img src="{{IMG:logo-aux.webp}}" alt="AUX logó" width="200" height="125" loading="lazy" decoding="async"></li>
+      <li class="jkh-brand"><img src="{{IMG:logo-daikin.webp}}" alt="Daikin logó" width="200" height="125" loading="lazy" decoding="async"></li>
+      <li class="jkh-brand"><img src="{{IMG:logo-fisher.webp}}" alt="Fisher logó" width="200" height="125" loading="lazy" decoding="async"></li>
+      <li class="jkh-brand"><img src="{{IMG:logo-gree.webp}}" alt="Gree logó" width="200" height="125" loading="lazy" decoding="async"></li>
+      <li class="jkh-brand"><img src="{{IMG:logo-midea.webp}}" alt="Midea logó" width="200" height="125" loading="lazy" decoding="async"></li>
+      <li class="jkh-brand"><img src="{{IMG:logo-polar.webp}}" alt="Polar logó" width="200" height="125" loading="lazy" decoding="async"></li>
+      <li class="jkh-brand"><img src="{{IMG:logo-syen.webp}}" alt="Syen logó" width="200" height="125" loading="lazy" decoding="async"></li>
+    </ul>
+  </div>
+  {{WAVE}}
+</section>
+@@CSS
+#__R__ { --jkh-fill-bottom: #0E1C43; }
+
+#__R__ .jkh-brands-sec { position: relative; background: #FFFFFF; padding: 4px 0 calc(clamp(40px, 30px + 2vw, 88px) + var(--jkh-wave-h)); --jkh-next: #0E1C43; }
+#__R__ .jkh-brands { overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 10%, #000 90%, transparent 100%); mask-image: linear-gradient(90deg, transparent 0, #000 10%, #000 90%, transparent 100%); }
+#__R__ .jkh-brands-track { display: flex; align-items: center; width: max-content; animation: jkh-marquee 30s linear infinite; }
+#__R__ .jkh-brand { flex: none; height: clamp(60px, 34px + 5.2vw, 120px); margin-right: clamp(28px, 18px + 2.6vw, 64px); }
+#__R__ .jkh-brand img { display: block; height: 100%; width: auto; }
+#__R__ .jkh-brands:hover .jkh-brands-track, #__R__ .jkh-brands:active .jkh-brands-track, #__R__ .jkh-brands.jkh-hold .jkh-brands-track { animation-play-state: paused; }
+@keyframes jkh-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@media (min-width: 801px) {
+  #__R__ .jkh-brands-sec { background: #F5F6F8; padding-top: clamp(24px, 12px + 2vw, 64px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  #__R__ .jkh-brands { -webkit-mask-image: none; mask-image: none; }
+  #__R__ .jkh-brands-track { animation: none; width: auto; flex-wrap: wrap; justify-content: center; gap: 16px 0; padding: 0 16px; }
+  #__R__ .jkh-brand[aria-hidden="true"] { display: none; }
+}
+@@JS
+  // Márka-futószalag: a lista másolata a varrat nélküli ismétléshez; érintésre megáll.
+  var track = root.querySelector('.jkh-brands-track');
+  if (track) {
+    Array.prototype.slice.call(track.children).forEach(function (li) {
+      var c = li.cloneNode(true);
+      c.setAttribute('aria-hidden', 'true');
+      c.querySelector('img').alt = '';
+      track.appendChild(c);
+    });
+    var band = root.querySelector('.jkh-brands');
+    var holdT = null;
+    band.addEventListener('touchstart', function () { band.classList.add('jkh-hold'); clearTimeout(holdT); }, { passive: true });
+    band.addEventListener('touchend', function () { holdT = setTimeout(function () { band.classList.remove('jkh-hold'); }, 1200); }, { passive: true });
+  }

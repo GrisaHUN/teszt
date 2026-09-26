@@ -1,0 +1,131 @@
+@@CONFIG
+root=jkh-b1
+guard=__jkhB1
+out=fooldal-1-hero-szolgaltatasok-cta.html
+modules=carousel,parallax
+@@HTML
+<section class="jkh-hero" aria-labelledby="jkh-h1">
+  <picture>
+    <source media="(max-width: 800px)" srcset="{{HERO_MOBIL}}" width="700" height="1254">
+    <img class="jkh-hero-photo" src="{{HERO_DESKTOP}}" alt="Nappali falára szerelt klíma beltéri egysége" width="1500" height="818" loading="eager" fetchpriority="high" decoding="async">
+  </picture>
+  <div class="jkh-hero-scrim" aria-hidden="true"></div>
+  <div class="jkh-wrap jkh-hero-inner">
+    <div class="jkh-hero-panel">
+      <div class="jkh-hero-box">
+        <h1 id="jkh-h1" class="jkh-hero-title jkh-rv jkh-up">Profi klímaszerelés Szegeden</h1>
+        <p class="jkh-hero-sub jkh-rv jkh-up" style="--jkh-d:100ms">Klímaszerelés, klímatisztítás, hővisszanyerős szellőztetés és villanyszerelés Szegeden és 30 km-es környékén. Ingyenes helyszíni felméréssel, fix árajánlattal.</p>
+      </div>
+      <div class="jkh-hero-actions jkh-rv jkh-up" style="--jkh-d:200ms">
+        <a class="jkh-btn jkh-hero-cta" href="{{ZOHO}}" target="_blank" rel="noopener">Ingyenes árajánlat kérése</a>
+      </div>
+    </div>
+  </div>
+  {{WAVE}}
+</section>
+
+<section class="jkh-sec jkh-svc-sec" aria-labelledby="jkh-svc-h">
+  <div class="jkh-wrap">
+    <h2 id="jkh-svc-h" class="jkh-h2 jkh-rv jkh-up">Szolgáltatásaink</h2>
+  </div>
+  <div class="jkh-car jkh-svc-car jkh-group">
+    <ul class="jkh-scroller jkh-svc-list" tabindex="0" aria-label="Szolgáltatásaink">
+      <li class="jkh-slide">
+        <a class="jkh-svc jkh-rv jkh-right" href="/klimaszereles">
+          <span class="jkh-badge"><svg viewBox="0 0 24 24" fill="none" stroke="#D9E419" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M7 10h4M7 14h2"/></svg></span>
+          <h3 class="jkh-svc-title">Klímaszerelés</h3>
+          <p class="jkh-svc-text">Megbízható készülékek szakszerű telepítése otthonába teljes körű lebonyolítással, számlával és garanciával.</p>
+        </a>
+      </li>
+      <li class="jkh-slide">
+        <a class="jkh-svc jkh-rv jkh-right" href="/klimatisztitas" style="--jkh-d:90ms">
+          <span class="jkh-badge"><svg viewBox="0 0 24 24" fill="none" stroke="#D9E419" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3c3 4 6 7 6 11a6 6 0 0 1-12 0c0-4 3-7 6-11z"/><path d="M9.5 14.5a2.5 2.5 0 0 0 2.5 2.5"/></svg></span>
+          <h3 class="jkh-svc-title">Klímatisztítás</h3>
+          <p class="jkh-svc-text">Speciális vegyszeres gépi klímamosás szennyezettségtől függően, teljes szétszedéssel és fertőtlenítéssel.</p>
+        </a>
+      </li>
+      <li class="jkh-slide">
+        <a class="jkh-svc jkh-rv jkh-right" href="/szelloztetes" style="--jkh-d:180ms">
+          <span class="jkh-badge"><svg viewBox="0 0 24 24" fill="none" stroke="#D9E419" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 9h11a3 3 0 1 0-3-3"/><path d="M3 15h15a3 3 0 1 1-3 3"/><path d="M3 12h7"/></svg></span>
+          <h3 class="jkh-svc-title">Hővisszanyerős szellőztetés</h3>
+          <p class="jkh-svc-text">Hővisszanyerős szellőztető rendszerek pontos tervezése és precíz kivitelezése A-Z-ig.</p>
+        </a>
+      </li>
+      <li class="jkh-slide">
+        <a class="jkh-svc jkh-rv jkh-right" href="/villanyszereles" style="--jkh-d:270ms">
+          <span class="jkh-badge"><svg viewBox="0 0 24 24" fill="none" stroke="#D9E419" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M13 3 4 14h6l-1 7 9-11h-6l1-7z"/></svg></span>
+          <h3 class="jkh-svc-title">Villanyszerelés</h3>
+          <p class="jkh-svc-text">Otthona komplett villanyszerelési munkálatait rendkívüli figyelemmel és hozzáértéssel végezzük el.</p>
+        </a>
+      </li>
+    </ul>
+    <div class="jkh-dots"></div>
+  </div>
+  {{WAVE}}
+</section>
+
+<div class="jkh-cta">
+  <div class="jkh-wrap jkh-cta-inner">
+    <a class="jkh-btn jkh-rv jkh-zoomin" href="{{ZOHO}}" target="_blank" rel="noopener">Ingyenes árajánlat kérése</a>
+  </div>
+  {{WAVE}}
+</div>
+@@CSS
+#__R__ { --jkh-fill-bottom: #FFFFFF; }
+
+#__R__ .jkh-hero { position: relative; overflow: hidden; background: #0E1C43; min-height: 600px; display: flex; flex-direction: column; justify-content: center; padding: 52px 0 calc(40px + var(--jkh-wave-h)); --jkh-next: #F5F6F8; }
+#__R__ .jkh-hero-photo { position: absolute; left: 0; top: -10%; width: 100%; height: 120%; object-fit: cover; object-position: center 20%; will-change: transform; }
+#__R__ .jkh-hero-scrim { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(14,28,67,0.80) 0%, rgba(14,28,67,0.55) 30%, rgba(14,28,67,0.35) 52%, rgba(14,28,67,0.65) 78%, #0E1C43 100%); }
+#__R__ .jkh-hero-inner { position: relative; z-index: 2; text-align: center; }
+#__R__ .jkh-hero-box { backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); background: rgba(14,28,67,0.30); border-radius: 20px; padding: 24px 18px 22px; margin: 0 auto 22px; max-width: 560px; }
+#__R__ .jkh-hero-title { font-size: var(--jkh-fs-h1); font-weight: 800; line-height: 1.15; letter-spacing: -0.01em; color: #FFFFFF; margin: 0 0 14px; text-shadow: 0 2px 12px rgba(0,0,0,0.35); }
+#__R__ .jkh-hero-sub { font-size: clamp(16.5px, 15.5px + 0.3vw, 22px); line-height: 1.6; color: rgba(255,255,255,0.94); max-width: 46em; margin: 0 auto; text-shadow: 0 1px 8px rgba(0,0,0,0.3); }
+#__R__ .jkh-hero-cta { animation: jkh-pulse 2600ms ease-in-out 1600ms infinite; }
+@keyframes jkh-pulse {
+  0%, 100% { box-shadow: 0 8px 22px -6px rgba(0,0,0,0.5), 0 0 0 0 rgba(217,228,25,0.45); transform: scale(1); }
+  50% { box-shadow: 0 8px 22px -6px rgba(0,0,0,0.5), 0 0 0 12px rgba(217,228,25,0); transform: scale(1.02); }
+}
+@media (min-width: 801px) {
+  #__R__ .jkh-hero { min-height: clamp(560px, 250px + 30vw, 900px); padding: clamp(28px, 2.4vw, 56px) 0 calc(clamp(28px, 2.4vw, 56px) + var(--jkh-wave-h)); }
+  #__R__ .jkh-hero-photo { object-position: center 35%; }
+  #__R__ .jkh-hero-scrim { background: linear-gradient(180deg, rgba(14,28,67,0.28) 0%, rgba(14,28,67,0.12) 45%, rgba(14,28,67,0.32) 100%); }
+  #__R__ .jkh-hero-inner { flex: 1; display: flex; }
+  #__R__ .jkh-hero-panel { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: space-between; gap: clamp(28px, 3vw, 64px); padding: clamp(40px, 4.4vw, 96px) clamp(32px, 4vw, 96px); background: rgba(14,28,67,0.42); backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px); border-radius: 22px; box-shadow: 0 30px 60px -30px rgba(0,0,0,0.45); }
+  #__R__ .jkh-hero-box { background: none; backdrop-filter: none; -webkit-backdrop-filter: none; padding: 0; margin: 0; max-width: 60em; flex: 1; display: flex; flex-direction: column; justify-content: space-around; gap: clamp(20px, 2vw, 44px); }
+  #__R__ .jkh-hero-title { margin: 0; }
+}
+
+#__R__ .jkh-svc-sec { background: #F5F6F8; --jkh-next: #0E1C43; }
+#__R__ .jkh-svc-list { display: flex; gap: 14px; padding: 6px 22px 12px; scroll-padding: 0 22px; }
+#__R__ .jkh-svc-list > .jkh-slide { flex: none; width: clamp(260px, 78vw, 340px); display: flex; scroll-snap-align: center; scroll-snap-stop: always; }
+#__R__ .jkh-svc { flex: 1; display: flex; flex-direction: column; background: #FFFFFF; border-radius: 16px; padding: clamp(24px, 18px + 1vw, 36px) clamp(20px, 16px + 1vw, 32px); box-shadow: 0 10px 28px -14px rgba(14,28,67,0.24); border-bottom: 4px solid #D9E419; color: inherit; text-decoration: none; -webkit-tap-highlight-color: transparent; transition: transform 200ms ease-out, box-shadow 200ms ease-out; }
+#__R__ .jkh-svc:active { background: #EEF0F5; }
+#__R__ .jkh-svc .jkh-badge { margin: 0 0 16px; }
+#__R__ .jkh-svc-title { font-size: var(--jkh-fs-h3); font-weight: 800; color: #0E1C43; line-height: 1.3; margin: 0 0 8px; }
+#__R__ .jkh-svc-text { font-size: calc(var(--jkh-fs-body) * 0.96); line-height: 1.6; color: #4B5568; }
+@media (min-width: 640px) {
+  #__R__ .jkh-svc-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--jkh-gap); width: min(1120px, calc(100% - 32px)); margin: 0 auto; padding: 6px 0 12px; overflow: visible; }
+  #__R__ .jkh-svc-list > .jkh-slide { width: auto; max-width: none; }
+  #__R__ .jkh-svc-car .jkh-dots { display: none; }
+}
+@media (min-width: 801px) {
+  #__R__ .jkh-svc { align-items: center; text-align: center; }
+  #__R__ .jkh-svc:hover { transform: translateY(-4px); box-shadow: 0 22px 40px -20px rgba(14,28,67,0.4); }
+}
+@media (min-width: 1100px) {
+  #__R__ .jkh-svc-list { grid-template-columns: repeat(4, 1fr); }
+}
+
+#__R__ .jkh-cta { position: relative; background: #0E1C43; background-image: radial-gradient(ellipse 55% 90% at 68% 55%, rgba(44,72,150,0.55), rgba(44,72,150,0) 70%); padding: clamp(30px, 22px + 1.6vw, 60px) 0 calc(clamp(30px, 22px + 1.6vw, 60px) + var(--jkh-wave-h)); --jkh-next: #FFFFFF; }
+#__R__ .jkh-cta-inner { text-align: center; }
+@media (min-width: 801px) {
+  #__R__ { --jkh-fill-bottom: #F0F4A3; }
+  #__R__ .jkh-cta { --jkh-next: #F0F4A3; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #__R__ .jkh-hero-cta { animation: none; }
+  #__R__ .jkh-hero-photo { top: 0; height: 100%; transform: none !important; }
+  #__R__ .jkh-svc { transition: none; }
+}
+@@JS
+  root.querySelectorAll('.jkh-svc-car').forEach(function (c) { carousel(c, 'Szolgáltatás'); });
