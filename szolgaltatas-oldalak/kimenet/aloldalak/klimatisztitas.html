@@ -1,0 +1,445 @@
+<style>#jks-kt-root{--jks-kt-fill-t:0px;--jks-kt-fill-b:0px;--jks-kt-fill-top:#0E1C43;--jks-kt-fill-bottom:#0E1C43;position:relative;box-sizing:border-box;width:100vw;max-width:100vw;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);overflow-x:clip;background:#FFFFFF;color:#33394A;font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;font-size:var(--jks-kt-fs-body);line-height:1.65;text-align:left;-webkit-text-size-adjust:100%}#jks-kt-root::before,#jks-kt-root::after{content:"";position:absolute;left:0;right:0;z-index:1;pointer-events:none}#jks-kt-root::before{bottom:100%;height:var(--jks-kt-fill-t);background:var(--jks-kt-fill-top)}#jks-kt-root::after{top:100%;height:var(--jks-kt-fill-b);background:var(--jks-kt-fill-bottom)}#jks-kt-root *,#jks-kt-root *::before,#jks-kt-root *::after{box-sizing:border-box}#jks-kt-root h1,#jks-kt-root h2,#jks-kt-root h3,#jks-kt-root p,#jks-kt-root ul,#jks-kt-root ol,#jks-kt-root li,#jks-kt-root dl,#jks-kt-root dt,#jks-kt-root dd,#jks-kt-root figure{margin:0;padding:0}#jks-kt-root ul,#jks-kt-root ol{list-style:none}#jks-kt-root li::marker{content:none}#jks-kt-root img{max-width:none;border:0}#jks-kt-root svg{flex:none}#jks-kt-root .jks-kt-link{color:inherit;font-weight:700;text-decoration:underline;text-decoration-color:#0E1C43;text-decoration-thickness:2px;text-underline-offset:4px;text-decoration-skip-ink:none;transition:text-decoration-color 150ms ease-out,color 150ms ease-out}#jks-kt-root .jks-kt-link:hover{color:#0E1C43;text-decoration-color:#1E6FD9}#jks-kt-root a:focus-visible,#jks-kt-root button:focus-visible{outline:3px solid #D9E419;outline-offset:3px;box-shadow:0 0 0 6px rgba(14,28,67,0.6)}#jks-kt-root .jks-kt-wave{position:absolute;left:0;bottom:-1px;z-index:2;display:block;width:100%;height:var(--jks-kt-wave-h);pointer-events:none;fill:var(--jks-kt-next,#FFFFFF)}#jks-kt-root.jks-kt-js .jks-kt-rv{opacity:0;transition:opacity 450ms ease-out,transform 450ms ease-out;transition-delay:var(--jks-kt-d,0ms)}#jks-kt-root.jks-kt-js .jks-kt-up{transform:translateY(18px)}#jks-kt-root.jks-kt-js .jks-kt-zoomin{transform:scale(0.95)}#jks-kt-root.jks-kt-js .jks-kt-rv.jks-kt-in{opacity:1;transform:none}#jks-kt-root.jks-kt-js .jks-kt-rv.jks-kt-done{transition:opacity 200ms ease-out,transform 220ms ease-out,box-shadow 220ms ease-out;transition-delay:0ms}#jks-kt-root .jks-kt-btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:54px;padding:13px 26px;border:0;border-radius:999px;font-family:inherit;font-size:var(--jks-kt-fs-btn);font-weight:800;line-height:1.2;text-align:center;text-decoration:none;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:transform 160ms ease-out,background-color 160ms ease-out,border-color 160ms ease-out,box-shadow 160ms ease-out,color 160ms ease-out}#jks-kt-root .jks-kt-btn:active{transform:scale(0.97)}#jks-kt-root .jks-kt-btn-lime{background:#D9E419;color:#0E1C43;box-shadow:0 10px 24px -10px rgba(217,228,25,0.55),0 8px 18px -12px rgba(0,0,0,0.5)}#jks-kt-root .jks-kt-btn-lime:hover{background:#C3CE12;color:#0E1C43}#jks-kt-root .jks-kt-btn-ghost{background:transparent;color:#FFFFFF;border:2px solid rgba(255,255,255,0.4);padding-left:12px}#jks-kt-root .jks-kt-btn-ghost:hover{border-color:#D9E419;color:#FFFFFF}#jks-kt-root .jks-kt-btn-line{background:#FFFFFF;color:#0E1C43;border:2px solid #0E1C43;padding-left:12px}#jks-kt-root .jks-kt-btn-line:hover{background:#0E1C43;color:#FFFFFF}#jks-kt-root .jks-kt-badge{position:relative;flex:none;width:var(--jks-kt-icon);height:var(--jks-kt-icon);border-radius:999px;background:#0E1C43;color:#D9E419;display:inline-flex;align-items:center;justify-content:center;transition:transform 220ms ease-out;-webkit-tap-highlight-color:transparent}#jks-kt-root .jks-kt-badge>svg{width:48%;height:48%}#jks-kt-root .jks-kt-badge-sm{--jks-kt-icon:32px;background:rgba(217,228,25,0.16);color:#D9E419}#jks-kt-root .jks-kt-btn-line .jks-kt-badge-sm{background:#0E1C43}#jks-kt-root .jks-kt-btn-line:hover .jks-kt-badge-sm{background:rgba(217,228,25,0.16)}#jks-kt-root .jks-kt-badge-lime{background:#D9E419;color:#0E1C43}#jks-kt-root .jks-kt-badge.jks-kt-zoom{transform:scale(1.15)}#jks-kt-root .jks-kt-ring{position:absolute;inset:0;border-radius:inherit;border:2px solid #D9E419;background:transparent;opacity:0;pointer-events:none}#jks-kt-root .jks-kt-ring.jks-kt-go{animation:jks-kt-ring 620ms ease-out forwards}#jks-kt-root .jks-kt-ring + .jks-kt-ring.jks-kt-go{animation-delay:150ms}@keyframes jks-kt-ring{0%{opacity:0.95;transform:scale(1)}100%{opacity:0;transform:scale(1.6)}}@media (prefers-reduced-motion:reduce){#jks-kt-root.jks-kt-js .jks-kt-rv{opacity:1;transform:none;transition:none}#jks-kt-root .jks-kt-badge,#jks-kt-root .jks-kt-btn{transition:none}#jks-kt-root .jks-kt-badge.jks-kt-zoom{transform:none}#jks-kt-root .jks-kt-ring{display:none}}@media (max-width:800px){html,body{max-width:100%;overflow-x:hidden}}#jks-kt-root{--jks-kt-fs-body:clamp(16px,15.5px + 0.15vw,17px);--jks-kt-fs-lead:17.5px;--jks-kt-fs-btn:16.5px;--jks-kt-icon:44px;--jks-kt-gap:14px;--jks-kt-wave-h:clamp(20px,14px + 2vw,32px)}@media (min-width:801px){#jks-kt-root{--jks-kt-fs-body:clamp(16.5px,14.71px + 0.2234vw,19px);--jks-kt-fs-lead:clamp(19px,15.42px + 0.447vw,24px);--jks-kt-fs-h1:clamp(42px,19.1px + 2.86vw,74px);--jks-kt-fs-h2:clamp(30px,15.7px + 1.787vw,50px);--jks-kt-fs-h3:clamp(18px,16.2px + 0.2234vw,21px);--jks-kt-fs-btn:clamp(16px,14.57px + 0.179vw,18px);--jks-kt-icon:clamp(50px,42.8px + 0.894vw,60px);--jks-kt-pad:clamp(64px,24px + 5vw,120px);--jks-kt-gap:clamp(20px,11.4px + 1.07vw,32px);--jks-kt-wave-h:clamp(28px,5.1px + 2.86vw,60px)}}#jks-kt-root .jks-kt-wrap{max-width:560px;margin:0 auto}#jks-kt-root .jks-kt-sec{position:relative;padding:40px 22px calc(40px + var(--jks-kt-wave-h));background:#FFFFFF}#jks-kt-root .jks-kt-sec-gray{background:#F5F6F8}#jks-kt-root .jks-kt-h2{font-size:25px;font-weight:800;line-height:1.25;color:#0E1C43;margin:0 0 20px}#jks-kt-root .jks-kt-h2::before{content:"";display:block;width:38px;height:4px;border-radius:4px;background:#D9E419;margin:0 0 14px}#jks-kt-root .jks-kt-p{font-size:var(--jks-kt-fs-body);line-height:1.68;color:#33394A}#jks-kt-root .jks-kt-btns{display:flex;flex-direction:column;gap:12px;max-width:420px;margin:0 auto}#jks-kt-root .jks-kt-btns .jks-kt-btn{width:100%}#jks-kt-root .jks-kt-card{position:relative;background:#FFFFFF;border:1px solid #EEF0F4;border-radius:16px;box-shadow:0 10px 28px -18px rgba(14,28,67,0.35);transition:transform 220ms ease-out,box-shadow 220ms ease-out}@media (min-width:801px){#jks-kt-root .jks-kt-wrap{width:min(1120px,calc(100% - 48px));max-width:none}#jks-kt-root .jks-kt-sec{padding:var(--jks-kt-pad) 0 calc(var(--jks-kt-pad) + var(--jks-kt-wave-h))}#jks-kt-root .jks-kt-h2{font-size:var(--jks-kt-fs-h2);line-height:1.15;letter-spacing:-0.015em;margin:0 0 clamp(28px,16px + 1.5vw,52px)}#jks-kt-root .jks-kt-h2::before{content:none}#jks-kt-root .jks-kt-h2::after{content:"";display:block;width:56px;height:5px;border-radius:5px;background:#D9E419;margin-top:16px}#jks-kt-root .jks-kt-center{text-align:center}#jks-kt-root .jks-kt-center.jks-kt-h2::after{margin-left:auto;margin-right:auto}#jks-kt-root .jks-kt-p{line-height:1.7;color:#4B5568}#jks-kt-root .jks-kt-btns{flex-direction:row;flex-wrap:wrap;align-items:center;max-width:none;margin:0;gap:14px}#jks-kt-root .jks-kt-btns .jks-kt-btn{width:auto}#jks-kt-root .jks-kt-btn:hover{transform:translateY(-2px)}#jks-kt-root .jks-kt-btn-lime:hover{box-shadow:0 18px 32px -14px rgba(0,0,0,0.55)}#jks-kt-root .jks-kt-card{border-color:#E8EBF1;border-radius:22px;box-shadow:0 18px 40px -30px rgba(14,28,67,0.45)}#jks-kt-root .jks-kt-host.jks-kt-card:hover{transform:translateY(-5px);box-shadow:0 26px 48px -26px rgba(14,28,67,0.5)}}#jks-kt-root .jks-kt-hero{position:relative;overflow:hidden;background:#0E1C43;padding:0 0 calc(34px + var(--jks-kt-wave-h));text-align:center}#jks-kt-root .jks-kt-hero-media{position:relative;width:100%;aspect-ratio:780 / 436;background:#16255A}#jks-kt-root .jks-kt-hero-media picture{display:block;width:100%;height:100%}#jks-kt-root .jks-kt-hero-media img{display:block;width:100%;height:100%;object-fit:cover}#jks-kt-root .jks-kt-hero-media::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:58%;background:linear-gradient(180deg,rgba(14,28,67,0) 0%,rgba(14,28,67,0.74) 60%,#0E1C43 100%);pointer-events:none}#jks-kt-root .jks-kt-hero-inner{position:relative;z-index:3;margin-top:-36px;padding:0 22px}#jks-kt-root .jks-kt-h1{font-size:clamp(32px,26px + 2vw,40px);font-weight:800;line-height:1.15;letter-spacing:-0.01em;color:#FFFFFF;margin:0 0 24px;text-shadow:0 2px 14px rgba(0,0,0,0.35)}#jks-kt-root .jks-kt-h1::after{content:"";display:block;width:52px;height:4px;border-radius:4px;background:#D9E419;margin:14px auto 0}@media (min-width:801px){#jks-kt-root .jks-kt-hero{min-height:clamp(460px,140px + 36vw,790px);display:flex;align-items:center;padding:0;text-align:left}#jks-kt-root .jks-kt-hero-media{position:absolute;top:0;bottom:0;left:50%;width:min(100%,1920px);aspect-ratio:auto;transform:translateX(-50%)}#jks-kt-root .jks-kt-hero-media img{object-position:30% 35%}#jks-kt-root .jks-kt-hero-media::after{top:0;bottom:0;height:auto;background:linear-gradient(90deg,rgba(14,28,67,0.18) 0%,rgba(14,28,67,0.34) 30%,rgba(14,28,67,0.84) 54%,rgba(14,28,67,0.94) 100%),linear-gradient(180deg,rgba(14,28,67,0.35) 0%,rgba(14,28,67,0) 26%)}#jks-kt-root .jks-kt-hero-inner{display:flex;justify-content:flex-end;margin:0 auto;padding:calc(var(--jks-kt-pad) * 0.8) 0 calc(var(--jks-kt-pad) * 0.8 + var(--jks-kt-wave-h))}#jks-kt-root .jks-kt-hero-box{width:min(560px,50%)}#jks-kt-root .jks-kt-h1{font-size:var(--jks-kt-fs-h1);line-height:1.05;letter-spacing:-0.02em;margin:0;text-shadow:0 4px 24px rgba(0,0,0,0.3)}#jks-kt-root .jks-kt-h1::after{width:72px;height:6px;border-radius:6px;margin:clamp(18px,12px + 0.8vw,28px) 0 clamp(28px,16px + 1.6vw,44px)}#jks-kt-root .jks-kt-hero .jks-kt-btns{flex-direction:column;align-items:stretch;max-width:380px}#jks-kt-root .jks-kt-hero .jks-kt-btns .jks-kt-btn{width:100%}}@media (min-width:801px) and (max-width:1099px){#jks-kt-root .jks-kt-hero-box{width:min(420px,52%)}}@media (min-width:1921px){#jks-kt-root .jks-kt-hero-media::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,#0E1C43 0,rgba(14,28,67,0) 14%)}}@media (min-width:801px){#jks-kt-root .jks-kt-intro-grid{display:grid;grid-template-columns:1fr;gap:var(--jks-kt-gap);max-width:760px}}@media (min-width:1100px){#jks-kt-root .jks-kt-intro-grid{grid-template-columns:1.05fr 1fr;gap:clamp(40px,10px + 3.5vw,88px);align-items:center;max-width:none}}#jks-kt-root .jks-kt-price{position:relative;overflow:hidden;margin:26px 0 0;background:#0E1C43;color:#FFFFFF;border-radius:20px;padding:26px 22px;text-align:center;box-shadow:0 18px 38px -22px rgba(14,28,67,0.8)}#jks-kt-root .jks-kt-price::before{content:"";position:absolute;right:-40px;top:-40px;width:140px;height:140px;border-radius:999px;border:14px solid rgba(217,228,25,0.16);pointer-events:none}#jks-kt-root .jks-kt-price-head{position:relative;display:flex;align-items:center;justify-content:center;gap:16px}#jks-kt-root .jks-kt-price-head .jks-kt-badge{display:none}#jks-kt-root .jks-kt-price-label{font-size:15.5px;font-weight:600;color:rgba(255,255,255,0.85);margin:0 0 6px}#jks-kt-root .jks-kt-price-value{position:relative;font-size:30px;font-weight:800;line-height:1.2;color:#D9E419}#jks-kt-root .jks-kt-price .jks-kt-btns{display:none}#jks-kt-root .jks-kt-brands-foot{display:flex;flex-direction:column;gap:6px;margin-top:18px}#jks-kt-root .jks-kt-brands-foot .jks-kt-btn{width:100%}#jks-kt-root .jks-kt-related{text-align:center;font-size:15.5px;color:#4B5568}#jks-kt-root .jks-kt-related .jks-kt-link{display:inline-block;padding:10px 2px}@media (min-width:801px){#jks-kt-root .jks-kt-pricing-grid{display:grid;grid-template-columns:1fr;gap:clamp(28px,16px + 1.5vw,48px);max-width:760px}#jks-kt-root .jks-kt-pricing-text{font-size:var(--jks-kt-fs-lead);line-height:1.55;font-weight:500;color:#0E1C43}#jks-kt-root .jks-kt-price{margin:0;text-align:left;border-radius:26px;padding:clamp(30px,20px + 1.3vw,46px);box-shadow:0 30px 60px -30px rgba(14,28,67,0.75)}#jks-kt-root .jks-kt-price::before{right:-70px;top:-70px;width:220px;height:220px;border-width:22px;border-color:rgba(217,228,25,0.12)}#jks-kt-root .jks-kt-price-head{justify-content:flex-start}#jks-kt-root .jks-kt-price-head .jks-kt-badge{display:inline-flex}#jks-kt-root .jks-kt-price-label{font-size:var(--jks-kt-fs-body);margin:0}#jks-kt-root .jks-kt-price-value{white-space:nowrap;font-size:clamp(34px,26px + 1vw,44px);line-height:1.1;letter-spacing:-0.02em;margin:18px 0 26px}#jks-kt-root .jks-kt-price .jks-kt-btns{display:flex;flex-direction:column;align-items:stretch}#jks-kt-root .jks-kt-price .jks-kt-btns .jks-kt-btn{width:100%}#jks-kt-root .jks-kt-brands-foot{flex-direction:row;flex-wrap:wrap;align-items:center;gap:16px 28px;margin-top:22px}#jks-kt-root .jks-kt-brands-foot .jks-kt-btn{width:auto}#jks-kt-root .jks-kt-related{text-align:left;font-size:0.95em}#jks-kt-root .jks-kt-related .jks-kt-link{padding:0}}@media (min-width:1100px){#jks-kt-root .jks-kt-pricing-grid{grid-template-columns:minmax(0,1.15fr) minmax(360px,1fr);grid-template-areas:"text price" "brands price";column-gap:clamp(40px,8px + 3.5vw,88px);row-gap:36px;max-width:none;align-items:start}#jks-kt-root .jks-kt-pricing-text{grid-area:text}#jks-kt-root .jks-kt-price{grid-area:price;position:sticky;top:28px}}#jks-kt-root .jks-kt-faq-side .jks-kt-btn{display:none}#jks-kt-root .jks-kt-faq-list{display:flex;flex-direction:column;gap:14px}#jks-kt-root .jks-kt-qa{display:grid;grid-template-columns:32px minmax(0,1fr);column-gap:12px;row-gap:10px;align-items:start;padding:20px 18px}#jks-kt-root .jks-kt-qa-ic{--jks-kt-icon:32px;font-size:17px;font-weight:800;line-height:1}#jks-kt-root .jks-kt-qa-q{font-size:17px;font-weight:800;line-height:1.4;color:#0E1C43;padding-top:3px}#jks-kt-root .jks-kt-qa-a{grid-column:1 / -1;font-size:var(--jks-kt-fs-body);line-height:1.65;color:#4B5568}@media (min-width:801px){#jks-kt-root .jks-kt-faq-grid{display:grid;grid-template-columns:1fr;gap:8px;max-width:820px}#jks-kt-root .jks-kt-faq-side .jks-kt-btn{display:inline-flex;margin:0 0 30px}#jks-kt-root .jks-kt-faq-list{gap:16px}#jks-kt-root .jks-kt-qa{grid-template-columns:44px minmax(0,1fr);column-gap:20px;row-gap:8px;padding:clamp(22px,16px + 0.8vw,32px)}#jks-kt-root .jks-kt-qa-ic{--jks-kt-icon:44px;font-size:22px;grid-row:1 / span 2}#jks-kt-root .jks-kt-qa-q{font-size:var(--jks-kt-fs-h3);line-height:1.35;padding-top:8px}#jks-kt-root .jks-kt-qa-a{grid-column:2}}@media (min-width:1100px){#jks-kt-root .jks-kt-faq-grid{grid-template-columns:minmax(260px,0.8fr) 2fr;gap:clamp(40px,8px + 3.5vw,88px);max-width:none;align-items:start}#jks-kt-root .jks-kt-faq-side{position:sticky;top:28px}}#jks-kt-root .jks-kt-cta{position:relative;background:#0E1C43;padding:40px 22px 44px;text-align:center}#jks-kt-root .jks-kt-fab{position:fixed;left:16px;bottom:26px;z-index:2147482000;max-width:calc(100vw - 124px);opacity:0;transform:translateY(16px);pointer-events:none;transition:opacity 260ms ease-out,transform 260ms ease-out}#jks-kt-root .jks-kt-fab.jks-kt-show{opacity:1;transform:none;pointer-events:auto}#jks-kt-root .jks-kt-fab .jks-kt-btn{min-height:50px;padding:12px 20px;font-size:15px;white-space:nowrap;box-shadow:0 12px 28px -8px rgba(14,28,67,0.55)}@media (max-width:339px){#jks-kt-root .jks-kt-fab .jks-kt-btn{font-size:13.5px;padding:12px 14px}}@media (min-width:801px){#jks-kt-root .jks-kt-cta{padding:calc(var(--jks-kt-pad) * 0.8) 0}#jks-kt-root .jks-kt-cta .jks-kt-btns{justify-content:center}#jks-kt-root .jks-kt-fab{display:none}}@media (prefers-reduced-motion:reduce){#jks-kt-root .jks-kt-fab,#jks-kt-root .jks-kt-card{transition:none}}#jks-kt-root .jks-kt-hero-media{aspect-ratio:var(--jks-kt-hero-ar,780 / 436)}@media (min-width:801px){#jks-kt-root .jks-kt-hero-media{aspect-ratio:auto}}#jks-kt-root .jks-kt-feats{display:flex;flex-direction:column;gap:12px}#jks-kt-root .jks-kt-feat{display:flex;gap:14px;align-items:center;padding:14px 16px}#jks-kt-root .jks-kt-feat .jks-kt-badge{--jks-kt-icon:44px}#jks-kt-root .jks-kt-feat-text{font-size:var(--jks-kt-fs-body);line-height:1.5;color:#33394A;font-weight:600}@media (min-width:801px){#jks-kt-root .jks-kt-feats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--jks-kt-gap)}#jks-kt-root .jks-kt-feat{flex-direction:column;align-items:flex-start;gap:20px;padding:clamp(26px,18px + 1vw,38px);border-bottom:4px solid #D9E419}#jks-kt-root .jks-kt-feat .jks-kt-badge{--jks-kt-icon:clamp(50px,42.8px + 0.894vw,60px)}#jks-kt-root .jks-kt-feat-text{font-size:var(--jks-kt-fs-h3);line-height:1.45;font-weight:700;color:#0E1C43}}@media (min-width:1100px){#jks-kt-root .jks-kt-feats{grid-template-columns:repeat(4,minmax(0,1fr))}}#jks-kt-root .jks-kt-pricing-text .jks-kt-h2 + .jks-kt-p{margin-top:0}#jks-kt-root .jks-kt-pricing-grid>.jks-kt-brands-foot{margin-top:18px}@media (min-width:801px){#jks-kt-root .jks-kt-pricing-grid>.jks-kt-brands-foot{margin-top:0}#jks-kt-root .jks-kt-pricing-text .jks-kt-p{font-size:var(--jks-kt-fs-body);font-weight:400;color:#4B5568}}@media (min-width:1100px){#jks-kt-root .jks-kt-pricing-grid>.jks-kt-brands-foot{grid-area:brands}}#jks-kt-root .jks-kt-why-text .jks-kt-p + .jks-kt-p{margin-top:14px}#jks-kt-root .jks-kt-method{display:flex;gap:14px;align-items:flex-start;margin-top:22px;padding:20px 18px;background:#0E1C43;border-color:#0E1C43;border-left:5px solid #D9E419}#jks-kt-root .jks-kt-method .jks-kt-badge{--jks-kt-icon:40px}#jks-kt-root .jks-kt-method-text{font-size:var(--jks-kt-fs-body);line-height:1.6;font-weight:600;color:#FFFFFF}@media (min-width:801px){#jks-kt-root .jks-kt-method{gap:22px;margin-top:0;padding:clamp(28px,18px + 1.2vw,44px)}#jks-kt-root .jks-kt-method .jks-kt-badge{--jks-kt-icon:clamp(50px,42.8px + 0.894vw,60px)}#jks-kt-root .jks-kt-method-text{font-size:var(--jks-kt-fs-lead);line-height:1.5}}@media (min-width:1100px){#jks-kt-root .jks-kt-intro-grid{align-items:start}#jks-kt-root .jks-kt-method{margin-top:clamp(60px,30px + 3vw,110px)}}#jks-kt-root .jks-kt-gal-sec{padding-left:0;padding-right:0}#jks-kt-root .jks-kt-car{position:relative}#jks-kt-root .jks-kt-scroller{overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;overscroll-behavior-x:contain}#jks-kt-root .jks-kt-scroller::-webkit-scrollbar{display:none}#jks-kt-root .jks-kt-scroller.jks-kt-drag{scroll-snap-type:none;cursor:grabbing;user-select:none}#jks-kt-root .jks-kt-scroller.jks-kt-auto{scroll-snap-type:none}#jks-kt-root .jks-kt-scroller.jks-kt-drag *{pointer-events:none}#jks-kt-root .jks-kt-gal{max-width:none}#jks-kt-root .jks-kt-gal-vp{padding:6px 0 14px}#jks-kt-root .jks-kt-gal-track{display:flex;gap:12px;padding:0 9vw;width:max-content}#jks-kt-root .jks-kt-gal-track>.jks-kt-slide{flex:none;width:82vw;max-width:420px;scroll-snap-align:center;scroll-snap-stop:always}#jks-kt-root .jks-kt-ref{display:block;width:100%;aspect-ratio:3 / 4;padding:0;margin:0;border:0;border-radius:16px;overflow:hidden;background:#F5F6F8;cursor:zoom-in;box-shadow:0 10px 30px -12px rgba(14,28,67,0.4);transform:scale(0.94);transition:transform 320ms cubic-bezier(0.16,1,0.3,1),box-shadow 200ms ease-out;-webkit-tap-highlight-color:transparent}#jks-kt-root .jks-kt-slide.jks-kt-center .jks-kt-ref,#jks-kt-root .jks-kt-auto .jks-kt-ref{transform:none}#jks-kt-root .jks-kt-ref img{display:block;width:100%;height:100%;object-fit:cover}#jks-kt-root .jks-kt-dots{display:flex;justify-content:center;flex-wrap:wrap;gap:2px;margin-top:12px;min-height:24px;padding:0 16px}#jks-kt-root .jks-kt-dot{width:24px;height:24px;padding:0;margin:0;border:0;background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;-webkit-tap-highlight-color:transparent}#jks-kt-root .jks-kt-dot::before{content:"";width:7px;height:7px;border-radius:999px;background:rgba(14,28,67,0.25);transition:transform 200ms ease,background 200ms ease}#jks-kt-root .jks-kt-dot.jks-kt-on::before{background:#0E1C43;transform:scale(1.35);box-shadow:0 0 0 2px #D9E419}#jks-kt-root .jks-kt-arrow{display:none;position:absolute;top:50%;z-index:3;width:52px;height:52px;margin-top:-26px;padding:0;border:0;border-radius:999px;background:#0E1C43;color:#FFFFFF;cursor:pointer;align-items:center;justify-content:center;box-shadow:0 10px 22px -8px rgba(0,0,0,0.55);transition:background-color 150ms ease-out,transform 150ms ease-out,opacity 150ms ease-out}#jks-kt-root .jks-kt-arrow svg{width:22px;height:22px}#jks-kt-root .jks-kt-arrow:hover{background:#1B2B5E;transform:scale(1.06)}#jks-kt-root .jks-kt-arrow[disabled]{opacity:0;pointer-events:none}#jks-kt-root .jks-kt-prev{left:-10px}#jks-kt-root .jks-kt-next{right:-10px}@media (min-width:801px){#jks-kt-root .jks-kt-gal-sec{padding-top:calc(var(--jks-kt-pad) * 0.7)}#jks-kt-root .jks-kt-gal{width:min(1120px,calc(100% - 48px))}#jks-kt-root .jks-kt-gal-track{gap:var(--jks-kt-gap);padding:0;width:auto}#jks-kt-root .jks-kt-gal-track>.jks-kt-slide{width:calc((100% - var(--jks-kt-gap)) / 2);max-width:none;scroll-snap-align:start;scroll-snap-stop:normal}#jks-kt-root .jks-kt-ref{transform:none}#jks-kt-root .jks-kt-ref:hover{box-shadow:0 18px 38px -16px rgba(14,28,67,0.55)}#jks-kt-root .jks-kt-arrow{display:flex}#jks-kt-root .jks-kt-dots{display:none}}@media (min-width:1100px){#jks-kt-root .jks-kt-gal-track>.jks-kt-slide{width:calc((100% - 3 * var(--jks-kt-gap)) / 4)}}@media (min-width:1240px){#jks-kt-root .jks-kt-prev{left:-26px}#jks-kt-root .jks-kt-next{right:-26px}}#jks-kt-root .jks-kt-seasons{display:flex;flex-direction:column;gap:12px;margin-bottom:22px}#jks-kt-root .jks-kt-season{display:flex;align-items:center;gap:14px;background:#0E1C43;border-radius:16px;padding:16px 18px}#jks-kt-root .jks-kt-season .jks-kt-badge{--jks-kt-icon:44px}#jks-kt-root .jks-kt-season-text{font-size:15.5px;line-height:1.5;color:rgba(255,255,255,0.86)}#jks-kt-root .jks-kt-season-text strong{display:block;color:#FFFFFF;font-size:17px;font-weight:800}#jks-kt-root .jks-kt-season-grid .jks-kt-pricing-text>.jks-kt-p + .jks-kt-p{margin-top:14px}#jks-kt-root .jks-kt-note{display:flex;gap:14px;align-items:flex-start;margin-top:22px;padding:16px 18px;border-radius:14px;background:#FFFFFF;border:1px solid #E8EBF1}#jks-kt-root .jks-kt-note .jks-kt-badge{--jks-kt-icon:38px}#jks-kt-root .jks-kt-note .jks-kt-p{font-size:15px;line-height:1.6;color:#4B5568}#jks-kt-root .jks-kt-season-grid .jks-kt-brands-foot{margin-top:14px}@media (min-width:801px){#jks-kt-root .jks-kt-seasons{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--jks-kt-gap);margin-bottom:clamp(32px,18px + 1.8vw,56px)}#jks-kt-root .jks-kt-season{gap:18px;padding:clamp(20px,14px + 0.8vw,30px);border-radius:20px;transition:transform 220ms ease-out}#jks-kt-root .jks-kt-season:hover{transform:translateY(-4px)}#jks-kt-root .jks-kt-season .jks-kt-badge{--jks-kt-icon:clamp(50px,42.8px + 0.894vw,60px)}#jks-kt-root .jks-kt-season-text{font-size:var(--jks-kt-fs-body)}#jks-kt-root .jks-kt-season-text strong{font-size:var(--jks-kt-fs-h3)}#jks-kt-root .jks-kt-season-grid .jks-kt-pricing-text{font-size:var(--jks-kt-fs-body);font-weight:400}#jks-kt-root .jks-kt-note{gap:18px;padding:clamp(20px,14px + 0.8vw,28px);border-radius:20px}#jks-kt-root .jks-kt-note .jks-kt-badge{--jks-kt-icon:48px}#jks-kt-root .jks-kt-note .jks-kt-p{font-size:calc(var(--jks-kt-fs-body) - 1px)}#jks-kt-root .jks-kt-season-grid .jks-kt-brands-foot{margin-top:0}}@media (min-width:1100px){#jks-kt-root .jks-kt-season-grid .jks-kt-brands-foot{grid-area:brands}}#jks-kt-root .jks-kt-lb{position:fixed;inset:0;z-index:2147482600;display:none;align-items:center;justify-content:center;padding:16px;background:rgba(14,28,67,0.95)}#jks-kt-root .jks-kt-lb.jks-kt-open{display:flex}#jks-kt-root .jks-kt-lb-img{width:auto;height:auto;max-width:min(100%,1100px);max-height:84vh;object-fit:contain;border-radius:10px;box-shadow:0 20px 60px rgba(0,0,0,0.5)}#jks-kt-root .jks-kt-lb-btn{position:absolute;width:48px;height:48px;padding:0;border:0;border-radius:999px;background:rgba(255,255,255,0.16);color:#FFFFFF;font-size:22px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background-color 150ms ease-out}#jks-kt-root .jks-kt-lb-btn:hover{background:rgba(255,255,255,0.28)}#jks-kt-root .jks-kt-lb-btn svg{width:24px;height:24px}#jks-kt-root .jks-kt-lb-close{top:16px;right:16px}#jks-kt-root .jks-kt-lb-prev{left:12px;top:50%;margin-top:-24px}#jks-kt-root .jks-kt-lb-next{right:12px;top:50%;margin-top:-24px}@media (prefers-reduced-motion:reduce){#jks-kt-root .jks-kt-ref,#jks-kt-root .jks-kt-season{transition:none}}</style>
+<div id="jks-kt-root" data-jks-kt-foglalas="https://growthnestg.zohobookings.eu/254300000000290002">
+<section class="jks-kt-hero" aria-labelledby="jks-kt-h1">
+<div class="jks-kt-hero-media"><picture><source media="(max-width: 800px)" srcset="https://d1yei2z3i6k35z.cloudfront.net/19002789/6ab70fb298f831.75960553_klimatisztitas-szeged-hero-mobil.webp" width="780" height="436"><img src="https://d1yei2z3i6k35z.cloudfront.net/19002789/6ab70e5a51ccf4.16922904_klimatisztitas-szeged-hero.jpeg" alt="Klímatisztítás Szegeden" width="1500" height="838" loading="eager" fetchpriority="high"></picture></div>
+<div class="jks-kt-wrap jks-kt-hero-inner">
+<div class="jks-kt-hero-box">
+<h1 id="jks-kt-h1" class="jks-kt-h1">Klímatisztítás</h1>
+<div class="jks-kt-btns">
+<a class="jks-kt-btn jks-kt-btn-lime" href="https://growthnestg.zohobookings.eu/254300000000290002" target="_blank" rel="noopener" data-jks-kt-zoho>Időpont foglalása</a>
+<a class="jks-kt-btn jks-kt-btn-ghost jks-kt-host" href="tel:+36203734991"><span class="jks-kt-badge jks-kt-badge-sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></span>+36 20 373 4991</a>
+</div>
+</div>
+</div>
+<svg class="jks-kt-wave" style="--jks-kt-next:#FFFFFF" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0,60 L0,26 C 380,64 1000,-6 1440,34 L1440,60 Z"/></svg>
+</section>
+<section class="jks-kt-sec" aria-labelledby="jks-kt-why-h">
+<div class="jks-kt-wrap jks-kt-intro-grid">
+<div class="jks-kt-why-text">
+<h2 id="jks-kt-why-h" class="jks-kt-h2 jks-kt-rv jks-kt-up">Miért kell tisztítani a klímánkat?</h2>
+<p class="jks-kt-p jks-kt-rv jks-kt-up">A klíma beltéri egysége óránként több száz köbméter levegőt áramoltat át magán, közben por és egyéb szennyeződés rakódik le rajta. Hűtéskor a beltéri egység hőcserélőjének hideg felületén kondenzvíz keletkezik, és a felhalmozódott szennyeződésben, nedvességben mikroorganizmusok is megtelepedhetnek.</p>
+<p class="jks-kt-p jks-kt-rv jks-kt-up" style="--jks-kt-d:80ms">Tisztítás nélkül a készülékben kellemetlen szag és penész is kialakulhat, ami ronthatja a beltéri levegő minőségét.</p>
+<p class="jks-kt-p jks-kt-rv jks-kt-up" style="--jks-kt-d:160ms">Erősen szennyezett hőcserélőnél a ventilátor többet dolgozhat, ezért nőhet az áramfogyasztás, csökkenhet a teljesítmény és a hatásfok. A készülék emellett hamarabb meghibásodhat.</p>
+</div>
+<div class="jks-kt-method jks-kt-card jks-kt-host jks-kt-rv jks-kt-up" style="--jks-kt-d:120ms">
+<span class="jks-kt-badge jks-kt-badge-lime"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3c3 4 6 7 6 11a6 6 0 0 1-12 0c0-4 3-7 6-11z"/><path d="M9.5 14.5a2.5 2.5 0 0 0 2.5 2.5"/></svg></span>
+<p class="jks-kt-method-text">Professzionális Deep Clean klímamosó vegyszerrel dolgozunk, amelyet nagynyomású vízsugárral öblítünk le.</p>
+</div>
+</div>
+<svg class="jks-kt-wave" style="--jks-kt-next:#F5F6F8" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0,60 L0,36 C 300,2 1100,62 1440,20 L1440,60 Z"/></svg>
+</section>
+<section class="jks-kt-sec jks-kt-sec-gray" aria-labelledby="jks-kt-feat-h">
+<div class="jks-kt-wrap">
+<h2 id="jks-kt-feat-h" class="jks-kt-h2 jks-kt-center jks-kt-rv jks-kt-up">Teljeskörű tisztítást végzünk!</h2>
+<ul class="jks-kt-feats">
+<li class="jks-kt-feat jks-kt-card jks-kt-host jks-kt-rv jks-kt-up" style="--jks-kt-d:0ms">
+<span class="jks-kt-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 9.3h16M4 14.7h16M9.3 4v16M14.7 4v16"/></svg></span>
+<p class="jks-kt-feat-text">Szűrők kiszerelése és alapos tisztítása.</p>
+</li>
+<li class="jks-kt-feat jks-kt-card jks-kt-host jks-kt-rv jks-kt-up" style="--jks-kt-d:90ms">
+<span class="jks-kt-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 6h18M3 18h18"/><path d="M6 6v12M10 6v12M14 6v12M18 6v12"/></svg></span>
+<p class="jks-kt-feat-text">A párologtató tisztítása.</p>
+</li>
+<li class="jks-kt-feat jks-kt-card jks-kt-host jks-kt-rv jks-kt-up" style="--jks-kt-d:180ms">
+<span class="jks-kt-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="2.5" y="5" width="19" height="13" rx="2"/><circle cx="9" cy="11.5" r="3.6"/><path d="M9 7.9v7.2M5.4 11.5h7.2M16 9h3M16 12h3M16 15h3M6 18v2M18 18v2"/></svg></span>
+<p class="jks-kt-feat-text">A kültéri egység átvizsgálása, tisztítása.</p>
+</li>
+<li class="jks-kt-feat jks-kt-card jks-kt-host jks-kt-rv jks-kt-up" style="--jks-kt-d:270ms">
+<span class="jks-kt-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.8 2.8L16.5 9.5"/></svg></span>
+<p class="jks-kt-feat-text">Működés-ellenőrzés a munka végén.</p>
+</li>
+</ul>
+</div>
+<svg class="jks-kt-wave" style="--jks-kt-next:#FFFFFF" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0,60 L0,26 C 380,64 1000,-6 1440,34 L1440,60 Z"/></svg>
+</section>
+<section class="jks-kt-sec jks-kt-gal-sec" aria-label="Referencia-fotók">
+<div class="jks-kt-wrap jks-kt-gal jks-kt-rv jks-kt-up">
+<div class="jks-kt-car jks-kt-gal-car">
+<button type="button" class="jks-kt-arrow jks-kt-prev" aria-label="Előző fotók"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M15 5l-7 7 7 7"/></svg></button>
+<div class="jks-kt-scroller jks-kt-gal-vp" tabindex="0" role="region" aria-label="Referencia-fotók, lapozható">
+<ul class="jks-kt-gal-track">
+<li class="jks-kt-slide"><button type="button" class="jks-kt-ref" aria-label="Nagyítás: szennyezett, kiszerelt klíma-ventilátorhenger egy kádban"><img src="https://d1yei2z3i6k35z.cloudfront.net/19002789/6ab2ee7ad8bbf0.19170727_FB_IMG_1790093040012.jpg" alt="Szennyezett, kiszerelt klíma-ventilátorhenger egy kádban" width="1125" height="1500" loading="lazy" decoding="async"></button></li>
+<li class="jks-kt-slide"><button type="button" class="jks-kt-ref" aria-label="Nagyítás: kimosott, világos klíma-ventilátorhenger egy kádban"><img src="https://d1yei2z3i6k35z.cloudfront.net/19002789/6ab2ee7f194152.69800172_FB_IMG_1790093042081.jpg" alt="Kimosott, világos klíma-ventilátorhenger egy kádban" width="1125" height="1500" loading="lazy" decoding="async"></button></li>
+<li class="jks-kt-slide"><button type="button" class="jks-kt-ref" aria-label="Nagyítás: beltéri egység hőcserélője nyitott burkolattal, alatta kék védőfólia"><img src="https://d1yei2z3i6k35z.cloudfront.net/19002789/6ab2f30d474f86.03377185_1111.jpg" alt="Beltéri egység hőcserélője nyitott burkolattal, alatta kék védőfólia" width="1500" height="1372" loading="lazy" decoding="async"></button></li>
+<li class="jks-kt-slide"><button type="button" class="jks-kt-ref" aria-label="Nagyítás: falra szerelt beltéri egység szétnyitva, a hőcserélő és a ventilátor alatt gyűjtőfólia"><img src="https://d1yei2z3i6k35z.cloudfront.net/19002789/6ab2f310abe1c3.72693182_20260531_160828.jpg" alt="Falra szerelt beltéri egység szétnyitva, a hőcserélő és a ventilátor alatt gyűjtőfólia" width="1125" height="1500" loading="lazy" decoding="async"></button></li>
+<li class="jks-kt-slide"><button type="button" class="jks-kt-ref" aria-label="Nagyítás: a beltéri egység hőcserélője és ventilátora közelről, tisztítás közben"><img src="https://d1yei2z3i6k35z.cloudfront.net/19002789/6ab2f313457b95.61073852_20260531_163728.jpg" alt="A beltéri egység hőcserélője és ventilátora közelről, tisztítás közben" width="1125" height="1500" loading="lazy" decoding="async"></button></li>
+<li class="jks-kt-slide"><button type="button" class="jks-kt-ref" aria-label="Nagyítás: két poros légszűrő a kádban, mellettük a beltéri egység előlapja"><img src="https://d1yei2z3i6k35z.cloudfront.net/19002789/6ab2f316dd1391.32354183_20260531_170124.jpg" alt="Két poros légszűrő a kádban, mellettük a beltéri egység előlapja" width="1125" height="1500" loading="lazy" decoding="async"></button></li>
+<li class="jks-kt-slide"><button type="button" class="jks-kt-ref" aria-label="Nagyítás: kiszerelt légszűrők mosás közben egy mosdókagylón"><img src="https://d1yei2z3i6k35z.cloudfront.net/19002789/6ab2f31b2fa844.91955339_20260531_171320.jpg" alt="Kiszerelt légszűrők mosás közben egy mosdókagylón" width="1125" height="1500" loading="lazy" decoding="async"></button></li>
+<li class="jks-kt-slide"><button type="button" class="jks-kt-ref" aria-label="Nagyítás: klímamosó gyűjtőzsák a falra szerelt beltéri egység alatt, mellette létra és mosóberendezés"><img src="https://d1yei2z3i6k35z.cloudfront.net/19002789/6ab2f325a455b4.80787444_20260602_172107.jpg" alt="Klímamosó gyűjtőzsák a falra szerelt beltéri egység alatt, mellette létra és mosóberendezés" width="1125" height="1500" loading="lazy" decoding="async"></button></li>
+<li class="jks-kt-slide"><button type="button" class="jks-kt-ref" aria-label="Nagyítás: szétszerelt beltéri egység burkolati elemei és légszűrői a csempén"><img src="https://d1yei2z3i6k35z.cloudfront.net/19002789/6ab2f32c4fdc12.09540981_20260603_175028.jpg" alt="Szétszerelt beltéri egység burkolati elemei és légszűrői a csempén" width="1125" height="1500" loading="lazy" decoding="async"></button></li>
+<li class="jks-kt-slide"><button type="button" class="jks-kt-ref" aria-label="Nagyítás: szennyezett ventilátor a szétnyitott beltéri egységben, alatta gyűjtőfólia"><img src="https://d1yei2z3i6k35z.cloudfront.net/19002789/6ab2f33385c717.35685857_20260627_190623.jpg" alt="Szennyezett ventilátor a szétnyitott beltéri egységben, alatta gyűjtőfólia" width="1125" height="1500" loading="lazy" decoding="async"></button></li>
+<li class="jks-kt-slide"><button type="button" class="jks-kt-ref" aria-label="Nagyítás: a beltéri egység ventilátorlapátjai közelről"><img src="https://d1yei2z3i6k35z.cloudfront.net/19002789/6ab2f3438f61f7.24603709_20260627_200458.jpg" alt="A beltéri egység ventilátorlapátjai közelről" width="1125" height="1500" loading="lazy" decoding="async"></button></li>
+<li class="jks-kt-slide"><button type="button" class="jks-kt-ref" aria-label="Nagyítás: gyűjtőzsák a beltéri egység alatt, a mosóvíz egy tartályba folyik"><img src="https://d1yei2z3i6k35z.cloudfront.net/19002789/6ab2f34c4e0691.42263197_20260630_1721150.jpg" alt="Gyűjtőzsák a beltéri egység alatt, a mosóvíz egy tartályba folyik" width="1125" height="1500" loading="lazy" decoding="async"></button></li>
+<li class="jks-kt-slide"><button type="button" class="jks-kt-ref" aria-label="Nagyítás: két poros légszűrő és a beltéri egység burkolata a padlón"><img src="https://d1yei2z3i6k35z.cloudfront.net/19002789/6ab2f357c81ec0.87611726_20260708_165646.jpg" alt="Két poros légszűrő és a beltéri egység burkolata a padlón" width="1125" height="1500" loading="lazy" decoding="async"></button></li>
+</ul>
+</div>
+<button type="button" class="jks-kt-arrow jks-kt-next" aria-label="Következő fotók"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 5l7 7-7 7"/></svg></button>
+<div class="jks-kt-dots"></div>
+</div>
+</div>
+<svg class="jks-kt-wave" style="--jks-kt-next:#F5F6F8" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0,60 L0,36 C 300,2 1100,62 1440,20 L1440,60 Z"/></svg>
+</section>
+<section class="jks-kt-sec jks-kt-sec-gray" aria-label="Időszak, gyakoriság és ár">
+<div class="jks-kt-wrap jks-kt-seasons">
+<div class="jks-kt-season jks-kt-host jks-kt-rv jks-kt-up" style="--jks-kt-d:0ms"><span class="jks-kt-badge jks-kt-badge-lime"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2v2.5M12 19.5V22M4.2 4.2l1.8 1.8M18 18l1.8 1.8M2 12h2.5M19.5 12H22M4.2 19.8L6 18M18 6l1.8-1.8"/></svg></span><p class="jks-kt-season-text">A klímatisztítások időszaka hűtési szezon előtt: <strong>Március-Június eleje.</strong></p></div>
+<div class="jks-kt-season jks-kt-host jks-kt-rv jks-kt-up" style="--jks-kt-d:110ms"><span class="jks-kt-badge jks-kt-badge-lime"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 22c4 0 7-2.9 7-7 0-3-1.6-5.3-3.6-7-.2 1.6-1 2.8-2.4 2.8C12 10.8 13.5 6 10 3c0 3.2-5 5.8-5 12 0 4.1 3 7 7 7z"/></svg></span><p class="jks-kt-season-text">Fűtési szezon előtt: <strong>Szeptember-November.</strong></p></div>
+</div>
+<div class="jks-kt-wrap jks-kt-pricing-grid jks-kt-season-grid">
+<div class="jks-kt-pricing-text">
+<p class="jks-kt-p jks-kt-rv jks-kt-up">A beltéri egység tisztítása függ az elhelyezkedéstől ( pl. egy konyhába szereltet sűrűbben kell) , illetve a használat gyakoriságától is.</p>
+<p class="jks-kt-p jks-kt-rv jks-kt-up">Általában évente egyszer elegendő a vegyszeres gépi klímamosás; ha fűtésre is használja, évente kétszer ajánljuk.</p>
+<div class="jks-kt-note jks-kt-rv jks-kt-up"><span class="jks-kt-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg></span><p class="jks-kt-p">Egyes gyártók a kiterjesztett jótállás feltételéül a rendszeres, igazolt szakszervizi karbantartást szabják. A pontos feltételt a gyártó jótállási feltételei tartalmazzák. A jótállás fenntartásához szükséges karbantartás feltételét érdemes a gyártótól vagy a forgalmazótól megkérdezni.</p></div>
+</div>
+<aside class="jks-kt-price jks-kt-rv jks-kt-zoomin" aria-label="Ár">
+<div class="jks-kt-price-head"><span class="jks-kt-badge jks-kt-badge-lime"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 12V4a1 1 0 0 1 1-1h8l9 9-9 9z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg></span><p class="jks-kt-price-label">Ár:</p></div>
+<p class="jks-kt-price-value">Br.: 14 999 Ft</p>
+<div class="jks-kt-btns">
+<a class="jks-kt-btn jks-kt-btn-lime" href="https://growthnestg.zohobookings.eu/254300000000290002" target="_blank" rel="noopener" data-jks-kt-zoho>Időpont foglalása</a>
+<a class="jks-kt-btn jks-kt-btn-ghost jks-kt-host" href="tel:+36203734991"><span class="jks-kt-badge jks-kt-badge-sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></span>+36 20 373 4991</a>
+</div>
+</aside>
+<div class="jks-kt-brands-foot jks-kt-rv jks-kt-up"><p class="jks-kt-related">Kapcsolódó oldal: <a class="jks-kt-link" href="/klimaszereles">Klímaszerelés</a></p></div>
+</div>
+<svg class="jks-kt-wave" style="--jks-kt-next:#FFFFFF" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0,60 L0,26 C 380,64 1000,-6 1440,34 L1440,60 Z"/></svg>
+</section>
+<section class="jks-kt-sec" aria-labelledby="jks-kt-faq-h">
+<div class="jks-kt-wrap jks-kt-faq-grid">
+<div class="jks-kt-faq-side">
+<h2 id="jks-kt-faq-h" class="jks-kt-h2 jks-kt-rv jks-kt-up">GYIK</h2>
+<div class="jks-kt-rv jks-kt-up" style="--jks-kt-d:100ms"><a class="jks-kt-btn jks-kt-btn-line jks-kt-host" href="tel:+36203734991"><span class="jks-kt-badge jks-kt-badge-sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></span>+36 20 373 4991</a></div>
+</div>
+<div class="jks-kt-faq-list">
+<div class="jks-kt-qa jks-kt-card jks-kt-host jks-kt-rv jks-kt-up" style="--jks-kt-d:0ms">
+<span class="jks-kt-badge jks-kt-qa-ic" aria-hidden="true">?</span>
+<h3 class="jks-kt-qa-q">Milyen gyakran kell tisztítani a klímát?</h3>
+<p class="jks-kt-qa-a">Általában évente egyszer elegendő a vegyszeres gépi klímamosás; ha fűtésre is használja, évente kétszer ajánljuk. A konyhába szerelt egységet gyakrabban érdemes tisztítani.</p>
+</div>
+<div class="jks-kt-qa jks-kt-card jks-kt-host jks-kt-rv jks-kt-up" style="--jks-kt-d:60ms">
+<span class="jks-kt-badge jks-kt-qa-ic" aria-hidden="true">?</span>
+<h3 class="jks-kt-qa-q">Mikor érdemes tisztíttatni a klímát?</h3>
+<p class="jks-kt-qa-a">A hűtési szezon előtt, március és június eleje között, illetve a fűtési szezon előtt, szeptember és november között.</p>
+</div>
+<div class="jks-kt-qa jks-kt-card jks-kt-host jks-kt-rv jks-kt-up" style="--jks-kt-d:120ms">
+<span class="jks-kt-badge jks-kt-qa-ic" aria-hidden="true">?</span>
+<h3 class="jks-kt-qa-q">Mit tartalmaz a tisztítás?</h3>
+<p class="jks-kt-qa-a">A szűrők kiszerelését és alapos tisztítását, a párologtató tisztítását, a kültéri egység átvizsgálását és tisztítását, a munka végén működés-ellenőrzést. Vegyszeres gépi klímamosással dolgozunk, nagynyomású vízsugárral öblítve.</p>
+</div>
+<div class="jks-kt-qa jks-kt-card jks-kt-host jks-kt-rv jks-kt-up" style="--jks-kt-d:180ms">
+<span class="jks-kt-badge jks-kt-qa-ic" aria-hidden="true">?</span>
+<h3 class="jks-kt-qa-q">Miért kell tisztítani a klímát?</h3>
+<p class="jks-kt-qa-a">A beltéri egység levegőt áramoltat át magán, közben por és egyéb szennyeződés rakódik le rajta. Tisztítás nélkül kellemetlen szag és penész is kialakulhat, ami ronthatja a beltéri levegő minőségét. Erősen szennyezett hőcserélőnél nőhet az áramfogyasztás is.</p>
+</div>
+<div class="jks-kt-qa jks-kt-card jks-kt-host jks-kt-rv jks-kt-up" style="--jks-kt-d:240ms">
+<span class="jks-kt-badge jks-kt-qa-ic" aria-hidden="true">?</span>
+<h3 class="jks-kt-qa-q">Számít a klímatisztítás a jótállásra?</h3>
+<p class="jks-kt-qa-a">Egyes gyártók a kiterjesztett jótállás feltételéül a rendszeres, igazolt szakszervizi karbantartást szabják. A pontos feltételt a gyártó jótállási feltételei tartalmazzák. A jótállás fenntartásához szükséges karbantartás feltételét érdemes a gyártótól vagy a forgalmazótól megkérdezni.</p>
+</div>
+</div>
+</div>
+<svg class="jks-kt-wave" style="--jks-kt-next:#0E1C43" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0,60 L0,36 C 300,2 1100,62 1440,20 L1440,60 Z"/></svg>
+</section>
+<section class="jks-kt-cta" aria-label="Időpont foglalása">
+<div class="jks-kt-wrap jks-kt-btns jks-kt-rv jks-kt-up">
+<a class="jks-kt-btn jks-kt-btn-lime" href="https://growthnestg.zohobookings.eu/254300000000290002" target="_blank" rel="noopener" data-jks-kt-zoho>Időpont foglalása</a>
+<a class="jks-kt-btn jks-kt-btn-ghost jks-kt-host" href="tel:+36203734991"><span class="jks-kt-badge jks-kt-badge-sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></span>+36 20 373 4991</a>
+</div>
+</section>
+<div class="jks-kt-fab"><a class="jks-kt-btn jks-kt-btn-lime" href="https://growthnestg.zohobookings.eu/254300000000290002" target="_blank" rel="noopener" data-jks-kt-zoho>Időpont foglalása</a></div>
+<div class="jks-kt-lb" role="dialog" aria-modal="true" aria-label="Referencia-fotó nagyítva" hidden>
+<button type="button" class="jks-kt-lb-btn jks-kt-lb-close" aria-label="Bezárás">&#10005;</button>
+<button type="button" class="jks-kt-lb-btn jks-kt-lb-prev" aria-label="Előző fotó"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M15 5l-7 7 7 7"/></svg></button>
+<button type="button" class="jks-kt-lb-btn jks-kt-lb-next" aria-label="Következő fotó"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 5l7 7-7 7"/></svg></button>
+<img class="jks-kt-lb-img" alt="Referencia-fotó nagyítva" width="1125" height="1500">
+</div>
+</div>
+<script>
+(function () {
+if (window.__jksKtInit) return;
+window.__jksKtInit = true;
+var root = document.getElementById('jks-kt-root');
+if (!root) return;
+var reduce = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+var hasIO = 'IntersectionObserver' in window;
+root.classList.add('jks-kt-js');
+var foglalas = root.getAttribute('data-jks-kt-foglalas');
+if (foglalas) root.querySelectorAll('[data-jks-kt-zoho]').forEach(function (a) { a.setAttribute('href', foglalas); });
+var rv = Array.prototype.slice.call(root.querySelectorAll('.jks-kt-rv'));
+var show = function (el) {
+el.classList.add('jks-kt-in');
+setTimeout(function () { el.classList.add('jks-kt-done'); }, 1100);
+};
+if (reduce || !hasIO) {
+rv.forEach(show);
+} else {
+var io = new IntersectionObserver(function (entries) {
+entries.forEach(function (e) {
+if (e.isIntersecting) { show(e.target); io.unobserve(e.target); }
+});
+}, { threshold: 0, rootMargin: '0px 0px 5% 0px' });
+rv.forEach(function (el) { io.observe(el); });
+setTimeout(function () {
+rv.forEach(function (el) {
+var r = el.getBoundingClientRect();
+if (r.top < innerHeight && r.bottom > 0) show(el);
+});
+}, 1200);
+}
+if (!reduce) {
+root.querySelectorAll('.jks-kt-badge').forEach(function (b) {
+var rings = [0, 1].map(function () {
+var r = document.createElement('span');
+r.className = 'jks-kt-ring';
+r.setAttribute('aria-hidden', 'true');
+b.appendChild(r);
+return r;
+});
+var wave = function () {
+rings.forEach(function (r) { r.classList.remove('jks-kt-go'); void r.offsetWidth; r.classList.add('jks-kt-go'); });
+};
+var host = b.closest('.jks-kt-host') || b;
+var touchT = null;
+host.addEventListener('pointerenter', function (e) {
+if (e.pointerType !== 'mouse') return;
+b.classList.add('jks-kt-zoom');
+wave();
+});
+host.addEventListener('pointerleave', function (e) {
+if (e.pointerType === 'mouse') b.classList.remove('jks-kt-zoom');
+});
+host.addEventListener('touchstart', function () {
+b.classList.add('jks-kt-zoom');
+wave();
+clearTimeout(touchT);
+touchT = setTimeout(function () { b.classList.remove('jks-kt-zoom'); }, 420);
+}, { passive: true });
+});
+}
+var fill = function () {
+var r = root.getBoundingClientRect();
+if (!r.height) return;
+var head = null, foot = null;
+document.querySelectorAll('header, footer').forEach(function (c) {
+if (c.contains(root)) return;
+var cr = c.getBoundingClientRect();
+if (!cr.height) return;
+var pos = root.compareDocumentPosition(c);
+if ((pos & 4) && !foot && c.tagName === 'FOOTER') foot = cr;
+if ((pos & 2) && c.tagName === 'HEADER' && !/fixed|sticky/.test(getComputedStyle(c).position)) head = cr;
+});
+var gb = foot ? Math.round(foot.top - r.bottom) : 0;
+var gt = head ? Math.round(r.top - head.bottom) : 0;
+root.style.setProperty('--jks-kt-fill-b', (gb > 0 && gb <= 160 ? gb : 0) + 'px');
+root.style.setProperty('--jks-kt-fill-t', (gt > 0 && gt <= 160 ? gt : 0) + 'px');
+};
+var fillT = null;
+var fillSoon = function () { clearTimeout(fillT); fillT = setTimeout(fill, 120); };
+fill();
+window.addEventListener('load', fill);
+window.addEventListener('resize', fillSoon, { passive: true });
+if ('ResizeObserver' in window) new ResizeObserver(fillSoon).observe(document.body);
+var fab = root.querySelector('.jks-kt-fab');
+var hero = root.querySelector('.jks-kt-hero');
+var cta = root.querySelector('.jks-kt-cta');
+if (fab && hero) {
+var sync = function () { fab.classList.toggle('jks-kt-show', hero.getBoundingClientRect().bottom < 0 && (!cta || cta.getBoundingClientRect().top > innerHeight)); };
+var fabT = null;
+var onScroll = function () { if (!fabT) fabT = requestAnimationFrame(function () { fabT = null; sync(); }); };
+window.addEventListener('scroll', onScroll, { passive: true });
+window.addEventListener('resize', onScroll, { passive: true });
+sync();
+}
+var carousel = function (car, label, onCenter, loopN) {
+var vp = car.querySelector('.jks-kt-scroller');
+var items = vp ? Array.prototype.slice.call(vp.querySelectorAll('.jks-kt-slide')) : [];
+if (!vp || !items.length) return;
+var dotsWrap = car.querySelector('.jks-kt-dots');
+var prev = car.querySelector('.jks-kt-prev');
+var next = car.querySelector('.jks-kt-next');
+var smooth = reduce ? 'auto' : 'smooth';
+var stepW = function () {
+var a = items[0].getBoundingClientRect(), b = items[1] ? items[1].getBoundingClientRect() : a;
+return (b.left - a.left) || a.width;
+};
+var goTo = function (i) {
+var it = items[Math.max(0, Math.min(items.length - 1, i))];
+var center = getComputedStyle(it).scrollSnapAlign.indexOf('center') > -1;
+var left = center ? it.offsetLeft - (vp.clientWidth - it.offsetWidth) / 2 : it.offsetLeft - items[0].offsetLeft;
+vp.scrollTo({ left: left, behavior: smooth });
+};
+var dots = [];
+if (dotsWrap) {
+dots = items.slice(0, loopN || items.length).map(function (it, i) {
+var d = document.createElement('button');
+d.type = 'button';
+d.className = 'jks-kt-dot';
+d.setAttribute('aria-label', label + ' ' + (i + 1));
+d.addEventListener('click', function () { goTo(i); });
+dotsWrap.appendChild(d);
+return d;
+});
+}
+var current = 0;
+var update = function () {
+var c = vp.getBoundingClientRect(), mid = c.left + c.width / 2, best = 0, bestD = Infinity;
+items.forEach(function (el, i) {
+var r = el.getBoundingClientRect(), d = Math.abs(r.left + r.width / 2 - mid);
+if (d < bestD) { bestD = d; best = i; }
+});
+current = best;
+var di = loopN ? best % loopN : best;
+dots.forEach(function (d, i) { d.classList.toggle('jks-kt-on', i === di); d.setAttribute('aria-current', i === di ? 'true' : 'false'); });
+var max = vp.scrollWidth - vp.clientWidth;
+if (prev) prev.disabled = vp.scrollLeft <= 2;
+if (next) next.disabled = vp.scrollLeft >= max - 2;
+if (onCenter) onCenter(best);
+};
+var t = null;
+vp.addEventListener('scroll', function () { clearTimeout(t); t = setTimeout(update, 60); }, { passive: true });
+window.addEventListener('resize', function () { clearTimeout(t); t = setTimeout(update, 120); }, { passive: true });
+if (prev) prev.addEventListener('click', function () { vp.scrollBy({ left: -stepW(), behavior: smooth }); });
+if (next) next.addEventListener('click', function () { vp.scrollBy({ left: stepW(), behavior: smooth }); });
+vp.addEventListener('keydown', function (e) {
+if (e.key === 'ArrowRight') { e.preventDefault(); vp.scrollBy({ left: stepW(), behavior: smooth }); }
+else if (e.key === 'ArrowLeft') { e.preventDefault(); vp.scrollBy({ left: -stepW(), behavior: smooth }); }
+});
+var sx = 0, sl = 0, down = false, moved = false;
+vp.addEventListener('pointerdown', function (e) {
+if (e.pointerType !== 'mouse' || e.button !== 0) return;
+down = true; moved = false; sx = e.clientX; sl = vp.scrollLeft;
+});
+window.addEventListener('pointermove', function (e) {
+if (!down) return;
+var dx = e.clientX - sx;
+if (!moved && Math.abs(dx) > 6) { moved = true; vp.classList.add('jks-kt-drag'); }
+if (moved) vp.scrollLeft = sl - dx;
+});
+window.addEventListener('pointerup', function () {
+if (!down) return;
+down = false;
+if (moved) {
+vp.classList.remove('jks-kt-drag');
+update();
+goTo(current);
+setTimeout(function () { moved = false; }, 0);
+}
+});
+vp.addEventListener('click', function (e) { if (moved) { e.preventDefault(); e.stopPropagation(); } }, true);
+vp.addEventListener('dragstart', function (e) { e.preventDefault(); });
+update();
+};
+var filmPrep = function (car) {
+var track = car.querySelector('.jks-kt-scroller .jks-kt-slide').parentNode;
+var orig = Array.prototype.slice.call(track.children);
+orig.forEach(function (li, i) { li.setAttribute('data-jks-kt-i', i); });
+if (!reduce) {
+orig.forEach(function (li) {
+var c = li.cloneNode(true);
+c.classList.add('jks-kt-clone');
+c.setAttribute('aria-hidden', 'true');
+c.querySelectorAll('button, a').forEach(function (b) { b.tabIndex = -1; b.removeAttribute('aria-label'); });
+c.querySelectorAll('img').forEach(function (im) { im.alt = ''; });
+track.appendChild(c);
+});
+}
+return { n: orig.length, slides: Array.prototype.slice.call(track.children) };
+};
+var film = function (car, prep, msPerSlide) {
+if (reduce) return;
+var vp = car.querySelector('.jks-kt-scroller');
+var slides = prep.slides, n = prep.n;
+var lbox = root.querySelector('.jks-kt-lb');
+var pos = 0, last = null, paused = false, visible = false, resumeT = null;
+var pause = function () { paused = true; clearTimeout(resumeT); vp.classList.remove('jks-kt-auto'); };
+var resume = function (ms) {
+clearTimeout(resumeT);
+resumeT = setTimeout(function () {
+if ((lbox && lbox.classList.contains('jks-kt-open')) || car.matches(':hover') || car.contains(document.activeElement)) return resume(ms);
+pos = vp.scrollLeft; last = null; paused = false; vp.classList.add('jks-kt-auto');
+}, ms);
+};
+car.addEventListener('mouseenter', pause);
+car.addEventListener('mouseleave', function () { resume(400); });
+car.addEventListener('touchstart', pause, { passive: true });
+car.addEventListener('touchend', function () { resume(3500); }, { passive: true });
+car.addEventListener('focusin', pause);
+car.addEventListener('focusout', function () { resume(1500); });
+car.addEventListener('click', function () { pause(); resume(4000); });
+var tick = function (ts) {
+if (!paused && visible) {
+if (last === null) last = ts;
+var dt = Math.min(64, ts - last);
+var step = slides[1].offsetLeft - slides[0].offsetLeft;
+var setW = slides[n].offsetLeft - slides[0].offsetLeft;
+pos += step / msPerSlide * dt;
+if (pos >= setW) pos -= setW;
+vp.scrollLeft = pos;
+}
+last = ts;
+requestAnimationFrame(tick);
+};
+new IntersectionObserver(function (es) { visible = es[es.length - 1].isIntersecting; }).observe(vp);
+vp.classList.add('jks-kt-auto');
+requestAnimationFrame(tick);
+};
+var lb = root.querySelector('.jks-kt-lb');
+var lbImg = lb && lb.querySelector('.jks-kt-lb-img');
+var shots = Array.prototype.slice.call(root.querySelectorAll('.jks-kt-ref')).filter(function (el) { return !el.closest('.jks-kt-clone'); });
+if (lb && lbImg && shots.length) {
+var cur = 0, lastFocus = null;
+var btns = Array.prototype.slice.call(lb.querySelectorAll('button'));
+var openAt = function (i) {
+cur = (i + shots.length) % shots.length;
+var img = shots[cur].querySelector('img');
+lbImg.src = img.currentSrc || img.src;
+lbImg.alt = img.alt;
+if (!lb.classList.contains('jks-kt-open')) {
+lastFocus = document.activeElement;
+lb.hidden = false;
+lb.classList.add('jks-kt-open');
+btns[0].focus();
+}
+};
+var close = function () {
+lb.classList.remove('jks-kt-open');
+lb.hidden = true;
+lbImg.removeAttribute('src');
+if (lastFocus && lastFocus.focus) lastFocus.focus();
+};
+root.addEventListener('click', function (e) {
+var ref = e.target.closest && e.target.closest('.jks-kt-ref');
+if (!ref || !root.contains(ref)) return;
+var li = ref.closest('[data-jks-kt-i]');
+openAt(li ? Number(li.getAttribute('data-jks-kt-i')) : shots.indexOf(ref));
+});
+lb.querySelector('.jks-kt-lb-close').addEventListener('click', close);
+lb.querySelector('.jks-kt-lb-prev').addEventListener('click', function (e) { e.stopPropagation(); openAt(cur - 1); });
+lb.querySelector('.jks-kt-lb-next').addEventListener('click', function (e) { e.stopPropagation(); openAt(cur + 1); });
+lb.addEventListener('click', function (e) { if (e.target === lb) close(); });
+lb.addEventListener('keydown', function (e) {
+if (e.key === 'Escape') { e.preventDefault(); close(); }
+else if (e.key === 'ArrowLeft') openAt(cur - 1);
+else if (e.key === 'ArrowRight') openAt(cur + 1);
+else if (e.key === 'Tab') {
+var i = btns.indexOf(document.activeElement);
+e.preventDefault();
+btns[(i + (e.shiftKey ? -1 : 1) + btns.length) % btns.length].focus();
+}
+});
+var tx = null;
+lb.addEventListener('touchstart', function (e) { tx = e.touches[0].clientX; }, { passive: true });
+lb.addEventListener('touchend', function (e) {
+if (tx === null) return;
+var dx = e.changedTouches[0].clientX - tx;
+tx = null;
+if (Math.abs(dx) > 50) openAt(cur + (dx < 0 ? 1 : -1));
+}, { passive: true });
+}
+var gal = root.querySelector('.jks-kt-gal-car');
+if (gal) {
+var gp = filmPrep(gal);
+carousel(gal, 'Fotó', function (i) { gp.slides.forEach(function (s, j) { s.classList.toggle('jks-kt-center', i === j); }); }, gp.n);
+film(gal, gp, 5200);
+}
+})();
+</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Service","serviceType":"Klímatisztítás","name":"Klímatisztítás Szegeden","description":"Vegyszeres gépi klímamosás: a szűrők, a párologtató és a kültéri egység tisztítása, működés-ellenőrzéssel.","provider":{"@type":["HVACBusiness","Electrician"],"name":"Jimmy Klíma","telephone":"+36203734991","email":"jimmyklimam@gmail.com","address":{"@type":"PostalAddress","streetAddress":"Gádor köz 3.","postalCode":"6710","addressLocality":"Szeged","addressCountry":"HU"},"areaServed":{"@type":"City","name":"Szeged"}},"areaServed":[{"@type":"City","name":"Szeged"},{"@type":"GeoCircle","geoMidpoint":{"@type":"GeoCoordinates","latitude":46.253,"longitude":20.1414},"geoRadius":"30000"}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Főoldal","item":"/"},{"@type":"ListItem","position":2,"name":"Klímatisztítás","item":"/klimatisztitas"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Milyen gyakran kell tisztítani a klímát?","acceptedAnswer":{"@type":"Answer","text":"Általában évente egyszer elegendő a vegyszeres gépi klímamosás; ha fűtésre is használja, évente kétszer ajánljuk. A konyhába szerelt egységet gyakrabban érdemes tisztítani."}},{"@type":"Question","name":"Mikor érdemes tisztíttatni a klímát?","acceptedAnswer":{"@type":"Answer","text":"A hűtési szezon előtt, március és június eleje között, illetve a fűtési szezon előtt, szeptember és november között."}},{"@type":"Question","name":"Mit tartalmaz a tisztítás?","acceptedAnswer":{"@type":"Answer","text":"A szűrők kiszerelését és alapos tisztítását, a párologtató tisztítását, a kültéri egység átvizsgálását és tisztítását, a munka végén működés-ellenőrzést. Vegyszeres gépi klímamosással dolgozunk, nagynyomású vízsugárral öblítve."}},{"@type":"Question","name":"Miért kell tisztítani a klímát?","acceptedAnswer":{"@type":"Answer","text":"A beltéri egység levegőt áramoltat át magán, közben por és egyéb szennyeződés rakódik le rajta. Tisztítás nélkül kellemetlen szag és penész is kialakulhat, ami ronthatja a beltéri levegő minőségét. Erősen szennyezett hőcserélőnél nőhet az áramfogyasztás is."}},{"@type":"Question","name":"Számít a klímatisztítás a jótállásra?","acceptedAnswer":{"@type":"Answer","text":"Egyes gyártók a kiterjesztett jótállás feltételéül a rendszeres, igazolt szakszervizi karbantartást szabják. A pontos feltételt a gyártó jótállási feltételei tartalmazzák. A jótállás fenntartásához szükséges karbantartás feltételét érdemes a gyártótól vagy a forgalmazótól megkérdezni."}}]}]}</script>

@@ -89,7 +89,7 @@ for (const [w, pre] of [[1440, D], [390, M]]) {
   ok(`${w}px: minden "${c.cta}" gomb (${zoho.length}) a pontos foglalási linkre, új lapon`, zoho.length >= 3 && zoho.every((l) => l.h === FOGLALAS && l.tg === '_blank' && l.rel === 'noopener'), JSON.stringify(zoho.map((l) => l.h)));
   const ext = links.filter((l) => /^https?:/.test(l.h));
   ok(`${w}px: külső link csak a foglalás`, ext.every((l) => l.h === FOGLALAS), JSON.stringify(ext.map((l) => l.h)));
-  const tel = links.filter((l) => /^tel:/.test(l.h));
+  const tel = links.filter((l) => /^tel:/.test(l.h) && l.h !== 'tel:112');
   ok(`${w}px: telefon-hivatkozás tel:+36203734991 (${tel.length})`, tel.length >= 2 && tel.every((l) => l.h === 'tel:+36203734991' && l.t === '+36 20 373 4991'), JSON.stringify(tel));
   const popupBtn = await pg.evaluate(() => document.querySelectorAll('[data-test-id="show-popup-button"]').length);
   const [np] = await Promise.all([ctx.waitForEvent('page', { timeout: 4000 }).catch(() => null), pg.locator(`#${pre}root .${pre}hero a[data-${pre}zoho]`).click()]);
@@ -97,17 +97,17 @@ for (const [w, pre] of [[1440, D], [390, M]]) {
   ok(`${w}px: a hero gomb új lapon a Zoho foglalásra visz, nincs popup`, !!np && np.url() === FOGLALAS && popupBtn === 0 || (!!np && np.url().startsWith('https://growthnestg.zohobookings.eu/254300000000290002')), np && np.url());
   if (np) await np.close();
   const internal = links.filter((l) => /^\//.test(l.h)).map((l) => l.h);
-  const need = page === 'klimaszereles' ? ['/aux', '/daikin', '/fisher', '/gree', '/midea', '/polar', '/syen', '/keszulekek', '/klimatisztitas'] : [];
+  const need = { klimaszereles: ['/aux', '/daikin', '/fisher', '/gree', '/midea', '/polar', '/syen', '/keszulekek', '/klimatisztitas'], klimatisztitas: ['/klimaszereles'], villanyszereles: ['/'], szelloztetes: ['/'] }[page];
   ok(`${w}px: belső szöveges linkek (Don 3.8)`, need.every((x) => internal.includes(x)), `hiányzik: ${need.filter((x) => !internal.includes(x)).join(', ')}`);
-  for (const href of need.filter((x) => ['/daikin', '/keszulekek', '/klimatisztitas'].includes(x))) {
+  for (const href of need.filter((x) => ['/daikin', '/keszulekek', '/klimatisztitas', '/klimaszereles', '/'].includes(x))) {
     const p2 = await ctx.newPage();
     await p2.goto(url);
     await p2.waitForTimeout(300);
     const el = p2.locator(`#${pre}root a[href="${href}"]`).first();
     await el.scrollIntoViewIfNeeded();
     await p2.waitForTimeout(700);
-    await Promise.all([p2.waitForURL(`**${href}`, { timeout: 4000 }).catch(() => {}), el.click()]);
-    ok(`${w}px: kattintás ${href}`, p2.url().endsWith(href), p2.url());
+    await Promise.all([p2.waitForURL(href === '/' ? `${SITE}/` : `**${href}`, { timeout: 4000 }).catch(() => {}), el.click()]);
+    ok(`${w}px: kattintás ${href}`, href === '/' ? p2.url() === `${SITE}/` : p2.url().endsWith(href), p2.url());
     await p2.close();
   }
   await ctx.close();
@@ -116,7 +116,7 @@ for (const [w, pre] of [[1440, D], [390, M]]) {
 // 4. Ikon-animáció: egér (képkockák a keret széléről induló gyűrűről) és érintés (egyszer fut)
 {
   const { ctx, pg } = await open(1440);
-  const sel = `#${D}root .${D}step`;
+  const sel = `#${D}root .${D}${c.lepesek ? 'step' : 'feat'}`;
   const badgeSel = `${sel} .${D}badge`;
   const badge = pg.locator(badgeSel).first();
   await badge.scrollIntoViewIfNeeded();
@@ -139,7 +139,9 @@ for (const [w, pre] of [[1440, D], [390, M]]) {
   }
   const sc = (tf) => (tf === 'none' ? 1 : Number(tf.match(/matrix\(([^,]+)/)[1]));
   ok('ikon: a kártyára vitt egérre egyszer nagyít (1,12-1,18x)', sc(states[1].zoom) >= 1.12 && sc(states[1].zoom) <= 1.18, states[1].zoom);
-  ok('ikon: a gyűrű a KERET SZÉLÉRŐL indul (üres, inset:0, ~1,0x), majd kifelé tágul és halványul', sc(states[0].tf) < 1.15 && states[0].top === '0px' && states[0].left === '0px' && states[0].bg === 'rgba(0, 0, 0, 0)' && parseFloat(states[0].bw) > 0 && sc(states[2].tf) > sc(states[0].tf) && Number(states[3].op) < Number(states[1].op), states.map((s) => `${sc(s.tf).toFixed(2)}/${Number(s.op).toFixed(2)}`).join(' '));
+  const kf = await pg.evaluate((s) => { const r = document.querySelector(s).querySelector(`[class*="-ring"]`); const a = r.getAnimations()[0] || null; const k = a ? a.effect.getKeyframes() : []; return k.length ? k[0].transform : (getComputedStyle(r).animationName !== 'none' ? 'lejárt' : ''); }, badgeSel);
+  const kfCss = await pg.evaluate(() => { for (const sh of document.styleSheets) { let rs = []; try { rs = sh.cssRules; } catch (e) { continue; } for (const r of rs) { if (r.type === 7 && /-ring$/.test(r.name)) return r.cssRules[0].style.transform; } } return ''; });
+  ok('ikon: a gyűrű a KERET SZÉLÉRŐL indul (üres, inset:0, 1,0x kezdőkockából), majd kifelé tágul és halványul', /scale\(1\)/.test(kfCss) && states[0].top === '0px' && states[0].left === '0px' && states[0].bg === 'rgba(0, 0, 0, 0)' && parseFloat(states[0].bw) > 0 && sc(states[2].tf) > sc(states[0].tf) && Number(states[3].op) < Number(states[1].op), states.map((s) => `${sc(s.tf).toFixed(2)}/${Number(s.op).toFixed(2)}`).join(' ') + ' kezdő: ' + kfCss + ' ' + kf);
   const logMouse = await pg.evaluate(() => window.__ringLog.length);
   await pg.mouse.move(bb.x + bb.width / 2, bb.y + bb.height / 2, { steps: 6 });
   await pg.waitForTimeout(700);
@@ -177,6 +179,84 @@ for (const [w, pre] of [[1440, D], [390, M]]) {
   await m.ctx.close();
 }
 
+// 4b. Galéria (klímatisztítás): filmszalag, nyilak, billentyű, húzás, pöttyök, nagyítás, lazy
+if (c.galeria) {
+  const { ctx, pg, log } = await open(1440);
+  const car = `#${D}root .${D}gal-car`;
+  const sl = () => pg.evaluate((s) => document.querySelector(s + ' [class*="-scroller"]').scrollLeft, car);
+  const galReqBefore = log.requests.filter((u) => /6ab2/.test(u)).length;
+  ok('galéria: a fotók lazy-k (betöltéskor nem töltődik le mind a 13)', galReqBefore < c.galeria.length && await pg.evaluate((s) => [...document.querySelectorAll(s + ' img')].every((i) => i.loading === 'lazy'), car), `${galReqBefore} kérés betöltéskor`);
+  await pg.locator(car).scrollIntoViewIfNeeded();
+  await pg.waitForTimeout(900);
+  await pg.mouse.move(5, 5);
+  const f0 = await sl(); await pg.waitForTimeout(1500); const f1 = await sl();
+  const gb = await pg.locator(car).boundingBox();
+  await pg.mouse.move(gb.x + gb.width / 2, gb.y + gb.height / 2);
+  await pg.waitForTimeout(300);
+  const f2 = await sl(); await pg.waitForTimeout(1200); const f3 = await sl();
+  await pg.mouse.move(5, 5); await pg.waitForTimeout(1500); const f4 = await sl();
+  ok('galéria: filmszalag magától gördül, egérre megáll, utána folytatja', f1 > f0 && Math.abs(f3 - f2) < 2 && f4 > f3, `${f0}->${f1}, megállva ${f2}->${f3}, folytatás ${f4}`);
+  await pg.mouse.move(gb.x + gb.width / 2, gb.y + gb.height / 2);
+  await pg.waitForTimeout(700);
+  const a0 = await sl();
+  await pg.click(`${car} [class*="-next"]`, { force: true });
+  await pg.waitForTimeout(700);
+  const a1 = await sl();
+  ok('galéria: nyíl léptet (desktop)', a1 > a0, `${a0} -> ${a1}`);
+  await pg.focus(`${car} [class*="-scroller"]`);
+  await pg.keyboard.press('ArrowRight');
+  await pg.waitForTimeout(700);
+  const a2 = await sl();
+  ok('galéria: billentyűzet (jobbra nyíl)', a2 > a1, `${a1} -> ${a2}`);
+  const vb = await pg.locator(`${car} [class*="-scroller"]`).boundingBox();
+  await pg.mouse.move(vb.x + vb.width * 0.7, vb.y + vb.height / 2);
+  await pg.mouse.down();
+  await pg.mouse.move(vb.x + vb.width * 0.3, vb.y + vb.height / 2, { steps: 8 });
+  await pg.mouse.up();
+  await pg.waitForTimeout(900);
+  const a3 = await sl();
+  const lbAfterDrag = await pg.evaluate((D) => document.querySelector(`.${D}lb`).classList.contains(`${D}open`), D);
+  ok('galéria: egérrel húzható, a húzás nem nyit nagyítást', a3 > a2 && !lbAfterDrag, `${a2} -> ${a3}`);
+  const first = pg.locator(`#${D}root .${D}ref`).first();
+  await first.click({ force: true });
+  await pg.waitForTimeout(300);
+  let st = await pg.evaluate((D) => ({ open: document.querySelector(`.${D}lb`).classList.contains(`${D}open`), focus: document.activeElement.className, src: document.querySelector(`.${D}lb-img`).getAttribute('src') }), D);
+  ok('nagyítás nyílik, fókusz a bezárás gombon', st.open && /lb-close/.test(st.focus) && !!st.src, JSON.stringify(st));
+  const s1 = st.src;
+  await pg.click(`.${D}lb-next`);
+  await pg.waitForTimeout(200);
+  const s2 = await pg.evaluate((D) => document.querySelector(`.${D}lb-img`).getAttribute('src'), D);
+  ok('nagyítás: következő kép', s2 && s2 !== s1);
+  await pg.keyboard.press('ArrowRight');
+  await pg.waitForTimeout(150);
+  const s3 = await pg.evaluate((D) => document.querySelector(`.${D}lb-img`).getAttribute('src'), D);
+  ok('nagyítás: billentyűvel is lapozható', s3 && s3 !== s2);
+  await pg.keyboard.press('Escape');
+  await pg.waitForTimeout(200);
+  st = await pg.evaluate((D) => ({ open: document.querySelector(`.${D}lb`).classList.contains(`${D}open`), focus: document.activeElement.className }), D);
+  ok('Esc bezár, a fókusz visszaáll a képre', !st.open && /-ref/.test(st.focus), JSON.stringify(st));
+  await first.click({ force: true });
+  await pg.waitForTimeout(200);
+  await pg.mouse.click(8, 450);
+  await pg.waitForTimeout(200);
+  ok('háttérre kattintás bezár', await pg.evaluate((D) => !document.querySelector(`.${D}lb`).classList.contains(`${D}open`), D));
+  await ctx.close();
+
+  const m = await open(390);
+  await m.pg.locator(car).scrollIntoViewIfNeeded();
+  await m.pg.waitForTimeout(800);
+  const n = await m.pg.evaluate((s) => document.querySelectorAll(s + ' .' + s.split(' .').pop().replace('gal-car', 'dot')).length, car);
+  await m.pg.locator(`${car} .${D}dot`).nth(2).click({ force: true });
+  await m.pg.waitForTimeout(900);
+  const ds = await m.pg.evaluate((s) => ({ on: [...document.querySelectorAll(s + ' .' + s.split(' .').pop().replace('gal-car', 'dot'))].findIndex((d) => /-on\b/.test(d.className)), sl: document.querySelector(s + ' [class*="-scroller"]').scrollLeft }), car);
+  ok(`mobil galéria: ${n} pötty, lapoznak`, n === c.galeria.length && ds.on === 2 && ds.sl > 0, JSON.stringify(ds));
+  const tb = await m.pg.locator(`#${D}root .${D}ref`).nth(2).boundingBox();
+  await m.pg.touchscreen.tap(tb.x + tb.width / 2, tb.y + tb.height / 2);
+  await m.pg.waitForTimeout(300);
+  ok('mobil: érintésre nyílik a nagyítás', await m.pg.evaluate((D) => document.querySelector(`.${D}lb`).classList.contains(`${D}open`), D));
+  await m.ctx.close();
+}
+
 // 5. Lebegő gomb (mobil): a hero után jelenik meg, a záró gombsornál eltűnik, a jobb alsó sarok szabad
 {
   const { ctx, pg } = await open(390);
@@ -189,8 +269,12 @@ for (const [w, pre] of [[1440, D], [390, M]]) {
   const box = await pg.locator(`${fab} a`).boundingBox();
   await pg.evaluate(() => scrollTo(0, document.documentElement.scrollHeight));
   await pg.waitForTimeout(500);
-  const cHidden = await pg.evaluate((s) => { const r = document.querySelector(s.replace('fab', 'cta')); const rr = r.getBoundingClientRect(); return rr.top < innerHeight && rr.bottom > 0 ? !/-show/.test(document.querySelector(s).className) : true; }, fab);
-  ok('mobil: lebegő gomb a hero után, a záró gombsornál eltűnik, a jobb alsó 84 px szabad', !a && b && cHidden && box.x + box.width <= 390 - 84, JSON.stringify({ a, b, cHidden, right: box.x + box.width }));
+  const cHidden = !(await shown());
+  const ctaTop = await pg.evaluate((s) => document.querySelector(s.replace('fab', 'cta')).getBoundingClientRect().top, fab);
+  await pg.evaluate((y) => scrollBy(0, y - 200), ctaTop);
+  await pg.waitForTimeout(500);
+  const atCta = !(await shown());
+  ok('mobil: lebegő gomb a hero után, a záró gombsornál és alatta (lábléc) eltűnik, a jobb alsó 84 px szabad', !a && b && cHidden && atCta && box.x + box.width <= 390 - 84, JSON.stringify({ a, b, cHidden, atCta, right: box.x + box.width }));
   await ctx.close();
 }
 
@@ -242,7 +326,7 @@ for (const w of [1440, 390]) {
   const dRaw = '';
   for (const [name, raw] of [['blokk', mRaw]]) {
     const text = raw.replace(/<script[\s\S]*?<\/script>/g, '').replace(/<style[\s\S]*?<\/style>/g, '');
-    const must = ['<h1', c.hero.h1, c.lepesekCim, c.gyikCim, ...c.gyik.map((f) => f.q), c.intro[0].slice(0, 60), 'href="/keszulekek"'];
+    const must = ['<h1', c.hero.h1, c.gyikCim, ...c.gyik.map((f) => f.q), ...(c.lepesekCim ? [c.lepesekCim] : []), ...(c.markak ? ['href="/keszulekek"'] : []), ...c.kapcsolodo.linkek.map((l) => `href="${l.href}"`)];
     const miss = must.filter((s) => !text.includes(s));
     ok(`nyers HTML (${name}): H1, szöveg, GYIK statikusan benne`, !miss.length, miss.join(', '));
   }

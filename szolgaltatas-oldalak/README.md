@@ -1,7 +1,7 @@
 # Szolgáltatás-oldalak (oldalanként egy reszponzív Raw HTML blokk)
 
 - `node build.mjs [oldal]`: elkészíti a `kimenet/aloldalak/<oldal>.html` fájlt, és ellenőrzi a szabályokat.
-- `node test/check.mjs [oldal]`: teljes Playwright-ellenőrzés a régi fejléc és lábléc között (a képek helyi másolata: `JKS_ANYAGOK` környezeti változó, alapból a csomag `anyagok/` mappája).
+- `node test/check.mjs <oldal>` (klimaszereles, klimatisztitas, villanyszereles, szelloztetes): teljes Playwright-ellenőrzés a régi fejléc és lábléc között (a képek helyi másolata: `JKS_ANYAGOK` környezeti változó, alapból a csomag `anyagok/` mappája).
 - `node test/shots.mjs [oldal] [szélesség ...]`: képernyőképek a `test/out/` mappába.
 - `node test/serve.mjs [oldal] [port]`: helyi szerver a Lighthouse-méréshez.
 

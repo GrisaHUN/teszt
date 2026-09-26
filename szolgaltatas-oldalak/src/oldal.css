@@ -186,3 +186,87 @@
   #__R__.__P__js .__P__step:not(:last-child)::before { transform: none; transition: none; }
   #__R__ .__P__fab, #__R__ .__P__card { transition: none; }
 }
+
+/* Hero-változatok: mobil kép-arány oldalanként (--hero-ar); osztott hero (kép jobbra); világos hero (fehér illusztráció) */
+#__R__ .__P__hero-media { aspect-ratio: var(--__P__hero-ar, 780 / 436); }
+#__R__ .__P__hero-split .__P__hero-media img { object-position: 50% 20%; }
+#__R__ .__P__hero-light { background: #FFFFFF; }
+#__R__ .__P__hero-light .__P__hero-media { background: #FFFFFF; }
+#__R__ .__P__hero-light .__P__hero-media img { object-fit: contain; }
+#__R__ .__P__hero-light .__P__hero-media::after { content: none; }
+#__R__ .__P__hero-light .__P__hero-inner { margin-top: 6px; }
+#__R__ .__P__hero-light .__P__h1 { color: #0E1C43; text-shadow: none; }
+@media (min-width: 801px) {
+  #__R__ .__P__hero-media { aspect-ratio: auto; }
+  #__R__ .__P__hero-split .__P__hero-media { left: auto; right: 0; width: min(56%, 1075px); transform: none; }
+  #__R__ .__P__hero-split .__P__hero-media img { object-position: 30% 30%; }
+  #__R__ .__P__hero-split .__P__hero-media::after { background: linear-gradient(90deg, #0E1C43 0%, rgba(14,28,67,0.55) 16%, rgba(14,28,67,0) 42%), linear-gradient(180deg, rgba(14,28,67,0.3) 0%, rgba(14,28,67,0) 22%); }
+  #__R__ .__P__hero-split .__P__hero-inner { justify-content: flex-start; }
+  #__R__ .__P__hero-split .__P__hero-box { width: min(520px, 42%); }
+  #__R__ .__P__hero-light { background: #FFFFFF; }
+  #__R__ .__P__hero-light .__P__hero-media { left: auto; right: max(24px, calc((100% - 1120px) / 2)); width: min(46%, 600px); transform: none; top: 24px; bottom: calc(var(--__P__wave-h) + 8px); }
+  #__R__ .__P__hero-light .__P__hero-media img { object-position: 50% 50%; }
+  #__R__ .__P__hero-light .__P__hero-inner { justify-content: flex-start; margin: 0 auto; }
+  #__R__ .__P__hero-light .__P__hero-box { width: min(560px, 46%); }
+  #__R__ .__P__hero-light .__P__h1 { color: #0E1C43; text-shadow: none; font-size: clamp(36px, 13.7px + 2.26vw, 58px); }
+}
+@media (min-width: 801px) and (max-width: 1099px) {
+  #__R__ .__P__hero-split .__P__hero-box, #__R__ .__P__hero-light .__P__hero-box { width: min(380px, 44%); }
+}
+@media (min-width: 1921px) { #__R__ .__P__hero-split .__P__hero-media::before, #__R__ .__P__hero-light .__P__hero-media::before { content: none; } }
+
+/* Ikonos kártyák */
+#__R__ .__P__feats { display: flex; flex-direction: column; gap: 12px; }
+#__R__ .__P__feat { display: flex; gap: 14px; align-items: center; padding: 14px 16px; }
+#__R__ .__P__feat .__P__badge { --__P__icon: 44px; }
+#__R__ .__P__feat-text { font-size: var(--__P__fs-body); line-height: 1.5; color: #33394A; font-weight: 600; }
+@media (min-width: 801px) {
+  #__R__ .__P__feats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--__P__gap); }
+  #__R__ .__P__feat { flex-direction: column; align-items: flex-start; gap: 20px; padding: clamp(26px, 18px + 1vw, 38px); border-bottom: 4px solid #D9E419; }
+  #__R__ .__P__feat .__P__badge { --__P__icon: clamp(50px, 42.8px + 0.894vw, 60px); }
+  #__R__ .__P__feat-text { font-size: var(--__P__fs-h3); line-height: 1.45; font-weight: 700; color: #0E1C43; }
+}
+@media (min-width: 1100px) { #__R__ .__P__feats { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+
+/* Három lépés: 801-1099 px között a harmadik teljes szélességű */
+@media (min-width: 801px) and (max-width: 1099px) { #__R__ .__P__steps-3 .__P__step:last-child { grid-column: 1 / -1; } }
+
+/* Középre zárt bevezető mondat (pl. a lépések fölött) */
+#__R__ .__P__lead-center { margin: 0 0 22px; }
+@media (min-width: 801px) { #__R__ .__P__lead-center { max-width: 820px; margin: 0 auto clamp(32px, 18px + 1.8vw, 56px); text-align: center; font-size: var(--__P__fs-lead); } }
+
+/* Ár nélküli oldalsó kiemelés: csak desktopon */
+#__R__ .__P__price-cta { display: none; }
+@media (min-width: 801px) {
+  #__R__ .__P__price-cta { display: block; }
+  #__R__ .__P__price-cta .__P__price-head { margin-bottom: 26px; }
+  #__R__ .__P__price-cta .__P__price-head .__P__badge { --__P__icon: 64px; }
+}
+
+/* GYIK kiegészítések: telefon-gomb a válasz alatt; kiemelt biztonsági sor */
+#__R__ .__P__qa-extra { grid-column: 1 / -1; }
+#__R__ .__P__qa-extra .__P__btn { width: 100%; }
+#__R__ .__P__qa-warn { border: 2px solid #E5484D; background: #FFF6F6; }
+#__R__ .__P__qa-warn .__P__qa-ic { background: #D92D35; color: #FFFFFF; }
+#__R__ .__P__qa-warn .__P__qa-q { color: #9E1A21; }
+#__R__ .__P__qa-warn .__P__qa-a { color: #33394A; }
+#__R__ .__P__qa-warn .__P__ring { border-color: #E5484D; }
+@media (min-width: 801px) {
+  #__R__ .__P__qa-extra { grid-column: 2; margin-top: 8px; }
+  #__R__ .__P__qa-extra .__P__btn { width: auto; }
+  #__R__ .__P__qa-warn .__P__qa-ic { --__P__icon: 44px; }
+}
+
+/* Ár-rész szöveggel (villanyszerelés, szellőztetés, klímatisztítás): a kapcsolódó link a szöveg alatt */
+#__R__ .__P__pricing-text .__P__h2 + .__P__p { margin-top: 0; }
+#__R__ .__P__pricing-grid > .__P__brands-foot { margin-top: 18px; }
+@media (min-width: 801px) {
+  #__R__ .__P__pricing-grid > .__P__brands-foot { margin-top: 0; }
+  #__R__ .__P__pricing-text .__P__p { font-size: var(--__P__fs-body); font-weight: 400; color: #4B5568; }
+}
+@media (min-width: 1100px) { #__R__ .__P__pricing-grid > .__P__brands-foot { grid-area: brands; } }
+
+/* Bevezető kártya (villanyszerelés) és a kiemelés első sora (szellőztetés) */
+#__R__ .__P__intro-card { margin-top: 0; }
+@media (min-width: 801px) { #__R__ .__P__intro-card { max-width: 980px; margin: 0 auto; align-items: center; } }
+#__R__ .__P__callout-head { font-weight: 700; color: #0E1C43; margin-bottom: 8px; }

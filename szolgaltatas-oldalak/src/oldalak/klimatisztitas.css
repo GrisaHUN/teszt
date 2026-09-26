@@ -1,0 +1,87 @@
+/* Módszer-kiemelés */
+#__R__ .__P__why-text .__P__p + .__P__p { margin-top: 14px; }
+#__R__ .__P__method { display: flex; gap: 14px; align-items: flex-start; margin-top: 22px; padding: 20px 18px; background: #0E1C43; border-color: #0E1C43; border-left: 5px solid #D9E419; }
+#__R__ .__P__method .__P__badge { --__P__icon: 40px; }
+#__R__ .__P__method-text { font-size: var(--__P__fs-body); line-height: 1.6; font-weight: 600; color: #FFFFFF; }
+@media (min-width: 801px) {
+  #__R__ .__P__method { gap: 22px; margin-top: 0; padding: clamp(28px, 18px + 1.2vw, 44px); }
+  #__R__ .__P__method .__P__badge { --__P__icon: clamp(50px, 42.8px + 0.894vw, 60px); }
+  #__R__ .__P__method-text { font-size: var(--__P__fs-lead); line-height: 1.5; }
+}
+@media (min-width: 1100px) { #__R__ .__P__intro-grid { align-items: start; } #__R__ .__P__method { margin-top: clamp(60px, 30px + 3vw, 110px); } }
+
+/* Referencia-galéria (a főoldal filmszalagjával azonos működés) */
+#__R__ .__P__gal-sec { padding-left: 0; padding-right: 0; }
+#__R__ .__P__car { position: relative; }
+#__R__ .__P__scroller { overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; overscroll-behavior-x: contain; }
+#__R__ .__P__scroller::-webkit-scrollbar { display: none; }
+#__R__ .__P__scroller.__P__drag { scroll-snap-type: none; cursor: grabbing; user-select: none; }
+#__R__ .__P__scroller.__P__auto { scroll-snap-type: none; }
+#__R__ .__P__scroller.__P__drag * { pointer-events: none; }
+#__R__ .__P__gal { max-width: none; }
+#__R__ .__P__gal-vp { padding: 6px 0 14px; }
+#__R__ .__P__gal-track { display: flex; gap: 12px; padding: 0 9vw; width: max-content; }
+#__R__ .__P__gal-track > .__P__slide { flex: none; width: 82vw; max-width: 420px; scroll-snap-align: center; scroll-snap-stop: always; }
+#__R__ .__P__ref { display: block; width: 100%; aspect-ratio: 3 / 4; padding: 0; margin: 0; border: 0; border-radius: 16px; overflow: hidden; background: #F5F6F8; cursor: zoom-in; box-shadow: 0 10px 30px -12px rgba(14,28,67,0.4); transform: scale(0.94); transition: transform 320ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 200ms ease-out; -webkit-tap-highlight-color: transparent; }
+#__R__ .__P__slide.__P__center .__P__ref, #__R__ .__P__auto .__P__ref { transform: none; }
+#__R__ .__P__ref img { display: block; width: 100%; height: 100%; object-fit: cover; }
+#__R__ .__P__dots { display: flex; justify-content: center; flex-wrap: wrap; gap: 2px; margin-top: 12px; min-height: 24px; padding: 0 16px; }
+#__R__ .__P__dot { width: 24px; height: 24px; padding: 0; margin: 0; border: 0; background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; -webkit-tap-highlight-color: transparent; }
+#__R__ .__P__dot::before { content: ""; width: 7px; height: 7px; border-radius: 999px; background: rgba(14,28,67,0.25); transition: transform 200ms ease, background 200ms ease; }
+#__R__ .__P__dot.__P__on::before { background: #0E1C43; transform: scale(1.35); box-shadow: 0 0 0 2px #D9E419; }
+#__R__ .__P__arrow { display: none; position: absolute; top: 50%; z-index: 3; width: 52px; height: 52px; margin-top: -26px; padding: 0; border: 0; border-radius: 999px; background: #0E1C43; color: #FFFFFF; cursor: pointer; align-items: center; justify-content: center; box-shadow: 0 10px 22px -8px rgba(0,0,0,0.55); transition: background-color 150ms ease-out, transform 150ms ease-out, opacity 150ms ease-out; }
+#__R__ .__P__arrow svg { width: 22px; height: 22px; }
+#__R__ .__P__arrow:hover { background: #1B2B5E; transform: scale(1.06); }
+#__R__ .__P__arrow[disabled] { opacity: 0; pointer-events: none; }
+#__R__ .__P__prev { left: -10px; }
+#__R__ .__P__next { right: -10px; }
+@media (min-width: 801px) {
+  #__R__ .__P__gal-sec { padding-top: calc(var(--__P__pad) * 0.7); }
+  #__R__ .__P__gal { width: min(1120px, calc(100% - 48px)); }
+  #__R__ .__P__gal-track { gap: var(--__P__gap); padding: 0; width: auto; }
+  #__R__ .__P__gal-track > .__P__slide { width: calc((100% - var(--__P__gap)) / 2); max-width: none; scroll-snap-align: start; scroll-snap-stop: normal; }
+  #__R__ .__P__ref { transform: none; }
+  #__R__ .__P__ref:hover { box-shadow: 0 18px 38px -16px rgba(14,28,67,0.55); }
+  #__R__ .__P__arrow { display: flex; }
+  #__R__ .__P__dots { display: none; }
+}
+@media (min-width: 1100px) { #__R__ .__P__gal-track > .__P__slide { width: calc((100% - 3 * var(--__P__gap)) / 4); } }
+@media (min-width: 1240px) { #__R__ .__P__prev { left: -26px; } #__R__ .__P__next { right: -26px; } }
+
+/* Szezon, gyakoriság, jótállás */
+#__R__ .__P__seasons { display: flex; flex-direction: column; gap: 12px; margin-bottom: 22px; }
+#__R__ .__P__season { display: flex; align-items: center; gap: 14px; background: #0E1C43; border-radius: 16px; padding: 16px 18px; }
+#__R__ .__P__season .__P__badge { --__P__icon: 44px; }
+#__R__ .__P__season-text { font-size: 15.5px; line-height: 1.5; color: rgba(255,255,255,0.86); }
+#__R__ .__P__season-text strong { display: block; color: #FFFFFF; font-size: 17px; font-weight: 800; }
+#__R__ .__P__season-grid .__P__pricing-text > .__P__p + .__P__p { margin-top: 14px; }
+#__R__ .__P__note { display: flex; gap: 14px; align-items: flex-start; margin-top: 22px; padding: 16px 18px; border-radius: 14px; background: #FFFFFF; border: 1px solid #E8EBF1; }
+#__R__ .__P__note .__P__badge { --__P__icon: 38px; }
+#__R__ .__P__note .__P__p { font-size: 15px; line-height: 1.6; color: #4B5568; }
+#__R__ .__P__season-grid .__P__brands-foot { margin-top: 14px; }
+@media (min-width: 801px) {
+  #__R__ .__P__seasons { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--__P__gap); margin-bottom: clamp(32px, 18px + 1.8vw, 56px); }
+  #__R__ .__P__season { gap: 18px; padding: clamp(20px, 14px + 0.8vw, 30px); border-radius: 20px; transition: transform 220ms ease-out; }
+  #__R__ .__P__season:hover { transform: translateY(-4px); }
+  #__R__ .__P__season .__P__badge { --__P__icon: clamp(50px, 42.8px + 0.894vw, 60px); }
+  #__R__ .__P__season-text { font-size: var(--__P__fs-body); }
+  #__R__ .__P__season-text strong { font-size: var(--__P__fs-h3); }
+  #__R__ .__P__season-grid .__P__pricing-text { font-size: var(--__P__fs-body); font-weight: 400; }
+  #__R__ .__P__note { gap: 18px; padding: clamp(20px, 14px + 0.8vw, 28px); border-radius: 20px; }
+  #__R__ .__P__note .__P__badge { --__P__icon: 48px; }
+  #__R__ .__P__note .__P__p { font-size: calc(var(--__P__fs-body) - 1px); }
+  #__R__ .__P__season-grid .__P__brands-foot { margin-top: 0; }
+}
+@media (min-width: 1100px) { #__R__ .__P__season-grid .__P__brands-foot { grid-area: brands; } }
+
+/* Nagyítás (lightbox) */
+#__R__ .__P__lb { position: fixed; inset: 0; z-index: 2147482600; display: none; align-items: center; justify-content: center; padding: 16px; background: rgba(14,28,67,0.95); }
+#__R__ .__P__lb.__P__open { display: flex; }
+#__R__ .__P__lb-img { width: auto; height: auto; max-width: min(100%, 1100px); max-height: 84vh; object-fit: contain; border-radius: 10px; box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
+#__R__ .__P__lb-btn { position: absolute; width: 48px; height: 48px; padding: 0; border: 0; border-radius: 999px; background: rgba(255,255,255,0.16); color: #FFFFFF; font-size: 22px; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background-color 150ms ease-out; }
+#__R__ .__P__lb-btn:hover { background: rgba(255,255,255,0.28); }
+#__R__ .__P__lb-btn svg { width: 24px; height: 24px; }
+#__R__ .__P__lb-close { top: 16px; right: 16px; }
+#__R__ .__P__lb-prev { left: 12px; top: 50%; margin-top: -24px; }
+#__R__ .__P__lb-next { right: 12px; top: 50%; margin-top: -24px; }
+@media (prefers-reduced-motion: reduce) { #__R__ .__P__ref, #__R__ .__P__season { transition: none; } }

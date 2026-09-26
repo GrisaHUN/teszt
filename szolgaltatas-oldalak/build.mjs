@@ -23,10 +23,10 @@ const TEL = 'tel:+36203734991';
 const TEL_TXT = '+36 20 373 4991';
 const CDN = 'https://d1yei2z3i6k35z.cloudfront.net/';
 const KEPEK = JSON.parse(readFileSync(join(here, 'src', 'kepek-urlek.json'), 'utf8'));
-const PAGES = process.argv.slice(2).length ? process.argv.slice(2) : ['klimaszereles'];
+const PAGES = process.argv.slice(2).length ? process.argv.slice(2) : ['klimaszereles', 'klimatisztitas', 'villanyszereles', 'szelloztetes'];
 const pre = (p) => `jks-${p}-`;
 const guard = (p) => `__jks${p[0].toUpperCase()}${p.slice(1)}Init`;
-const ALLOWED_LINK = /^(\/|\/(klimaszereles|klimatisztitas|szelloztetes|villanyszereles|keszulekek|aux|daikin|fisher|gree|midea|polar|syen|kedvezo))$/;
+const ALLOWED_LINK = /^(tel:112|\/|\/(klimaszereles|klimatisztitas|szelloztetes|villanyszereles|keszulekek|aux|daikin|fisher|gree|midea|polar|syen|kedvezo))$/;
 
 // Ikonok (24x24, vonalas). A jelvényben a szín a CSS-ből jön (currentColor).
 const ICONS = {
@@ -40,6 +40,21 @@ const ICONS = {
   pajzs: '<path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/>',
   homero: '<path d="M14 14.8V5a2 2 0 0 0-4 0v9.8a4 4 0 1 0 4 0z"/><path d="M12 9v7"/>',
   cimke: '<path d="M3 12V4a1 1 0 0 1 1-1h8l9 9-9 9z"/><circle cx="7.5" cy="7.5" r="1.5"/>',
+  csepp: '<path d="M12 3c3 4 6 7 6 11a6 6 0 0 1-12 0c0-4 3-7 6-11z"/><path d="M9.5 14.5a2.5 2.5 0 0 0 2.5 2.5"/>',
+  szuro: '<rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 9.3h16M4 14.7h16M9.3 4v16M14.7 4v16"/>',
+  parologtato: '<path d="M3 6h18M3 18h18"/><path d="M6 6v12M10 6v12M14 6v12M18 6v12"/>',
+  kulteri: '<rect x="2.5" y="5" width="19" height="13" rx="2"/><circle cx="9" cy="11.5" r="3.6"/><path d="M9 7.9v7.2M5.4 11.5h7.2M16 9h3M16 12h3M16 15h3M6 18v2M18 18v2"/>',
+  ellenorzes: '<circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.8 2.8L16.5 9.5"/>',
+  nap: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2.5M12 19.5V22M4.2 4.2l1.8 1.8M18 18l1.8 1.8M2 12h2.5M19.5 12H22M4.2 19.8L6 18M18 6l1.8-1.8"/>',
+  lang: '<path d="M12 22c4 0 7-2.9 7-7 0-3-1.6-5.3-3.6-7-.2 1.6-1 2.8-2.4 2.8C12 10.8 13.5 6 10 3c0 3.2-5 5.8-5 12 0 4.1 3 7 7 7z"/>',
+  villam: '<path d="M13 3L4 14h6l-1 7 9-11h-6l1-7z"/>',
+  konnektor: '<rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="12" cy="12" r="5"/><circle cx="10" cy="12" r="0.6"/><circle cx="14" cy="12" r="0.6"/>',
+  izzo: '<path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.6 10.8c.8.6 1.1 1.4 1.1 2.2h5c0-.8.3-1.6 1.1-2.2A6 6 0 0 0 12 3z"/>',
+  halozat: '<circle cx="12" cy="5" r="2.2"/><circle cx="5" cy="19" r="2.2"/><circle cx="19" cy="19" r="2.2"/><path d="M12 7.2V12M12 12l-5.6 5.3M12 12l5.6 5.3"/>',
+  figyelem: '<path d="M12 3.5L2.5 20h19z"/><path d="M12 10v4.5M12 17.4v.1"/>',
+  levego: '<path d="M3 9h11a3 3 0 1 0-3-3"/><path d="M3 15h15a3 3 0 1 1-3 3"/><path d="M3 12h7"/>',
+  para: '<path d="M7 4c2 2.8 4 4.9 4 7.5a4 4 0 0 1-8 0C3 8.9 5 6.8 7 4z"/><path d="M16.5 9c1.6 2.2 3.5 3.8 3.5 6a3.5 3.5 0 0 1-7 0c0-2.2 1.9-3.8 3.5-6z"/>',
+  terv: '<path d="M3 21h18"/><path d="M5 21V8l7-5 7 5v13"/><path d="M9 21v-6h6v6"/>',
   kerdes: '<circle cx="12" cy="12" r="9.5"/><path d="M9.3 9.2a2.8 2.8 0 0 1 5.4 1c0 1.9-2.7 2.5-2.7 4"/><circle cx="12" cy="17.3" r="0.4"/>',
 };
 const icon = (n) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">${ICONS[n]}</svg>`;
@@ -62,6 +77,7 @@ function helpers() {
     // Hero-kép: mobilon (800 px-ig) a kis WebP, desktopon az eredeti JPEG; mindig csak az egyik töltődik.
     hero: (d, m, alt) => { for (const f of [d.file, m.file]) if (!KEPEK[f]) throw new Error('nincs végleges URL: ' + f); return `<picture><source media="(max-width: 800px)" srcset="${KEPEK[m.file]}" width="${m.w}" height="${m.h}"><img src="${KEPEK[d.file]}" alt="${alt}" width="${d.w}" height="${d.h}" loading="eager" fetchpriority="high"></picture>`; },
     wave: (next) => `<svg class="__P__wave" style="--__P__next:${next}" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="${WAVES[waveN++ % 2]}"/></svg>`,
+    arrow: (dir) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="${dir === 'prev' ? 'M15 5l-7 7 7 7' : 'M9 5l7 7-7 7'}"/></svg>`,
     link: (t, href) => `<a class="__P__link" href="${href}">${t}</a>`,
   };
 }
@@ -106,6 +122,31 @@ function jsonLd(c, h) {
   return `<script type="application/ld+json">${JSON.stringify(data).replace(/</g, '\\u003c')}</script>`;
 }
 
+// A nem használt CSS-szabályokat elhagyja: egy szabály marad, ha legalább egy szelektorának minden
+// __P__ osztálya előfordul a markupban vagy a scriptben (a script által adott osztályok is).
+function shakeCss(css, used) {
+  const out = [];
+  let i = 0;
+  while (i < css.length) {
+    const open = css.indexOf('{', i);
+    if (open < 0) break;
+    const head = css.slice(i, open).trim();
+    let depth = 1, j = open + 1;
+    while (depth && j < css.length) { if (css[j] === '{') depth++; else if (css[j] === '}') depth--; j++; }
+    const body = css.slice(open + 1, j - 1);
+    if (head.startsWith('@media')) {
+      const inner = shakeCss(body, used);
+      if (inner) out.push(`${head}{${inner}}`);
+    } else if (head.startsWith('@')) {
+      out.push(`${head}{${body}}`);
+    } else if (head.split(',').some((sel) => [...sel.matchAll(/\.(__P__[\w-]+)/g)].every((m) => used.has(m[1])))) {
+      out.push(`${head}{${body}}`);
+    }
+    i = j;
+  }
+  return out.join('');
+}
+
 const compactCss = (css) => css.replace(/\/\*[\s\S]*?\*\//g, '').replace(/\s+/g, ' ').replace(/\s*([{};,>])\s*/g, '$1').replace(/:\s+/g, ':').replace(/;}/g, '}').trim();
 const compactJs = (js) => js.split('\n').filter((l) => !/^\s*\/\//.test(l)).map((l) => l.trim()).filter(Boolean).join('\n');
 const read = (...p) => { const f = join(here, 'src', ...p); return existsSync(f) ? readFileSync(f, 'utf8') : ''; };
@@ -121,8 +162,9 @@ for (const page of PAGES) {
   const tpl = (await import(pathToFileURL(join(here, 'src', 'oldalak', `${page}.mjs`)))).default;
   const h = helpers();
   const markup = tpl(c, h).split('\n').map((l) => l.trim()).filter(Boolean).join('\n');
-  const css = compactCss(`${read('_kozos.css')}\n${read('oldal.css')}\n${read('oldalak', `${page}.css`)}`);
-  const js = compactJs(read('core.js').replace('/*@PAGE_JS*/', read('oldalak', `${page}.js`)));
+  const js = compactJs(read('core.js').replace('/*@PAGE_JS*/', read('oldalak', `${page}.js`).replace('/*@galeria*/', read('js', 'galeria.js'))));
+  const used = new Set([...(markup + js).matchAll(/__P__[\w-]+/g)].map((m) => m[0]));
+  const css = shakeCss(compactCss(`${read('_kozos.css')}\n${read('oldal.css')}\n${read('oldalak', `${page}.css`)}`), used);
   let html = `<style>${css}</style>\n<div id="__R__" data-__P__foglalas="${FOGLALAS}">\n${markup}\n</div>\n<script>\n${js}\n</script>\n${jsonLd(c, h)}\n`;
   html = html.replaceAll('__R__', rootId).replaceAll('__P__', P).replaceAll('__G__', guard(c.prefix)).replaceAll('{{KESZULEKEK}}', KESZULEKEK);
   const out = `${page}.html`;
@@ -173,6 +215,7 @@ for (const page of PAGES) {
   for (const [, src] of code.matchAll(/\ssrcset="([^"]+)"/g)) if (!src.startsWith(CDN)) tag(`nem a végleges CDN-kép: ${src}`);
   for (const im of code.matchAll(/<img\s[^>]*>/g)) {
     const t = im[0];
+    if (/-lb-img"/.test(t)) continue; // a nagyító képe: a script tölti be a kiválasztott fotót
     const src = (t.match(/\ssrc="([^"]+)"/) || [])[1] || '';
     if (!/\salt="[^"]+"/.test(t) || !/\swidth="\d+"/.test(t) || !/\sheight="\d+"/.test(t)) tag(`kép alt/width/height nélkül: ${src}`);
     if (!src.startsWith(CDN)) tag(`nem a végleges CDN-kép: ${src}`);

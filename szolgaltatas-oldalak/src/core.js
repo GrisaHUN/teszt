@@ -100,18 +100,14 @@
   var fab = root.querySelector('.__P__fab');
   var hero = root.querySelector('.__P__hero');
   var cta = root.querySelector('.__P__cta');
-  if (fab && hero && hasIO) {
-    var heroSeen = true, ctaSeen = false;
-    var sync = function () { fab.classList.toggle('__P__show', !heroSeen && !ctaSeen && hero.getBoundingClientRect().bottom < 0); };
-    var fabIO = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (e.target === hero) heroSeen = e.isIntersecting;
-        else ctaSeen = e.isIntersecting;
-      });
-      sync();
-    });
-    fabIO.observe(hero);
-    if (cta) fabIO.observe(cta);
+  if (fab && hero) {
+    // Csak a hero után látszik, és eltűnik, amint a záró gombsor képernyőre ér (alatta, a láblécnél sem jön vissza).
+    var sync = function () { fab.classList.toggle('__P__show', hero.getBoundingClientRect().bottom < 0 && (!cta || cta.getBoundingClientRect().top > innerHeight)); };
+    var fabT = null;
+    var onScroll = function () { if (!fabT) fabT = requestAnimationFrame(function () { fabT = null; sync(); }); };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    sync();
   }
 /*@PAGE_JS*/
 })();

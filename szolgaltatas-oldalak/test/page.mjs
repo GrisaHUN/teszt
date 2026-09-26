@@ -43,7 +43,7 @@ export async function preparePage(ctx, html, page) {
       const type = f.endsWith('.webp') ? 'image/webp' : f.endsWith('.png') ? 'image/png' : 'image/jpeg';
       return r.fulfill({ contentType: type, body: readFileSync(join(ANYAGOK, f)) });
     }
-    if (/zohobookings|jimmy-klima\.systeme\.io\/./.test(u)) return r.fulfill({ contentType: 'text/html; charset=utf-8', body: '<title>cel</title>cel' });
+    if (/zohobookings|jimmy-klima\.systeme\.io\/./.test(u) || u === `${SITE}/`) return r.fulfill({ contentType: 'text/html; charset=utf-8', body: '<title>cel</title>cel' });
     return r.abort();
   });
   return log;
