@@ -5,13 +5,13 @@ Oldalanként **egyetlen reszponzív Raw HTML blokk** (mobilon és desktopon ugya
 | Oldal | URL | Fájl | Előtag | Méret |
 |---|---|---|---|---|
 | Forgalmazott készülékek | `/keszulekek` | `keszulekek.html` | `jkk-` | 30,7 KB |
-| AUX | `/aux` | `aux.html` | `jkb-aux-` | 29,6 KB |
-| Daikin | `/daikin` | `daikin.html` | `jkb-dai-` | 29,7 KB |
-| Fisher | `/fisher` | `fisher.html` | `jkb-fis-` | 30,7 KB |
-| Gree | `/gree` | `gree.html` | `jkb-gre-` | 31,7 KB |
-| Midea | `/midea` | `midea.html` | `jkb-mid-` | 30,6 KB |
-| Polar | `/polar` | `polar.html` | `jkb-pol-` | 29,6 KB |
-| Syen | `/syen` | `syen.html` | `jkb-sye-` | 29,3 KB |
+| AUX | `/aux` | `aux.html` | `jkb-aux-` | 31,1 KB |
+| Daikin | `/daikin` | `daikin.html` | `jkb-dai-` | 31,3 KB |
+| Fisher | `/fisher` | `fisher.html` | `jkb-fis-` | 32,9 KB |
+| Gree | `/gree` | `gree.html` | `jkb-gre-` | 34,3 KB |
+| Midea | `/midea` | `midea.html` | `jkb-mid-` | 32,9 KB |
+| Polar | `/polar` | `polar.html` | `jkb-pol-` | 31,2 KB |
+| Syen | `/syen` | `syen.html` | `jkb-sye-` | 30,4 KB |
 
 ## Beillesztés
 
@@ -36,7 +36,7 @@ Oldalanként **egyetlen reszponzív Raw HTML blokk** (mobilon és desktopon ugya
   - **Záró gombsor**, mobilon lebegő fő gomb.
 - **Márka-oldalak:**
   - **Hero:** logó fehér keretben, H1 („{Márka} klíma beszereléssel Szegeden”), rövid bevezető, gombok.
-  - **„Modellek és árak”:** modell-kártyák (név, teljesítmény, „Klíma szett”, ár).
+  - **„Modellek és árak”:** modell-kártyák (név, teljesítmény, „Klíma szett”, ár, „Bővebb információ” gomb).
   - **„Mit tartalmaz a beszerelés?”:** 6 ikonos elem, szöveges link a klímaszerelés oldalra.
   - **Garancia-kártya.**
   - **„Kapcsolódó oldalak”:**
@@ -57,11 +57,18 @@ Oldalanként **egyetlen reszponzív Raw HTML blokk** (mobilon és desktopon ugya
   - **Az összes többi modellnél** sincs igazolt adat, ezért ott sem szerepel.
 - **Ha később jön igazolt adat:** a forrásban (`src/tartalom/markak.mjs`) minden modellnek van egy `energia` mezője; ezt kell kitölteni, és a kártyán megjelenik egy kiemelt sor. Az oldalt nem kell újraépíteni.
 
+## „Bővebb információ” gombok (David, 2026-09-29)
+
+- Minden modell-kártyán van egy „Bővebb információ” gomb. A modell gyártói vagy viszonteladói terméklapjára mutat, új lapon nyílik (`target="_blank" rel="noopener"`), külső-link ikonnal.
+- A képernyőolvasó ezt olvassa fel: „Bővebb információ: {modell} (új lapon nyílik)”.
+- A 17 link pontosan a David által megadott cím, mást nem használtam; a forrásban a modellek `info` mezőjében van (`src/tartalom/markak.mjs`).
+- Ezek nem versenytárs-linkek. A build csak ezeket a gyártói/viszonteladói domaineket engedi a Zoho mellett.
+
 ## Szövegek, árak
 
 - **Modellnevek, teljesítmény, árak:** szó szerint a prompt 7. pontjából.
   - Az ár formátuma: „Beszerelve (3 m-ig): 325 000 Ft”, szóközös ezres tagolással, jelző nélkül.
-  - Nincs „bruttó”, „ÁFÁ-val” vagy „végleges ár”.
+  - Nincs „végleges ár”, „bruttó”, „Br.” vagy „ÁFÁ-val” (a teszt mind a 8 fájlban ellenőrzi).
 - **Saját mondatok** (a prompt kérte, mintaszövegek alapján):
   - a gyűjtőoldal alcíme;
   - az árakról szóló összefoglaló;
@@ -77,10 +84,10 @@ Oldalanként **egyetlen reszponzív Raw HTML blokk** (mobilon és desktopon ugya
 ## Ellenőrzés
 
 - **`node build.mjs`:** méret, előtagok, globális CSS, komment, gondolatjel, link-fehérlista, img-attribútumok, egy H1, a JSON-LD hiánya.
-- **`node test/check-km.mjs`: 532/532 rendben.**
+- **`node test/check-km.mjs`: 539/539 rendben.**
   - Mind a 8 oldal, 12 szélességen (320–2560 px): csúszás, túlnyúló elem, duplikált id, konzolhiba, egy H1, felfedés, képattribútumok, 44 px-es érintési célpontok.
   - Tiltott szavak és külső linkek.
-  - Zoho- és telefon-linkek, a hero-gomb új lapon.
+  - Zoho- és telefon-linkek, a hero-gomb új lapon; a „Bővebb információ” linkek a megadott címlistához mérve, új lapon, 44 px-es gombként.
   - Belső linkek és kattintások (a 7 márka-kártya a kártya szélére kattintva is).
   - Modellnevek és árak a prompttól függetlenül beírt listához mérve.
   - Energiaosztály csak a 2 engedélyezett modellnél, pontos szöveggel.
@@ -103,7 +110,7 @@ Oldalanként **egyetlen reszponzív Raw HTML blokk** (mobilon és desktopon ugya
 |---|---|---|---|
 | 1 | Minden ár és modellnév szó szerint egyezik a 7. ponttal | megfelelt | A teszt a prompttól függetlenül beírt listához méri, mind a 7 márkánál egyezik. |
 | 2 | Energiaosztály/hidegtűrés csak a 2 engedélyezett modellnél, pontos szöveggel | megfelelt | Syen Muse Next és Gree Amber Royal szó szerint; a Midea Oasis Plus+-nál és máshol nincs (teszt). |
-| 3 | Nincs „bruttó”, „ÁFÁ-val”, „végleges ár” | megfelelt | Jelző nélküli ár; a teszt és a build is ellenőrzi. |
+| 3 | Nincs „bruttó”, „Br.”, „ÁFÁ-val”, „végleges ár” | megfelelt | Jelző nélküli ár („Beszerelve (3 m-ig): 325 000 Ft”); a teszt ellenőrzi. |
 | 4 | Nincs környezeti állítás vagy megtakarítási szám | megfelelt | A teszt tiltott-szó listája üres találatot ad. |
 | 5 | Minden Zoho-gomb a pontos linkre, új lapon, nincs popup | megfelelt | `https://growthnestg.zohobookings.eu/254300000000290002`, `target="_blank"`, `rel="noopener"`. |
 | 6 | Egyetlen Raw HTML blokk, mindkét eszközön látható | megfelelt | Egy fájl oldalanként; a leírás elején a beállítás. |
@@ -115,7 +122,7 @@ Oldalanként **egyetlen reszponzív Raw HTML blokk** (mobilon és desktopon ugya
 | 12 | Reszponzív 360-1920 px között | megfelelt | Képernyőképek 8 szélességen; mobilon 2, desktopon 4 oszlopos márkarács. |
 | 13 | Nincs JSON-LD | megfelelt | Build és teszt. |
 | 14 | Telefon mindenhol `tel:+36203734991` | megfelelt | Teszt. |
-| 15 | Lighthouse: LCP 2,5 s alatt, CLS 0,1 alatt; 70 KB alatt | részben | Desktopon teljesül, a CLS mindenhol 0-0,002, a blokkok 29-32 KB-osak; a mobil LCP a Systeme-keret miatt 3,2-4,2 s. |
+| 15 | Lighthouse: LCP 2,5 s alatt, CLS 0,1 alatt; 70 KB alatt | részben | Desktopon teljesül, a CLS mindenhol 0-0,002, a blokkok 30-35 KB-osak; a mobil LCP a Systeme-keret miatt 3,2-4,2 s. |
 
 **Összesen: 14/15 megfelelt oldalanként, minden kritikus sor megfelelt.**
 

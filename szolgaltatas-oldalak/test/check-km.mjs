@@ -27,7 +27,28 @@ const ENERGIA = {
   'Syen Muse Next': 'Energiaosztály (gyártói adatlap szerint): hűtés A+++ (SEER 8,5), fűtés A++ (SCOP 4,8). Fűtés: -25 °C külső hőmérsékletig.',
   'Gree Amber Royal': 'Hűtési energiaosztály (gyártói adatlap szerint): A+++ (SEER 8,5). Fűtés: -30 °C külső hőmérsékletig.',
 };
-const TILTOTT = /bruttó|áfá|végleges ár|környezetbarát|\bzöld|energiatakarékos|legjobb|leghatékonyabb|legmegbízhatóbb|spórol|megtakarít|—/i;
+// A „Bővebb információ” linkek modellenként (David, 2026-09-29), a kéréséből szó szerint.
+const INFO = {
+  'AUX Delta 3': 'https://aux-magyarorszag.hu/termekek/kategoria/delta-3-series/',
+  'AUX Aura': 'https://aux-magyarorszag.hu/termekek/kategoria/aura-series/',
+  'Daikin Sensira E FTXF35/RXF35': 'https://www.daikin.hu/hu_hu/lakossagi/products-and-advice/product-categories/air-conditioners/sensira.html',
+  'Daikin Comfora FTXP35N/RXP35N': 'https://www.daikin.hu/hu_hu/lakossagi/products-and-advice/product-categories/air-conditioners/comfora.html',
+  'Fisher Special Edition': 'https://www.fisherklima.hu/termekek/kereskedelmi-klimaberendezesek/oldalfali/special-edition-sorozat/fisher-special-edition-3,5-kw-inverteres-split-kl%C3%ADma-1-adatlap',
+  'Fisher Art': 'https://www.fisherklima.hu/termekarchivum/art-3520w-inverteres-split-klima-antracit-adatlap',
+  'Fisher Nordic': 'https://www.fisherklima.hu/termekek/kereskedelmi-klimaberendezesek/oldalfali/nordic-sorozat/fisher-nordic-3,5-kw-inverteres-split-kl%C3%ADma-adatlap?limitstart=0',
+  'Gree Smart One': 'https://gree-magyarorszag.hu/klima/gree-smart-one-inverter-351-kw-klima-szett/',
+  'Gree Comfort Pro': 'https://gree-magyarorszag.hu/klima/gree-comfort-pro-inverter-35-kw-klima-szett/',
+  'Gree Dark Pro': 'https://gree-magyarorszag.hu/klima/gree-dark-pro-inverter-35-kw-klima-szett/',
+  'Gree Amber Royal': 'https://gree-magyarorszag.hu/klima/gree-amber-royal-inverter-35-kw-klima-szett/',
+  'Midea Breezeless E': 'https://midea.hu/category/2_Lakossagilegkondicionalok/brand/17_BreezeleSSElegkondicionalok/products/mcb-12-sp-breezeless-e-oldalfali-split-3-5-kw-cmid002611',
+  'Midea All Easy Pro': 'https://midea.hu/category/2_Lakossagilegkondicionalok/brand/7_AllEasyProlegkondicionalok/products/mex-12-sp-all-easy-pro-oldalfali-split-r32-3-5-kw-cmid002088',
+  'Midea Oasis Plus+': 'https://midea.hu/category/2_Lakossagilegkondicionalok/brand/6_OasisPluslegkondicionalok/products/mopp-12-sp-oasis-plus-oldalfali-split-r32-3-5-kw-cmid003235',
+  'Polar Lite': 'https://polarklima.hu/product/polar-lite-35sdla-split-inverteres-klimaszett/',
+  'Polar Optimum': 'https://polarklima.hu/product/polar-optimum-35sdob-split-inverteres-klimaszett/',
+  'Syen Muse Next': 'https://syen.hu/syen-klima/syen-muse-next-inverter-35-kw-klima-szett-masolat/',
+};
+const INFO_URLS = new Set(Object.values(INFO));
+const TILTOTT = /bruttó|\bBr\.|áfá|végleges|környezetbarát|\bzöld|energiatakarékos|legjobb|leghatékonyabb|legmegbízhatóbb|spórol|megtakarít|—/i;
 
 const pages = process.argv.slice(2).length ? process.argv.slice(2) : Object.keys(PRE);
 const browser = await playwright.chromium.launch();
@@ -96,8 +117,8 @@ for (const page of pages) {
     const text = raw.replace(/<script[\s\S]*?<\/script>/g, '').replace(/<style[\s\S]*?<\/style>/g, '').replace(/<[^>]+>/g, ' ');
     ok(`${page}: nincs JSON-LD`, !/application\/ld\+json/.test(raw));
     ok(`${page}: nincs tiltott szó (bruttó, ÁFÁ, végleges ár, környezetbarát, zöld, energiatakarékos, szuperlatívusz, megtakarítás, gondolatjel)`, !TILTOTT.test(text), (text.match(TILTOTT) || [''])[0]);
-    const ext = [...raw.matchAll(/\shref="(https?:[^"]+)"/g)].map((x) => x[1]).filter((u) => u !== ZOHO);
-    ok(`${page}: külső link csak a Zoho foglalás`, !ext.length, ext.join(', '));
+    const ext = [...raw.matchAll(/\shref="(https?:[^"]+)"/g)].map((x) => x[1]).filter((u) => u !== ZOHO && !INFO_URLS.has(u));
+    ok(`${page}: külső link csak a Zoho foglalás és a megadott gyártói terméklapok`, !ext.length, ext.join(', '));
   }
 
   // 3. Linkek, kattintások
@@ -157,6 +178,8 @@ for (const page of pages) {
     ok(`${page}: energiaosztály/hidegtűrés csak a 2 engedélyezett modellnél, pontos szöveggel`, energyOk && !/energiaosztály|A\+\+|°C|SEER|SCOP/i.test(stray), JSON.stringify(models.map((x) => [x.n, x.e])));
     const h1 = await pg.evaluate(() => document.querySelector('h1').textContent.trim());
     ok(`${page}: H1 „${NEV[page]} klíma beszereléssel Szegeden”`, h1 === `${NEV[page]} klíma beszereléssel Szegeden`, h1);
+    const more = await pg.evaluate((P) => [...document.querySelectorAll(`.${P}model`)].map((a) => { const l = a.querySelector(`.${P}model-more`); return l ? { n: a.querySelector('h3').textContent.trim(), h: l.getAttribute('href'), t: l.textContent.trim(), tg: l.target, rel: l.rel, hh: Math.round(l.getBoundingClientRect().height) } : null; }), P);
+    ok(`${page}: minden modellnél „Bővebb információ” a megadott terméklapra, új lapon (${more.length})`, more.length === exp.length && more.every((x) => x && x.h === INFO[x.n] && x.t === 'Bővebb információ' && x.tg === '_blank' && x.rel === 'noopener' && x.hh >= 44), JSON.stringify(more));
     ok(`${page}: garancia-szöveg a prompt szerint`, txt.includes('2 év garancia a telepítésre (Jimmy Klíma). A gyártói garancia a gyártó saját feltételei szerint érvényes.'));
     await ctx.close();
   }

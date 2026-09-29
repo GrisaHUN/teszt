@@ -30,6 +30,8 @@
 #__R__ .__P__model-price { margin-top: auto; padding-top: 14px; border-top: 1px solid #EEF0F4; display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 12px; }
 #__R__ .__P__model-price-l { font-size: 15px; font-weight: 600; color: #4B5568; }
 #__R__ .__P__model-price-v { font-size: 26px; font-weight: 800; line-height: 1.2; color: #0E1C43; white-space: nowrap; }
+#__R__ .__P__model-more { width: 100%; min-height: 48px; padding: 11px 18px; font-size: 15.5px; }
+#__R__ .__P__model-more svg { width: 18px; height: 18px; }
 @media (min-width: 801px) {
   #__R__ .__P__models { gap: var(--__P__gap); grid-template-columns: repeat(2, minmax(0, 1fr)); }
   #__R__ .__P__models-n1 { grid-template-columns: minmax(0, 600px); justify-content: center; }

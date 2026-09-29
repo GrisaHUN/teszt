@@ -31,6 +31,7 @@ ${b.modellek.map((m, i) => `<article class="__P__model __P__card __P__host __P__
 <ul class="__P__model-tags">${m.jelzo ? `<li class="__P__tag-hl">${m.jelzo}</li>` : ''}<li>${m.telj}</li><li>${m.tipus}</li></ul>
 ${m.energia ? `<p class="__P__model-energy">${m.energia}</p>` : ''}
 <p class="__P__model-price"><span class="__P__model-price-l">${c.arCimke}</span> <span class="__P__model-price-v">${h.nb(m.ar)}</span></p>
+${m.info ? `<a class="__P__btn __P__btn-line __P__model-more" href="${m.info}" target="_blank" rel="noopener" aria-label="Bővebb információ: ${m.nev} (új lapon nyílik)">Bővebb információ${h.icon('kulso')}</a>` : ''}
 </article>`).join('\n')}
 </div>
 </div>

@@ -29,6 +29,8 @@ const PAGES = process.argv.slice(2).length ? process.argv.slice(2) : [...SZOLG, 
 const pre = (p) => `jks-${p}-`;
 // Script-őr az előtagból: jks-ksz- -> __jksKszInit, jkb-aux- -> __jkbAuxInit
 const guardOf = (P) => '__' + P.replace(/-$/, '').split('-').map((x, i) => (i ? x[0].toUpperCase() + x.slice(1) : x)).join('') + 'Init';
+// A márka-oldalak „Bővebb információ” linkjei: csak a gyártói/viszonteladói terméklapok (David, 2026-09-29).
+const GYARTOI = /^https:\/\/(aux-magyarorszag\.hu|www\.daikin\.hu|www\.fisherklima\.hu|gree-magyarorszag\.hu|midea\.hu|polarklima\.hu|syen\.hu)\//;
 const ALLOWED_LINK = /^(tel:112|\/|\/(klimaszereles|klimatisztitas|szelloztetes|villanyszereles|keszulekek|aux|daikin|fisher|gree|midea|polar|syen|kedvezo))$/;
 
 // Ikonok (24x24, vonalas). A jelvényben a szín a CSS-ből jön (currentColor).
@@ -43,6 +45,7 @@ const ICONS = {
   pajzs: '<path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/>',
   homero: '<path d="M14 14.8V5a2 2 0 0 0-4 0v9.8a4 4 0 1 0 4 0z"/><path d="M12 9v7"/>',
   hopehely: '<path d="M12 2v20M3.3 7l17.4 10M20.7 7L3.3 17"/><path d="M9.5 3.5L12 6l2.5-2.5M9.5 20.5L12 18l2.5 2.5M3.7 10.3l3.4-.9-.9-3.4M20.3 13.7l-3.4.9.9 3.4M6.2 17l.9-3.4-3.4-.9M17.8 7l-.9 3.4 3.4.9"/>',
+  kulso: '<path d="M14 4h6v6M20 4l-9 9"/><path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/>',
   cimke: '<path d="M3 12V4a1 1 0 0 1 1-1h8l9 9-9 9z"/><circle cx="7.5" cy="7.5" r="1.5"/>',
   csepp: '<path d="M12 3c3 4 6 7 6 11a6 6 0 0 1-12 0c0-4 3-7 6-11z"/><path d="M9.5 14.5a2.5 2.5 0 0 0 2.5 2.5"/>',
   szuro: '<rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 9.3h16M4 14.7h16M9.3 4v16M14.7 4v16"/>',
@@ -218,7 +221,7 @@ for (const page of PAGES) {
   if ((code.match(/<h1[\s>]/g) || []).length !== 1) tag('nem pontosan egy <h1>');
   if (/<main[\s>]/.test(code)) tag('<main> elem');
   for (const [, href] of code.matchAll(/\shref="([^"]+)"/g)) {
-    if (href === FOGLALAS || href === TEL || href === KESZULEKEK || ALLOWED_LINK.test(href)) continue;
+    if (href === FOGLALAS || href === TEL || href === KESZULEKEK || ALLOWED_LINK.test(href) || GYARTOI.test(href)) continue;
     tag(`váratlan link: ${href}`);
   }
   for (const a of code.matchAll(/<a\s[^>]*href="https:[^"]*"[^>]*>/g)) if (!/target="_blank"/.test(a[0]) || !/rel="noopener"/.test(a[0])) tag('külső link target/rel nélkül');

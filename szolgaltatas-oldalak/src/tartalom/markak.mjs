@@ -3,44 +3,44 @@
 // Energiaosztály / hidegtűrés CSAK a két, gyártói adatlappal igazolt modellnél (Matt/Don, 2026-09-26),
 // pontosan a jóváhagyott szöveggel. A többi modellnél az `energia` mező szándékosan üres: ha később
 // megjön az igazolt adat, csak ki kell tölteni, és a kártyán megjelenik.
-// Az ár jelző nélkül áll (nincs „bruttó”, „ÁFÁ-val” vagy „végleges ár”).
+// Az ár jelző nélkül áll. Az `info` a modell gyártói/viszonteladói terméklapja (David, 2026-09-29), új lapon nyílik.
 export const AR_CIMKE = 'Beszerelve (3 m-ig):';
 
 const m = (nev, telj, ar, extra = {}) => ({ nev, telj, tipus: 'Klíma szett', ar, energia: '', ...extra });
 
 export const MARKAK = {
   aux: { nev: 'AUX', nevelo: 'Az', pre: 'jkb-aux-', logo: 'aux-logo.png', lasd: ['daikin', 'gree'], modellek: [
-    m('AUX Delta 3', 'Inverter 3,5 kW', '325 000 Ft'),
-    m('AUX Aura', 'Inverter 3,5 kW', '362 000 Ft'),
+    m('AUX Delta 3', 'Inverter 3,5 kW', '325 000 Ft', { info: 'https://aux-magyarorszag.hu/termekek/kategoria/delta-3-series/' }),
+    m('AUX Aura', 'Inverter 3,5 kW', '362 000 Ft', { info: 'https://aux-magyarorszag.hu/termekek/kategoria/aura-series/' }),
   ] },
   daikin: { nev: 'Daikin', nevelo: 'A', pre: 'jkb-dai-', logo: 'daikin-logo.png', lasd: ['gree', 'midea'], modellek: [
-    m('Daikin Sensira E FTXF35/RXF35', 'Inverter 3,5 kW', '385 000 Ft'),
-    m('Daikin Comfora FTXP35N/RXP35N', 'Inverter 3,5 kW', '430 000 Ft'),
+    m('Daikin Sensira E FTXF35/RXF35', 'Inverter 3,5 kW', '385 000 Ft', { info: 'https://www.daikin.hu/hu_hu/lakossagi/products-and-advice/product-categories/air-conditioners/sensira.html' }),
+    m('Daikin Comfora FTXP35N/RXP35N', 'Inverter 3,5 kW', '430 000 Ft', { info: 'https://www.daikin.hu/hu_hu/lakossagi/products-and-advice/product-categories/air-conditioners/comfora.html' }),
   ] },
   fisher: { nev: 'Fisher', nevelo: 'A', pre: 'jkb-fis-', logo: 'fisher-logo.png', lasd: ['polar', 'aux'], modellek: [
-    m('Fisher Special Edition', 'Inverter 3,6 kW', '320 000 Ft'),
-    m('Fisher Art', 'Inverter 3,5 kW', '390 000 Ft', { jelzo: 'Háromféle színben!' }),
-    m('Fisher Nordic', 'Inverter 3,5 kW', '449 000 Ft'),
+    m('Fisher Special Edition', 'Inverter 3,6 kW', '320 000 Ft', { info: 'https://www.fisherklima.hu/termekek/kereskedelmi-klimaberendezesek/oldalfali/special-edition-sorozat/fisher-special-edition-3,5-kw-inverteres-split-kl%C3%ADma-1-adatlap' }),
+    m('Fisher Art', 'Inverter 3,5 kW', '390 000 Ft', { jelzo: 'Háromféle színben!', info: 'https://www.fisherklima.hu/termekarchivum/art-3520w-inverteres-split-klima-antracit-adatlap' }),
+    m('Fisher Nordic', 'Inverter 3,5 kW', '449 000 Ft', { info: 'https://www.fisherklima.hu/termekek/kereskedelmi-klimaberendezesek/oldalfali/nordic-sorozat/fisher-nordic-3,5-kw-inverteres-split-kl%C3%ADma-adatlap?limitstart=0' }),
   ] },
   gree: { nev: 'Gree', nevelo: 'A', pre: 'jkb-gre-', logo: 'gree-logo.png', lasd: ['daikin', 'midea'], modellek: [
-    m('Gree Smart One', 'Inverter 3,5 kW', '362 000 Ft'),
-    m('Gree Comfort Pro', 'Inverter 3,5 kW', '365 000 Ft'),
-    m('Gree Dark Pro', 'Inverter 3,5 kW', '385 000 Ft'),
-    m('Gree Amber Royal', 'Inverter 3,5 kW', '497 000 Ft', { energia: 'Hűtési energiaosztály (gyártói adatlap szerint): A+++ (SEER 8,5). Fűtés: -30 °C külső hőmérsékletig.' }),
+    m('Gree Smart One', 'Inverter 3,5 kW', '362 000 Ft', { info: 'https://gree-magyarorszag.hu/klima/gree-smart-one-inverter-351-kw-klima-szett/' }),
+    m('Gree Comfort Pro', 'Inverter 3,5 kW', '365 000 Ft', { info: 'https://gree-magyarorszag.hu/klima/gree-comfort-pro-inverter-35-kw-klima-szett/' }),
+    m('Gree Dark Pro', 'Inverter 3,5 kW', '385 000 Ft', { info: 'https://gree-magyarorszag.hu/klima/gree-dark-pro-inverter-35-kw-klima-szett/' }),
+    m('Gree Amber Royal', 'Inverter 3,5 kW', '497 000 Ft', { energia: 'Hűtési energiaosztály (gyártói adatlap szerint): A+++ (SEER 8,5). Fűtés: -30 °C külső hőmérsékletig.', info: 'https://gree-magyarorszag.hu/klima/gree-amber-royal-inverter-35-kw-klima-szett/' }),
   ] },
   midea: { nev: 'Midea', nevelo: 'A', pre: 'jkb-mid-', logo: 'midea-logo.png', lasd: ['gree', 'aux'], modellek: [
-    m('Midea Breezeless E', 'Inverter 3,5 kW', '362 000 Ft'),
-    m('Midea All Easy Pro', 'Inverter 3,5 kW', '365 000 Ft'),
+    m('Midea Breezeless E', 'Inverter 3,5 kW', '362 000 Ft', { info: 'https://midea.hu/category/2_Lakossagilegkondicionalok/brand/17_BreezeleSSElegkondicionalok/products/mcb-12-sp-breezeless-e-oldalfali-split-3-5-kw-cmid002611' }),
+    m('Midea All Easy Pro', 'Inverter 3,5 kW', '365 000 Ft', { info: 'https://midea.hu/category/2_Lakossagilegkondicionalok/brand/7_AllEasyProlegkondicionalok/products/mex-12-sp-all-easy-pro-oldalfali-split-r32-3-5-kw-cmid002088' }),
     // Oasis Plus+: a gyártói források ellentmondanak, ezért NINCS energiaosztály (EPREL-megerősítésig).
-    m('Midea Oasis Plus+', 'Inverter 3,5 kW', '459 000 Ft'),
+    m('Midea Oasis Plus+', 'Inverter 3,5 kW', '459 000 Ft', { info: 'https://midea.hu/category/2_Lakossagilegkondicionalok/brand/6_OasisPluslegkondicionalok/products/mopp-12-sp-oasis-plus-oldalfali-split-r32-3-5-kw-cmid003235' }),
   ] },
   polar: { nev: 'Polar', nevelo: 'A', pre: 'jkb-pol-', logo: 'polar-logo.png', lasd: ['fisher', 'syen'], modellek: [
-    m('Polar Lite', 'Inverter 3,5 kW', '280 000 Ft'),
-    m('Polar Optimum', 'Inverter 3,5 kW', '299 000 Ft'),
+    m('Polar Lite', 'Inverter 3,5 kW', '280 000 Ft', { info: 'https://polarklima.hu/product/polar-lite-35sdla-split-inverteres-klimaszett/' }),
+    m('Polar Optimum', 'Inverter 3,5 kW', '299 000 Ft', { info: 'https://polarklima.hu/product/polar-optimum-35sdob-split-inverteres-klimaszett/' }),
   ] },
   syen: { nev: 'Syen', nevelo: 'A', pre: 'jkb-sye-', logo: 'syen-logo.png', lasd: ['polar', 'fisher'], modellek: [
     // Az energia-adat a SOH12MN-E32DA1D típuskódra vonatkozik (gyártói adatlap).
-    m('Syen Muse Next', 'Inverter 3,5 kW', '350 000 Ft', { energia: 'Energiaosztály (gyártói adatlap szerint): hűtés A+++ (SEER 8,5), fűtés A++ (SCOP 4,8). Fűtés: -25 °C külső hőmérsékletig.' }),
+    m('Syen Muse Next', 'Inverter 3,5 kW', '350 000 Ft', { energia: 'Energiaosztály (gyártói adatlap szerint): hűtés A+++ (SEER 8,5), fűtés A++ (SCOP 4,8). Fűtés: -25 °C külső hőmérsékletig.', info: 'https://syen.hu/syen-klima/syen-muse-next-inverter-35-kw-klima-szett-masolat/' }),
   ] },
 };
 export const SORREND = ['aux', 'daikin', 'fisher', 'gree', 'midea', 'polar', 'syen'];
