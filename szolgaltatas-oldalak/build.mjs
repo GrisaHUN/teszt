@@ -23,9 +23,12 @@ const TEL = 'tel:+36203734991';
 const TEL_TXT = '+36 20 373 4991';
 const CDN = 'https://d1yei2z3i6k35z.cloudfront.net/';
 const KEPEK = JSON.parse(readFileSync(join(here, 'src', 'kepek-urlek.json'), 'utf8'));
-const PAGES = process.argv.slice(2).length ? process.argv.slice(2) : ['klimaszereles', 'klimatisztitas', 'villanyszereles', 'szelloztetes'];
+export const SZOLG = ['klimaszereles', 'klimatisztitas', 'villanyszereles', 'szelloztetes'];
+export const KM = ['keszulekek', 'aux', 'daikin', 'fisher', 'gree', 'midea', 'polar', 'syen'];
+const PAGES = process.argv.slice(2).length ? process.argv.slice(2) : [...SZOLG, ...KM];
 const pre = (p) => `jks-${p}-`;
-const guard = (p) => `__jks${p[0].toUpperCase()}${p.slice(1)}Init`;
+// Script-őr az előtagból: jks-ksz- -> __jksKszInit, jkb-aux- -> __jkbAuxInit
+const guardOf = (P) => '__' + P.replace(/-$/, '').split('-').map((x, i) => (i ? x[0].toUpperCase() + x.slice(1) : x)).join('') + 'Init';
 const ALLOWED_LINK = /^(tel:112|\/|\/(klimaszereles|klimatisztitas|szelloztetes|villanyszereles|keszulekek|aux|daikin|fisher|gree|midea|polar|syen|kedvezo))$/;
 
 // Ikonok (24x24, vonalas). A jelvényben a szín a CSS-ből jön (currentColor).
@@ -39,6 +42,7 @@ const ICONS = {
   kulcs: '<circle cx="8" cy="15" r="4"/><path d="M10.9 12.1L20 3M16.5 6.5l3 3M14.5 8.5l2 2"/>',
   pajzs: '<path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/>',
   homero: '<path d="M14 14.8V5a2 2 0 0 0-4 0v9.8a4 4 0 1 0 4 0z"/><path d="M12 9v7"/>',
+  hopehely: '<path d="M12 2v20M3.3 7l17.4 10M20.7 7L3.3 17"/><path d="M9.5 3.5L12 6l2.5-2.5M9.5 20.5L12 18l2.5 2.5M3.7 10.3l3.4-.9-.9-3.4M20.3 13.7l-3.4.9.9 3.4M6.2 17l.9-3.4-3.4-.9M17.8 7l-.9 3.4 3.4.9"/>',
   cimke: '<path d="M3 12V4a1 1 0 0 1 1-1h8l9 9-9 9z"/><circle cx="7.5" cy="7.5" r="1.5"/>',
   csepp: '<path d="M12 3c3 4 6 7 6 11a6 6 0 0 1-12 0c0-4 3-7 6-11z"/><path d="M9.5 14.5a2.5 2.5 0 0 0 2.5 2.5"/>',
   szuro: '<rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 9.3h16M4 14.7h16M9.3 4v16M14.7 4v16"/>',
@@ -59,6 +63,7 @@ const ICONS = {
 };
 const icon = (n) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">${ICONS[n]}</svg>`;
 
+const PIXEL = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
 const WAVES = ['M0,60 L0,26 C 380,64 1000,-6 1440,34 L1440,60 Z', 'M0,60 L0,36 C 300,2 1100,62 1440,20 L1440,60 Z'];
 
 function helpers() {
@@ -78,6 +83,7 @@ function helpers() {
     hero: (d, m, alt) => { for (const f of [d.file, m.file]) if (!KEPEK[f]) throw new Error('nincs végleges URL: ' + f); return `<picture><source media="(max-width: 800px)" srcset="${KEPEK[m.file]}" width="${m.w}" height="${m.h}"><img src="${KEPEK[d.file]}" alt="${alt}" width="${d.w}" height="${d.h}" loading="eager" fetchpriority="high"></picture>`; },
     wave: (next) => `<svg class="__P__wave" style="--__P__next:${next}" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="${WAVES[waveN++ % 2]}"/></svg>`,
     arrow: (dir) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="${dir === 'prev' ? 'M15 5l-7 7 7 7' : 'M9 5l7 7-7 7'}"/></svg>`,
+    pixel: PIXEL,
     link: (t, href) => `<a class="__P__link" href="${href}">${t}</a>`,
   };
 }
@@ -157,18 +163,21 @@ mkdirSync(OUT, { recursive: true });
 
 for (const page of PAGES) {
   const c = (await import(pathToFileURL(join(here, 'src', 'tartalom', `${page}.mjs`)))).default;
-  const P = pre(c.prefix);
+  const P = c.pre || pre(c.prefix);
+  const S = c.sablon || page;
+  const outDir = c.kimenet ? join(here, 'kimenet', c.kimenet) : OUT;
+  mkdirSync(outDir, { recursive: true });
   const rootId = `${P}root`;
-  const tpl = (await import(pathToFileURL(join(here, 'src', 'oldalak', `${page}.mjs`)))).default;
+  const tpl = (await import(pathToFileURL(join(here, 'src', 'oldalak', `${S}.mjs`)))).default;
   const h = helpers();
   const markup = tpl(c, h).split('\n').map((l) => l.trim()).filter(Boolean).join('\n');
-  const js = compactJs(read('core.js').replace('/*@PAGE_JS*/', read('oldalak', `${page}.js`).replace('/*@galeria*/', read('js', 'galeria.js'))));
+  const js = compactJs(read('core.js').replace('/*@PAGE_JS*/', read('oldalak', `${S}.js`).replace('/*@galeria*/', read('js', 'galeria.js'))));
   const used = new Set([...(markup + js).matchAll(/__P__[\w-]+/g)].map((m) => m[0]));
-  const css = shakeCss(compactCss(`${read('_kozos.css')}\n${read('oldal.css')}\n${read('oldalak', `${page}.css`)}`), used);
-  let html = `<style>${css}</style>\n<div id="__R__" data-__P__foglalas="${FOGLALAS}">\n${markup}\n</div>\n<script>\n${js}\n</script>\n${jsonLd(c, h)}\n`;
-  html = html.replaceAll('__R__', rootId).replaceAll('__P__', P).replaceAll('__G__', guard(c.prefix)).replaceAll('{{KESZULEKEK}}', KESZULEKEK);
+  const css = shakeCss(compactCss(`${read('_kozos.css')}\n${read('oldal.css')}\n${read('oldalak', `${S}.css`)}`), used);
+  let html = `<style>${css}</style>\n<div id="__R__" data-__P__foglalas="${FOGLALAS}">\n${markup}\n</div>\n<script>\n${js}\n</script>\n${c.service ? jsonLd(c, h) + '\n' : ''}`;
+  html = html.replaceAll('__R__', rootId).replaceAll('__P__', P).replaceAll('__G__', guardOf(P)).replaceAll('{{KESZULEKEK}}', KESZULEKEK);
   const out = `${page}.html`;
-  writeFileSync(join(OUT, out), html);
+  writeFileSync(join(outDir, out), html);
 
   // Ellenőrzések
   const bytes = Buffer.byteLength(html);
@@ -184,7 +193,8 @@ for (const page of PAGES) {
   if (/fertőtlen/i.test(html)) tag('"fertőtlenítés" szó');
   if (/\[[^\]]*\]\(/.test(html)) tag('feldolgozatlan link-jelölés');
   const ld = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g) || [];
-  if (ld.length !== 1) tag('pontosan egy JSON-LD kell');
+  if (!c.service) { if (ld.length) tag('ezen az oldalon nem lehet JSON-LD'); }
+  else if (ld.length !== 1) tag('pontosan egy JSON-LD kell');
   else { try { const j = JSON.stringify(JSON.parse(ld[0].replace(/^<script[^>]*>|<\/script>$/g, ''))); if (/\[[A-ZÁÉÍÓÖŐÚÜŰ ]+/.test(j)) tag('szögletes mező a JSON-LD-ben'); if (/"@id"|"url"|priceRange|offers|aggregateRating|founder|foundingDate|identifier/.test(j)) tag('tiltott JSON-LD mező'); } catch (e) { tag('érvénytelen JSON-LD: ' + e.message); } }
   // globális CSS: minden szelektor a gyökérre vagy az előtagos osztályra szűkül (kivétel: a mobil html/body szabály)
   const style = html.match(/<style>([\s\S]*?)<\/style>/)[1];
@@ -212,7 +222,7 @@ for (const page of PAGES) {
     tag(`váratlan link: ${href}`);
   }
   for (const a of code.matchAll(/<a\s[^>]*href="https:[^"]*"[^>]*>/g)) if (!/target="_blank"/.test(a[0]) || !/rel="noopener"/.test(a[0])) tag('külső link target/rel nélkül');
-  for (const [, src] of code.matchAll(/\ssrcset="([^"]+)"/g)) if (!src.startsWith(CDN)) tag(`nem a végleges CDN-kép: ${src}`);
+  for (const [, src] of code.matchAll(/\ssrcset="([^"]+)"/g)) if (!src.startsWith(CDN) && src !== PIXEL) tag(`nem a végleges CDN-kép: ${src}`);
   for (const im of code.matchAll(/<img\s[^>]*>/g)) {
     const t = im[0];
     if (/-lb-img"/.test(t)) continue; // a nagyító képe: a script tölti be a kiválasztott fotót

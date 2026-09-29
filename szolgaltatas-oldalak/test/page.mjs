@@ -14,6 +14,9 @@ export const playwright = (() => {
 const here = dirname(fileURLToPath(import.meta.url));
 export const ANYAGOK = process.env.JKS_ANYAGOK || '/tmp/claude-0/-home-user-teszt/5fe1348b-77c1-5bb6-926a-205949d65f1a/scratchpad/csomag-szolg/claude-code-csomag-szolgaltatas-oldalak/anyagok';
 export const OUT = join(here, '..', 'kimenet', 'aloldalak');
+export const OUT_KM = join(here, '..', 'kimenet', 'keszulekek-markak');
+export const ANYAGOK_KM = process.env.JKS_ANYAGOK_KM || '/tmp/claude-0/-home-user-teszt/5fe1348b-77c1-5bb6-926a-205949d65f1a/scratchpad/csomag-km/claude-code-csomag-keszulekek-markak/anyagok';
+export const blockFile = (page) => (existsSync(join(OUT, `${page}.html`)) ? join(OUT, `${page}.html`) : join(OUT_KM, `${page}.html`));
 export const SITE = 'https://jimmy-klima.systeme.io';
 
 let n = 0;
@@ -27,21 +30,24 @@ export function testPage(page, { withChat = true } = {}) {
   const chatStart = s.lastIndexOf('<div id="rawhtml-', pulse);
   const chatEnd = s.indexOf('</script></div>', pulse) + '</script></div>'.length;
   n = 0;
-  const content = wrap(readFileSync(join(OUT, `${page}.html`), 'utf8')) + (withChat ? wrap(s.slice(chatStart, chatEnd)) : '');
+  const content = wrap(readFileSync(blockFile(page), 'utf8')) + (withChat ? wrap(s.slice(chatStart, chatEnd)) : '');
   return s.slice(0, mainOpen) + `<div id="websitepagebody-test"><div class="sc-bdvwhi rExYR">${content}</div></div>` + s.slice(mainClose);
 }
 
 export async function preparePage(ctx, html, page) {
   const map = JSON.parse(readFileSync(join(ANYAGOK, 'kepek-terkep-offline-teszthez.json'), 'utf8'));
+  const mapKm = JSON.parse(readFileSync(join(ANYAGOK_KM, 'kepek-terkep-offline-teszthez.json'), 'utf8'));
+  for (const [u, f] of Object.entries(mapKm)) map[u] = join(ANYAGOK_KM, f);
   const log = { requests: [] };
   await ctx.route('**/*', (r) => {
     const u = r.request().url();
     if (u === `${SITE}/${page}`) return r.fulfill({ contentType: 'text/html; charset=utf-8', body: html });
-    if (map[u] && existsSync(join(ANYAGOK, map[u]))) {
+    const loc = (f) => (f.startsWith("/") ? f : join(ANYAGOK, f));
+    if (map[u] && existsSync(loc(map[u]))) {
       log.requests.push(u);
       const f = map[u];
       const type = f.endsWith('.webp') ? 'image/webp' : f.endsWith('.png') ? 'image/png' : 'image/jpeg';
-      return r.fulfill({ contentType: type, body: readFileSync(join(ANYAGOK, f)) });
+      return r.fulfill({ contentType: type, body: readFileSync(loc(f)) });
     }
     if (/zohobookings|jimmy-klima\.systeme\.io\/./.test(u) || u === `${SITE}/`) return r.fulfill({ contentType: 'text/html; charset=utf-8', body: '<title>cel</title>cel' });
     return r.abort();

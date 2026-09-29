@@ -6,3 +6,10 @@
 - `node test/serve.mjs [oldal] [port]`: helyi szerver a Lighthouse-méréshez.
 
 Szöveg: `src/tartalom/<oldal>.mjs`. Elrendezés: `src/oldalak/<oldal>.mjs`, stílus: `src/oldal.css` (mobil-first, desktop 801 px-től). Beillesztés: `kimenet/aloldalak/BEILLESZTES.md`.
+
+## Forgalmazott készülékek + 7 márka-oldal
+
+- Kimenet: `kimenet/keszulekek-markak/` (`keszulekek.html`, `aux.html` … `syen.html`, `BEILLESZTES.md`).
+- Adatok: `src/tartalom/markak.mjs` (modellek, árak, az `energia` mező), `src/tartalom/keszulekek.mjs`.
+- Sablonok: `src/oldalak/keszulekek.mjs`, `src/oldalak/_marka.mjs` (mind a 7 márka-oldal).
+- Ellenőrzés: `node test/check-km.mjs [oldal ...]`.

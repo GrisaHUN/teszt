@@ -30,7 +30,7 @@ ${s.kiemeles ? `<p class="__P__free">${s.kiemeles}</p>` : ''}
 </ol>`;
 
 // Ikonos kártyák (pl. „Teljeskörű tisztítást végzünk!”, „Mit tartalmaz szolgáltatásunk ?”).
-export const feats = (list, h) => `<ul class="__P__feats">
+export const feats = (list, h, cls = '') => `<ul class="__P__feats${cls ? ' ' + cls : ''}">
 ${list.map((f, i) => `<li class="__P__feat __P__card __P__host __P__rv __P__up" style="--__P__d:${(i % 4) * 90}ms">
 ${h.badge(f.ikon)}
 <p class="__P__feat-text">${f.t}</p>

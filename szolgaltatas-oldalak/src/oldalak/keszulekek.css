@@ -1,0 +1,47 @@
+/* Hero: a két félképből illesztett háttér (1920 px-nél megáll), navy fátyollal, középre zárt szöveg */
+#__R__ .__P__hub-hero { display: flex; align-items: center; min-height: clamp(420px, 300px + 18vw, 600px); padding: 0; text-align: center; --__P__hub-h: clamp(420px, 300px + 18vw, 600px); }
+#__R__ .__P__sav-wrap { position: absolute; top: 0; bottom: 0; left: 50%; width: min(100%, 1920px); transform: translateX(-50%); overflow: hidden; }
+#__R__ .__P__sav { position: absolute; top: 50%; left: 50%; display: flex; width: max(100%, calc(var(--__P__hub-h) * 3.59)); transform: translate(-50%, -50%); }
+#__R__ .__P__sav img, #__R__ .__P__sav picture { display: block; flex: 0 0 auto; width: calc((100% + 8px) / 2); height: auto; }
+#__R__ .__P__sav picture img { width: 100%; }
+#__R__ .__P__sav-jobb { margin-left: -8px; -webkit-mask-image: linear-gradient(to right, transparent, #000 8px); mask-image: linear-gradient(to right, transparent, #000 8px); }
+#__R__ .__P__sav-wrap::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(14,28,67,0.55) 0%, rgba(14,28,67,0.72) 55%, rgba(14,28,67,0.86) 100%); }
+#__R__ .__P__hub-hero .__P__hero-inner { position: relative; z-index: 3; margin: 0 auto; padding: 56px 22px calc(56px + var(--__P__wave-h)); }
+#__R__ .__P__hub-hero .__P__hero-box { max-width: 760px; margin: 0 auto; }
+#__R__ .__P__hub-hero .__P__h1 { margin-bottom: 0; }
+#__R__ .__P__hero-sub { font-size: var(--__P__fs-lead); line-height: 1.55; color: rgba(255,255,255,0.92); margin: 18px auto 26px; max-width: 40em; text-shadow: 0 1px 10px rgba(0,0,0,0.3); }
+@media (max-width: 800px) {
+  #__R__ .__P__sav { width: 100%; height: 100%; }
+  #__R__ .__P__sav .__P__sav-bal { display: none; }
+  #__R__ .__P__sav .__P__sav-jobb { width: 100%; height: 100%; margin: 0; object-fit: cover; object-position: 18% 50%; -webkit-mask-image: none; mask-image: none; }
+}
+@media (min-width: 801px) {
+  #__R__ .__P__hub-hero { text-align: center; }
+  #__R__ .__P__hub-hero .__P__hero-inner { display: block; padding: calc(var(--__P__pad) * 0.8) 0 calc(var(--__P__pad) * 0.8 + var(--__P__wave-h)); }
+  #__R__ .__P__hub-hero .__P__hero-box { width: auto; }
+  #__R__ .__P__hub-hero .__P__h1::after { margin-left: auto; margin-right: auto; }
+  #__R__ .__P__hub-hero .__P__btns { flex-direction: row; max-width: none; justify-content: center; }
+  #__R__ .__P__hub-hero .__P__btns .__P__btn { width: auto; }
+}
+@media (min-width: 1921px) { #__R__ .__P__sav-wrap::before { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(90deg, #0E1C43 0, rgba(14,28,67,0) 10%, rgba(14,28,67,0) 90%, #0E1C43 100%); } }
+
+/* Márka-kártyák */
+#__R__ .__P__brand-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+#__R__ .__P__brand-grid > li { display: flex; }
+#__R__ .__P__brand { position: relative; display: flex; flex-direction: column; width: 100%; overflow: hidden; text-decoration: none; color: inherit; -webkit-tap-highlight-color: transparent; }
+#__R__ .__P__brand-logo { display: block; aspect-ratio: 480 / 300; background: #FFFFFF; border-bottom: 1px solid #EEF0F4; }
+#__R__ .__P__brand-logo img { display: block; width: 100%; height: 100%; object-fit: cover; }
+#__R__ .__P__brand-deal .__P__brand-logo img { object-fit: contain; background: #F7FAFD; }
+#__R__ .__P__brand-body { display: flex; flex-direction: column; gap: 2px; padding: 12px 52px 14px 14px; min-height: 64px; }
+#__R__ .__P__brand-name { font-size: 16.5px; font-weight: 800; line-height: 1.3; color: #0E1C43; }
+#__R__ .__P__brand-meta { font-size: 14px; color: #64708B; }
+#__R__ .__P__brand-go { position: absolute; right: 12px; bottom: 16px; }
+@media (min-width: 560px) { #__R__ .__P__brand-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+@media (min-width: 801px) {
+  #__R__ .__P__brand-grid { gap: var(--__P__gap); }
+  #__R__ .__P__brand-body { padding: clamp(14px, 10px + 0.6vw, 22px) 60px clamp(16px, 12px + 0.6vw, 24px) clamp(16px, 12px + 0.6vw, 24px); }
+  #__R__ .__P__brand-name { font-size: var(--__P__fs-h3); }
+  #__R__ .__P__brand-meta { font-size: calc(var(--__P__fs-body) - 2px); }
+  #__R__ .__P__brand-go { right: clamp(14px, 10px + 0.6vw, 22px); bottom: clamp(18px, 14px + 0.6vw, 26px); }
+  #__R__ .__P__brand:hover .__P__brand-name { text-decoration: underline; text-decoration-color: #1E6FD9; text-decoration-thickness: 2px; text-underline-offset: 4px; }
+}

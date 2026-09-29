@@ -1,0 +1,80 @@
+/* Márka-hero: navy, a logó fehér keretben, mellette a cím, a bevezető és a gombok */
+#__R__ .__P__brand-hero { padding: 36px 22px calc(40px + var(--__P__wave-h)); background: #0E1C43; background-image: radial-gradient(ellipse 60% 70% at 85% 0%, rgba(217,228,25,0.08), rgba(217,228,25,0) 70%); }
+#__R__ .__P__bh-grid { display: flex; flex-direction: column; align-items: center; gap: 24px; }
+#__R__ .__P__bh-logo { width: min(260px, 70%); border-radius: 18px; overflow: hidden; background: #FFFFFF; box-shadow: 0 0 0 6px rgba(217,228,25,0.18), 0 18px 40px -18px rgba(0,0,0,0.6); }
+#__R__ .__P__bh-logo img { display: block; width: 100%; height: auto; }
+#__R__ .__P__brand-hero .__P__h1 { margin-bottom: 0; }
+#__R__ .__P__hero-sub { font-size: var(--__P__fs-body); line-height: 1.6; color: rgba(255,255,255,0.9); margin: 16px auto 24px; max-width: 36em; }
+@media (min-width: 801px) {
+  #__R__ .__P__brand-hero { display: block; min-height: 0; padding: calc(var(--__P__pad) * 0.75) 0 calc(var(--__P__pad) * 0.75 + var(--__P__wave-h)); text-align: left; }
+  #__R__ .__P__bh-grid { flex-direction: row; align-items: center; gap: clamp(36px, 8px + 3.5vw, 88px); }
+  #__R__ .__P__bh-logo { flex: 0 0 auto; width: clamp(260px, 150px + 14vw, 420px); border-radius: 24px; box-shadow: 0 0 0 8px rgba(217,228,25,0.16), 0 30px 60px -28px rgba(0,0,0,0.7); }
+  #__R__ .__P__brand-hero .__P__hero-box { flex: 1; width: auto; }
+  #__R__ .__P__brand-hero .__P__h1 { font-size: clamp(34px, 14.6px + 2.42vw, 62px); }
+  #__R__ .__P__brand-hero .__P__h1::after { margin-bottom: 0; }
+  #__R__ .__P__hero-sub { font-size: var(--__P__fs-lead); line-height: 1.55; margin: clamp(20px, 14px + 0.8vw, 30px) 0 clamp(26px, 16px + 1.3vw, 40px); }
+  #__R__ .__P__brand-hero .__P__btns { flex-direction: row; max-width: none; }
+  #__R__ .__P__brand-hero .__P__btns .__P__btn { width: auto; }
+}
+
+/* Modell-kártyák */
+#__R__ .__P__models { display: grid; grid-template-columns: 1fr; gap: 14px; }
+#__R__ .__P__model { display: flex; flex-direction: column; gap: 14px; padding: 20px 18px; border-top: 4px solid #D9E419; }
+#__R__ .__P__model-head { display: flex; align-items: center; gap: 12px; }
+#__R__ .__P__model-head .__P__badge { --__P__icon: 40px; }
+#__R__ .__P__model-name { font-size: 19px; font-weight: 800; line-height: 1.3; color: #0E1C43; }
+#__R__ .__P__model-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+#__R__ .__P__model-tags li { padding: 6px 12px; border-radius: 999px; background: #F1F3F7; color: #33394A; font-size: 14.5px; font-weight: 600; line-height: 1.3; }
+#__R__ .__P__model-tags .__P__tag-hl { background: #D9E419; color: #0E1C43; font-weight: 800; }
+#__R__ .__P__model-energy { padding: 12px 14px; border-radius: 12px; background: #EEF4FF; border-left: 4px solid #1E6FD9; color: #0E1C43; font-size: 14.5px; line-height: 1.55; font-weight: 600; }
+#__R__ .__P__model-price { margin-top: auto; padding-top: 14px; border-top: 1px solid #EEF0F4; display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 12px; }
+#__R__ .__P__model-price-l { font-size: 15px; font-weight: 600; color: #4B5568; }
+#__R__ .__P__model-price-v { font-size: 26px; font-weight: 800; line-height: 1.2; color: #0E1C43; white-space: nowrap; }
+@media (min-width: 801px) {
+  #__R__ .__P__models { gap: var(--__P__gap); grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  #__R__ .__P__models-n1 { grid-template-columns: minmax(0, 600px); justify-content: center; }
+  #__R__ .__P__model { gap: 18px; padding: clamp(24px, 16px + 1vw, 36px); }
+  #__R__ .__P__model-head .__P__badge { --__P__icon: clamp(48px, 42px + 0.6vw, 56px); }
+  #__R__ .__P__model-name { font-size: var(--__P__fs-h3); }
+  #__R__ .__P__model-energy { font-size: calc(var(--__P__fs-body) - 1.5px); }
+  #__R__ .__P__model-price-l { font-size: calc(var(--__P__fs-body) - 1px); }
+  #__R__ .__P__model-price-v { font-size: clamp(26px, 20px + 0.8vw, 36px); }
+}
+@media (min-width: 1100px) { #__R__ .__P__models-n3 { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+
+/* Beszerelés + garancia */
+#__R__ .__P__feats-compact { margin-top: 4px; }
+#__R__ .__P__feats-compact .__P__feat { padding: 12px 14px; }
+#__R__ .__P__feats-compact .__P__badge { --__P__icon: 40px; }
+#__R__ .__P__install-link { margin-top: 18px; }
+#__R__ .__P__warranty { margin-top: 26px; padding: 22px 20px; background: #0E1C43; border-color: #0E1C43; color: #FFFFFF; }
+#__R__ .__P__warranty .__P__badge { --__P__icon: 48px; }
+#__R__ .__P__warranty-h { font-size: 20px; font-weight: 800; color: #FFFFFF; margin: 14px 0 8px; }
+#__R__ .__P__warranty-t { font-size: var(--__P__fs-body); line-height: 1.6; color: rgba(255,255,255,0.9); }
+@media (min-width: 801px) {
+  #__R__ .__P__install-grid { display: grid; grid-template-columns: 1fr; gap: clamp(28px, 16px + 1.5vw, 48px); }
+  #__R__ .__P__feats-compact { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  #__R__ .__P__feats-compact .__P__feat { flex-direction: row; align-items: center; gap: 14px; padding: 16px 18px; border-bottom-width: 3px; }
+  #__R__ .__P__feats-compact .__P__badge { --__P__icon: 44px; }
+  #__R__ .__P__feats-compact .__P__feat-text { font-size: var(--__P__fs-body); }
+  #__R__ .__P__warranty { margin-top: 0; padding: clamp(28px, 18px + 1.2vw, 44px); border-radius: 26px; }
+  #__R__ .__P__warranty .__P__badge { --__P__icon: clamp(52px, 44px + 0.8vw, 64px); }
+  #__R__ .__P__warranty-h { font-size: var(--__P__fs-h3); margin: 20px 0 10px; }
+}
+@media (min-width: 1100px) {
+  #__R__ .__P__install-grid { grid-template-columns: minmax(0, 1.5fr) minmax(300px, 1fr); align-items: center; column-gap: clamp(40px, 8px + 3.5vw, 88px); }
+}
+
+/* Kapcsolódó oldalak */
+#__R__ .__P__related-sec { padding-top: 36px; }
+#__R__ .__P__rel { background: #FFFFFF; border: 1px solid #E8EBF1; border-radius: 18px; padding: 20px 18px; }
+#__R__ .__P__rel-h { font-size: 18px; font-weight: 800; color: #0E1C43; margin: 0 0 10px; }
+#__R__ .__P__rel-list { display: flex; flex-direction: column; gap: 4px; }
+#__R__ .__P__rel-list li { font-size: var(--__P__fs-body); color: #33394A; }
+#__R__ .__P__rel-list li { line-height: 2.2; }
+#__R__ .__P__rel-list .__P__link { padding: 13px 0; }
+@media (min-width: 801px) {
+  #__R__ .__P__related-sec { padding-top: calc(var(--__P__pad) * 0.6); }
+  #__R__ .__P__rel { padding: clamp(24px, 16px + 1vw, 36px); border-radius: 22px; }
+  #__R__ .__P__rel-h { font-size: var(--__P__fs-h3); }
+}
